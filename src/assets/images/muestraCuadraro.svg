@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 349 320" style="enable-background:new 0 0 349 320;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#3CB371;}
+	.st2{fill:#FF0000;}
+	.st3{fill:#8A2BE2;}
+	.st4{fill:#FFD700;}
+	.st5{fill:#231F20;}
+</style>
+<circle class="st0" cx="-2528.5" cy="-225" r="227.6"/>
+<circle class="st0" cx="-1996.5" cy="-225" r="227.6"/>
+<circle class="st0" cx="-1464.5" cy="-225" r="227.6"/>
+<g>
+	<rect x="-2653.6" y="-385.5" class="st1" width="58.2" height="321.1"/>
+	<rect x="-2557.6" y="-385.5" class="st1" width="58.2" height="321.1"/>
+	<rect x="-2461.6" y="-385.5" class="st1" width="58.2" height="321.1"/>
+</g>
+<rect x="-2141.3" y="-369.7" class="st2" width="289.5" height="289.5"/>
+<circle class="st3" cx="-1464.5" cy="-225" r="174.6"/>
+<circle class="st0" cx="-3060.5" cy="-225" r="227.6"/>
+<polygon class="st4" points="-3060.5,-423.3 -2972,-270 -2883.5,-116.7 -3060.5,-116.7 -3237.5,-116.7 -3149,-270 "/>
+<path class="st2" d="M-770-65h-325c-6.6,0-12-5.4-12-12v-296c0-6.6,5.4-12,12-12h325c6.6,0,12,5.4,12,12v296
+	C-758-70.4-763.4-65-770-65z"/>
+<path class="st1" d="M-238-65h-325c-6.6,0-12-5.4-12-12v-296c0-6.6,5.4-12,12-12h325c6.6,0,12,5.4,12,12v296
+	C-226-70.4-231.4-65-238-65z"/>
+<path class="st4" d="M287.4-64.9H-38.4c-6.6,0-12-5.4-12-12v-296.5c0-6.6,5.4-12,12-12h325.8c6.6,0,12,5.4,12,12v296.5
+	C299.4-70.3,294-64.9,287.4-64.9z"/>
+<path class="st3" d="M826-64.9H501c-6.6,0-12-5.4-12-12v-296.5c0-6.6,5.4-12,12-12h325c6.6,0,12,5.4,12,12v296.5
+	C838-70.3,832.6-64.9,826-64.9z"/>
+<circle class="st5" cx="-932.5" cy="160" r="160"/>
+<rect x="14.5" y="0" class="st5" width="320" height="320"/>
+<g>
+	<rect x="-354.5" y="0" class="st5" width="74.4" height="320"/>
+	<rect x="-231.7" y="0" class="st5" width="74.4" height="320"/>
+	<rect x="-108.9" y="0" class="st5" width="74.4" height="320"/>
+</g>
+<polygon class="st5" points="-563.5,0 -483.5,160 -403.5,320 -563.5,320 -723.5,320 -643.5,160 "/>
+</svg>

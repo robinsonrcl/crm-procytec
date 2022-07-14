@@ -1,0 +1,74 @@
+.titletextbubble {
+  text-shadow: 1px 0px 3px #5f463e;
+  font-weight: 600;
+  padding-bottom: 6px;
+}
+
+.photoPreview {
+  width: 100px;
+  height: 100px;
+}
+
+.centerImgDiv {
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* display: block; */
+  /* position: absolute; */
+  /* width: 140px; */
+  vertical-align: middle;
+}
+
+.muestraColor {
+  width: 20px;
+  height: 12px;
+}
+
+.muestraEstructura {
+    width: 17px;
+    height: 14px;
+  }
+
+.divColores {
+  border-radius: 10px;
+  border: 2px solid #73ad21;
+  padding: 10px;
+  background: white;
+  box-shadow: 2px 2px 1px rgba(136, 136, 136, 0.09);
+  align-self: self-end;
+  margin-right: 8px;
+}
+
+.rowDivBubble {
+    height: 17px;
+}
+
+.titleBitacorah2 {
+    -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
+    box-sizing : border-box; 
+    font-weight : 300; 
+    font-size : 25px; 
+    letter-spacing : -0.20825px; 
+    line-height : 60px; 
+    color : rgb(0, 0, 0); 
+    margin : -50px 0px 0px; 
+}
+
+.titleBitacorah1 {
+    -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
+    box-sizing : border-box; 
+    font-size : 25px; 
+    letter-spacing : -0.3905px; 
+    line-height : 96px; 
+    font-weight : 300; 
+    color : rgb(3, 11, 185); 
+    margin : 0px; 
+
+}
+
+.iconoBitacora {
+    -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
+    box-sizing : border-box; 
+    border-style : none;
+    width: 120px;
+    height: 120px;
+}
