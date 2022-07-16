@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100;400&family=Bebas+Neue&family=Edu+NSW+ACT+Foundation:wght@600&family=Edu+SA+Beginner&display=swap');
+
 .titletextbubble {
   text-shadow: 1px 0px 3px #5f463e;
   font-weight: 600;
@@ -44,31 +46,53 @@
 
 .titleBitacorah2 {
     -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
-    box-sizing : border-box; 
+    box-sizing : border-box;
     font-weight : 300; 
     font-size : 25px; 
     letter-spacing : -0.20825px; 
-    line-height : 60px; 
     color : rgb(0, 0, 0); 
-    margin : -50px 0px 0px; 
+    margin: 0px;
+    display: inline;
 }
 
 .titleBitacorah1 {
     -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
-    box-sizing : border-box; 
+    box-sizing:border-box;
     font-size : 25px; 
     letter-spacing : -0.3905px; 
-    line-height : 96px; 
     font-weight : 300; 
     color : rgb(3, 11, 185); 
     margin : 0px; 
-
+    display: inline;
 }
 
 .iconoBitacora {
-    -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
+    /* -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
     box-sizing : border-box; 
-    border-style : none;
-    width: 120px;
-    height: 120px;
+    border-style : none; */
+    width: 100px;
+    height: 100px;
+    padding: 0px;
+    box-sizing:border-box;
 }
+
+.typefontNSW {
+  font-family: 'Edu NSW ACT Foundation', cursive;
+  font-family: 'Arima', cursive;
+}
+
+.typefontBubble {
+  /* font-family: 'Edu SA Beginner'; */
+  font-family: 'Arima', cursive;
+  font-size: 1.2em;
+}
+
+img:hover {
+ width: 150px;
+ height: 150px;
+}
+
+/* font-family: 'Arima', cursive;
+font-family: 'Bebas Neue', cursive;
+font-family: 'Edu NSW ACT Foundation', cursive;
+font-family: 'Edu SA Beginner', cursive; */

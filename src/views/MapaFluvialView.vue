@@ -1,17 +1,11 @@
 <template>
-<div class="d-flex flex-column align-content-start">
-  <div class="p-2"><img src="../assets/images/iconoBitacora.svg" alt="" class="iconoBitacora"></div>
-  <div class="p-2">
-    <h1 class="titleBitacorah1">Bitacora</h1>
-    <h2 class="titleBitacorah2">Fluvial</h2>
-  </div>
-  <div class="p-2"><h3>Mapa Contratos - Hallazgos y Patologías</h3></div>
+<div style="position:relative; border: none; height: 120px; width: 200px; box-sizing: border-box;">
+  <div style="position: absolute; left:0; top: 0;"><img src="../assets/images/iconoBitacora.svg" alt="" class="iconoBitacora" /></div>
+  <div style="position: absolute; right: 15px; top: 22px;"><h2 class="titleBitacorah1">Bitacora</h2></div>
+  <div style="position:absolute; right: 15px; bottom: 37px;"><h2 class="titleBitacorah2">Fluvial</h2></div>
 </div>
-  <div class="d-flex align-items-center justify-content-center">
-    <div class="p-2">
-      <MapaGeneral />
-    </div>
-  </div>
+  <h3 class="typefontNSW" style="position:absolute; top: 110px; left: 5px;">Mapa Contratos - Hallazgos y Patologías</h3>
+  <MapaGeneral />
 </template>
 
 <script>

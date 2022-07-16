@@ -1,0 +1,79 @@
+{
+    "contrato": [
+      {
+        "nombre": "Contrato 639-2012",
+        "fecha": "01-01-2012",
+        "year": "01-01-2012",
+        "mes": "01-01-2012",
+        "descripcion": "01-01-2012",
+        "corrientes": [
+          {
+            "nombre": "Rio Medellín",
+            "coordenadas": [
+              {
+                "lat": "6.456789",
+                "lon": "-89.433123"
+              },
+              {
+                "lat": "5.454789",
+                "lon": "-49.445123"
+              },
+              {
+                "lat": "6.655789",
+                "lon": "-54.443123"
+              }
+            ],
+            "descripcion":"Descripcion corriente...",
+            "coord_referencia_lat":"5.657687",
+            "coord_referencia_lon":"5.653587",
+            "hallazgos": [
+              {
+                "idhallazgo": "639-2012-001",
+                "componente": "AZUD",
+                "descripcion": "Ubicacion en ....",
+                "estado": "Bueno",
+                "coordenadas": [
+                  {
+                    "lat": "6.456789",
+                    "lon": "-89.433123"
+                  },
+                  {
+                    "lat": "5.454789",
+                    "lon": "-49.445123"
+                  }
+                ],
+                "coord_referencia_lat": "5.565656",
+                "coord_referencia_lon": "5.565656",
+                "fotos": [
+                  {
+                    "url": "../images/639-2012-001/foto1.jpg"
+                  },
+                  {
+                    "url": "../images/639-2012-001/foto2.jpg"
+                  },
+                  {
+                    "url": "../images/639-2012-001/foto3.jpg"
+                  }
+                ],
+                "diagnostico": "Se encontro....",
+                "propuesta": "Se propone adecuar....",
+                "costo": "2800000000",
+                "criticidad": "1"
+              }
+            ],
+            "etiquetas": [
+              {
+                "label": "punto referencia"
+              },
+              {
+                "label": "zona norte"
+              },
+              {
+                "label": "tramo 1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
