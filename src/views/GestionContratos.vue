@@ -1,10 +1,10 @@
 <template>
-<div>Hola Mundo</div>
+  <div>Gestión Contratos</div>
 </template>
 
 <script>
 export default {
-  name: "HomeTest",
+  name: "GestionContratos",
   created() {},
   data() {
     return {};

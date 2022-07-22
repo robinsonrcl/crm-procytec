@@ -1,31 +1,58 @@
 <template>
-  <header>
-    <nav class="nav">
-      <ul class="nav__ul">
-        <li class="nav__li"><i class="fas fa-home"></i><router-link to="/">Inicio</router-link></li>
-        <li class="nav__li"><font-awesome-icon icon="MapLocation" /><router-link to="/fluvial">Mapa Fluvial</router-link></li>
-        <li class="nav__li"><font-awesome-icons icon="Home" />Gestión contratos</li>
-        <li class="nav__li"><i class="fas fa-home"></i>Configuración</li>
-        <li class="nav__li"><i class="fas fa-home"></i>Usuario</li>
-      </ul>
-      <ul class="nav__responsive-ul">
-        <div class="nav__responsive-button"></div>
-        <div class="nav__li-container">
-          <li class="nav__responsive-li"><i class="fas fa-home"></i><router-link to="/">Inicio</router-link></li>
-          <li class="nav__responsive-li"><router-link to="/fluvial">Mapa Fluvial</router-link></li>
-          <li class="nav__responvive-li">Registro</li>
-          <li class="nav__responsive-li">Configuración</li>
-          <li class="nav__responsive-li">Usuario</li>
-        </div>
-      </ul>
-    </nav>
-  </header>
-  <!-- <nav style="margin:0px; padding: 10px 0px 0px 0px;">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/fluvial">Mapa Fluvial</router-link> |
-    <router-link to="/hometest">Home Test</router-link>
-  </nav> -->
-  <router-view />
+  <!-- <header> -->
+    <div class="grid-containerH">
+      <div class="grid-itemH grid-item__icono">
+        <img src="@/assets/images/iconoBitacoraBlanco.svg" alt="" class="iconoBitacora" />
+      </div>
+      <div class="grid-itemH">
+        <nav class="nav">
+          <ul class="nav__ul">
+            <li class="nav__li">
+              <fa icon="home" class="iconMenu" /><router-link to="/">Inicio</router-link>
+            </li>
+            <li class="nav__li">
+              <fa icon="map-location" class="iconMenu" /><router-link to="/fluvial">Mapa Fluvial</router-link>
+            </li>
+            <li class="nav__li">
+              <fa icon="fa-file-contract" class="iconMenu" /><router-link to="/gestioncontratos"
+                >Contratos</router-link
+              >
+            </li>
+            <li class="nav__li">
+              <fa icon="fa-gears" class="iconMenu" /><router-link to="/setup">Configuración</router-link>
+            </li>
+            <li class="nav__li">
+              <fa icon="fa-user" class="iconMenu" /><router-link to="/profile">Usuario</router-link>
+            </li>
+          </ul>
+          <ul class="nav__responsive-ul">
+            <div class="nav__responsive-button-container">
+              <div class="nav__responsive-button"><fa icon="bars" class="nav_responsive-fa" /></div>
+            </div>
+            <div class="nav__li-container">
+              <li class="nav__responsive-li">
+                <fa icon="home" size="sm" /><router-link to="/">Inicio</router-link>
+              </li>
+              <li class="nav__responsive-li">
+                <fa icon="map-location" size="sm" /><router-link to="/fluvial"
+                  >Mapa Fluvial</router-link
+                >
+              </li>
+              <li class="nav__responsive-li">
+                <fa icon="fa-file-contract" size="sm" /><router-link to="/gestioncontratos">Contratos</router-link
+                >
+              </li>
+              <li class="nav__responsive-li">
+                <fa icon="fa-gears" size="sm" /><router-link to="/setup">Configuracin</router-link>
+              </li>
+              <li class="nav__responsive-li"><fa icon="fa-user" size="sm" /><router-link to="/profile">Usuario</router-link></li>
+            </div>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  <!-- </header> -->
+   <router-view />
 </template>
 
 <style>
