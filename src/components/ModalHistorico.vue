@@ -1,6 +1,6 @@
 <template>
     <div class="container-historico">
-    <div class="hist-item hist-item-title"><p>PANEL DE INFORMACIÓN</p></div>
+    <div class="hist-item hist-item-title"><p>HISTORIA / PATOLOGIA</p></div>
     <div v-for="item in 6" :key="item.id">
         <GridHallazgo />    
     </div>

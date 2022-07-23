@@ -10,6 +10,9 @@
     <div class="grid-item">8</div>
     <div class="grid-item">9</div>
   </div>
+  <div id="parentContainer">
+    <div id="childContainer"></div>
+  </div>
 </template>
 
 <script>

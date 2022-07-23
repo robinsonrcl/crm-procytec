@@ -9,6 +9,9 @@
     <div>
       <ModalHistorico v-show=showModalHistorico @show-modal="showModalHistorico" />
     </div>
+    <div>
+      <PanelFilters />
+    </div>
   </div>
   <div class="container-convenciones">
     <div class="conv-item conv-item-title"><p>COLORES DE ESTADO</p></div>
@@ -36,10 +39,16 @@
 import MapaGeneral from "../components/MapaGeneral.vue";
 import ModalImagenes from "../components/ModalImagenes.vue";
 import ModalHistorico from "@/components/ModalHistorico.vue";
+import PanelFilters from "@/components/PanelFilters.vue";
 
 export default {
   name: "FluvialView",
-  components: { MapaGeneral, ModalImagenes, ModalHistorico },
+  components: { 
+    MapaGeneral, 
+    ModalImagenes, 
+    ModalHistorico,
+    PanelFilters
+  },
 
   data() {
     return {

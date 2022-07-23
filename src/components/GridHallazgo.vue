@@ -10,8 +10,7 @@
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-observacion">
-        Se realizo remosión de barras de sedimento, el punto se encuentra bueno.
-      </div>
+        Se realizo remosión de barras de sedimento, el punto se encuentra bueno, ademas se implemento una barrera de acero para lograr mayor.... lo cual esta trayendo mejoras en todos los sentidos      </div>
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-title"><span id="subtitulos">Referencia:</span></div>
@@ -28,9 +27,9 @@
       <div class="cont-hall-title"><span id="subtitulos">Tramo1:</span></div>
     </div>
     <div class="container-hallazgo-item" id="cont__hallazgo">
-      <div>VEGETACIÓN</div>
-      <div>EROSION</div>
-      <div>FISURAS</div>
+      <div><fa icon="check" /> VEGETACIÓN</div>
+      <div><fa icon="check" /> EROSION</div>
+      <div><fa icon="check" /> FISURAS</div>
     </div>
     <div class="container-hallazgo-item" id="cont-tramo">
       <div>T1. Variante de Caldas - Estación Envigado</div>
