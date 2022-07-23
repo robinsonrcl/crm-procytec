@@ -32,6 +32,7 @@ body,
 .photoPreview {
   width: 100px;
   height: 100px;
+  transition: 0.3s;
 }
 
 .centerImgDiv {
@@ -41,6 +42,7 @@ body,
   /* position: absolute; */
   /* width: 140px; */
   vertical-align: middle;
+  
 }
 
 .centerImgDiv:hover img {
@@ -565,6 +567,9 @@ body,
   font-size: 12px;
   color: #ffffff;
 }
+.container-convenciones p {
+  margin: 0;
+}
 .conv-item-title {
   margin-top: 10px;
 }
@@ -627,6 +632,12 @@ body,
   }
   .container-historico {
     width: 20% !important;
+  }
+  .cont-filtros {
+    width: 20%;
+    font-size: larger;
+    text-transform: uppercase;
+    /* font-variant-caps:petite-caps; */
   }
 }
 
@@ -725,6 +736,9 @@ body,
   font-size: 12px;
   color: #ffffff;
 }
+.container-historico p {
+  margin: 0;
+}
 .hist-item p {
   text-align: center;
 }
@@ -754,7 +768,7 @@ body,
   display: flex;
   align-items: center;
   padding-left: 15px;
-  height: 23px;
+  /* height: 23px; */
 }
 .container-hallazgo-item:nth-child(2) {
   border-radius: 0px 25px 0 0;
@@ -916,14 +930,51 @@ body,
   right: 0;
   z-index: 10;
   background-color: #555555;
+  opacity: 0.9;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   color: #fff;
+  padding: 7px 0px 0px 0px;
+  border-radius: 0px 0px 0px 25px;
+  gap: 5px;
 }
 .c-filtros-item {
   display: grid;
 }
-
+#select-contratos {
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 5px;
+}
+#filtros-componentes {
+  place-items: flex-start;
+  font-size: 12px;
+}
+#filtros-estados {
+  place-items: flex-start;
+  font-size: 12px;
+  padding-right: 7px;
+}
+.c-filtros-item:nth-last-child(1) {
+  grid-column: 1 / span 4;
+  background-color: #303030;
+  border-radius: 0px 0px 0px 25px;
+}
+.c-filtros-item:nth-child(1) {
+  font-weight: 600;
+}
+.c-filtros-item:nth-child(2) {
+  font-weight: 600;
+}
+.c-filtros-item:nth-child(3) {
+  font-weight: 600;
+}
+.c-filtros-item:nth-child(4) {
+  font-weight: 600;
+}
+#contratos {
+  padding-left: 7px;
+}
 /* font-family: 'Arima', cursive;
 font-family: 'Bebas Neue', cursive;
 font-family: 'Edu NSW ACT Foundation', cursive;
