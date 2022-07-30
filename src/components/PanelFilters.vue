@@ -1,3 +1,12 @@
+<script  setup>
+import { useContratoStore } from "@/stores/ContratoStore";
+
+const contratoStore = useContratoStore()
+
+contratoStore.fill()
+
+</script>
+
 <template>
   <div class="cont-filtros">
     <div class="c-filtros-item">
@@ -12,24 +21,41 @@
     <div class="c-filtros-item">
       Estados
     </div>
-    <div class="c-filtros-item" id="contratos">
-      <select name="languages" id="select-contratos" multiple size="3" readonly>
-        <option value="javascript">C-1022-2012</option>
-        <option value="javascript">C-9857-2022</option>
+    <div class="c-filtros-item">
+      <select v-model="optionContrato" 
+        class="form-control" 
+        id="select-contratos" 
+        multiple size="3" 
+        readonly>
+        <option 
+          v-for="(contrato, index) in contratoStore.contratos.contrato"
+          v-bind:value="{ id: contrato.id, text: contrato.nombre }"
+          :key="index"
+          @click.prevent="fillCorrientes()">
+          {{ contrato.nombre }}
+        </option>
       </select>
     </div>
     <div class="c-filtros-item">
-      <select name="languages" id="select-contratos" multiple size="3" readonly>
-        <option value="javascript">Rio Medellín</option>
-        <option value="javascript">La Clara</option>
-        <option value="javascript">La Tolda</option>
+      <select v-model="optionCorriente" 
+        class="form-control"  
+        id="select-corrientes" 
+        multiple size="3" 
+        readonly>
+        <option 
+          v-for="(corriente, index) in contratoStore.getCorrientes"
+          v-bind:value="{ id: corriente.id, text: corriente.nombre }"
+          :key="index"
+          @click.prevent="drawPath()">
+          {{ corriente.nombre }}
+        </option>
       </select>
     </div>
     <div class="c-filtros-item" id="filtros-componentes">
-      <div><label><input type="checkbox" id="cbox1" value="first_checkbox"> AZUD</label></div>
-      <div><label><input type="checkbox" id="cbox2" value="second_checkbox"> PLACA</label></div>
-      <div><label><input type="checkbox" id="cbox2" value="second_checkbox"> MURO</label></div>
-      <div><label><input type="checkbox" id="cbox2" value="second_checkbox"> BARRAS</label></div>
+      <div><label><input v-model="chkAzud" @change="selectComponente()" type="checkbox" id="cbox1" value="AZUD"> AZUD</label></div>
+      <div><label><input v-model="chkPlaca" @change="selectComponente()" type="checkbox" id="cbox2" value="PLACA"> PLACA</label></div>
+      <div><label><input v-model="chkMuro" @change="selectComponente()" type="checkbox" id="cbox3" value="MURO"> MURO</label></div>
+      <div><label><input v-model="chkBarras" @change="selectComponente()" type="checkbox" id="cbox4" value="BARRAS"> BARRAS</label></div>
     </div>
     <div class="c-filtros-item" id="filtros-estados">
       <div><label><input type="checkbox" id="cbox1" value="first_checkbox"> Repotenciado</label></div>
@@ -47,14 +73,48 @@
 </template>
 
 <script>
+
 export default {
   name: "PanelFilters",
   created() {},
   data() {
-    return {};
+    return {
+      selected: [],
+        options: [
+          { item: 'A', name: 'Option A' },
+          { item: 'B', name: 'Option B' },
+          { item: 'D', name: 'Option C', notEnabled: true },
+          { item: { d: 1 }, name: 'Option D' }
+        ]
+      // optionContrato: String
+    };
   },
   props: {},
-  methods: {},
+  methods: {
+    drawPath() {
+      this.contratoStore.drawCorriente(this.optionContrato, this.optionCorriente)
+    },
+    fillCorrientes() {
+      this.contratoStore.fillCorrientes(this.optionContrato)
+    },
+    selectComponente() {
+      var chkArray = []
+      if(this.chkAzud) {
+        chkArray.push("AZUD")
+      }
+      if(this.chkPlaca) {
+        chkArray.push("PLACA")
+      }
+      if(this.chkMuro) {
+        chkArray.push("MURO")
+      }
+      if(this.chkBarras) {
+        chkArray.push("BARRAS")
+      }
+
+      this.contratoStore.drawHallazgos(chkArray, this.optionContrato, this.optionCorriente)
+    }
+  },
 };
 </script>
 

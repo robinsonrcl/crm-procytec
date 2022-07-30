@@ -1,13 +1,13 @@
 <template>
   <div class="map__container">
     <div class="map__body">
-      <MapaGeneral @show-modal="showModalImg" />
+      <MapaGeneral @show-modal="showModalImg" @show-modal-historia="showModalHistoricoView" />
     </div>
     <div>
       <ModalImagenes v-show=showModalImage @show-modal="showModalImg" />
     </div>
     <div>
-      <ModalHistorico v-show=showModalHistorico @show-modal="showModalHistorico" />
+      <ModalHistorico v-show=showModalHistorico @show-modal="showModalHistoricoView" />
     </div>
     <div>
       <PanelFilters />
@@ -53,14 +53,18 @@ export default {
   data() {
     return {
       showModalImage: false,
-      showModalHistorico: true
+      showModalHistorico: false
     }
   },
 
   methods: {
     showModalImg(newValue) {
       this.showModalImage = newValue
+    },
+    showModalHistoricoView(show) {
+      this.showModalHistorico = show
     }
+
   }
 };
 </script>

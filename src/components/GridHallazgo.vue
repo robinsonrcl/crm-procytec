@@ -43,7 +43,7 @@
       <div><img class="cont-hall-img" :src="require('@/assets/photos/100.jpg')" alt="" /></div>
     </div>
     <div class="container-hallazgo-item" id="cont-hall-foot-1">
-      <div class="cont-hall-estado-anterior">Estado diseño anterior:</div> 
+      <div class="cont-hall-estado-anterior">Estado diseño:</div> 
       <div class="cont-hall-ejecutado">Ejecutado</div> 
     </div>
     <div class="container-hallazgo-item" id="cont-hall-foot-2">
