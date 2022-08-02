@@ -1,4 +1,3 @@
-// import { some } from "fs"
 import { defineStore } from "pinia"
 
 export const useContratoStore = defineStore("ContratoStore", {
@@ -10,7 +9,9 @@ export const useContratoStore = defineStore("ContratoStore", {
             corriente: [],
             path: [[]],
             puntomedio: { lat: 6.248353, lng: -75.580265 },
-            hallazgos: []
+            hallazgos: [],
+            componentes: [],
+            estados: []
         }
     },
 
@@ -67,15 +68,28 @@ export const useContratoStore = defineStore("ContratoStore", {
             })
 
             this.puntomedio = corrientesBk[0].puntomedio
-            this.drawHallazgos()
+            this.drawHallazgos(contratosId, corrientesId)
         },
-        drawHallazgos(componentesName, contratosId, corrientesId) {
+        drawHallazgos(contratosId, corrientesId) {
+            var componentesName = this.componentes
+            var estadosName = this.estados
+
+            if(estadosName.length === 0){
+                this.hallazgos = []
+                return
+            }
+            if(componentesName.length === 0) {
+                this.hallazgos = []
+                return
+            }
+
             const contratos = this.contratos.contrato.filter(function(contratolocal) {
                 return contratosId.some(itemuno => itemuno.id === contratolocal.id)
             })
 
             this.hallazgos = []
             contratos.forEach(contrato => {
+                var nombreContrato = contrato.nombre
                 var corrientes = contrato.corrientes.filter(function(corriente) {
                     return corrientesId.some(item => item.id === corriente.id)
                 })
@@ -85,8 +99,48 @@ export const useContratoStore = defineStore("ContratoStore", {
                         return componentesName.some(item => item === hallazgo.componente)
                     })
 
-                    hallazgos.forEach(visita => {
-                        this.hallazgos.push(visita)
+                    var hallazgosSegunEstado = hallazgos.filter(function(evento) {
+                        return estadosName.some(item => item === evento.estado)
+                    }) 
+
+                    hallazgosSegunEstado.forEach(visita => {
+                        console.log("Nombre contrato: " + nombreContrato)
+
+                        const newVisita = {
+                            id: visita.id,
+                            nombrecontrato: nombreContrato,
+                            icono: visita.icono,
+                            fecha: visita.fecha,
+                            componente: visita.componente,
+                            nomenclatura: visita.nomenclatura,
+                            margen: visita.margen,
+                            hallazgo1: visita.hallazgo1,
+                            hallazgo2: visita.hallazgo2,
+                            hallazgo3: visita.hallazgo3,
+                            estado: visita.estado,
+                            observacion: visita.observacion,
+                            estadoanterior: visita.estadoanterior,
+                            afectacion: visita.afectacion,
+                            nivelriesgo: visita.nivelriesgo,
+                            coordenadas: visita.coordenadas,
+                            position: visita.position,
+                            fotos: visita.fotos,
+                            referencia: visita.referencia,
+                            zona: visita.zona,
+                            tramo1: visita.tramo1,
+                            abscisakm: visita.abscisakm,
+                            revisor: visita.revisor,
+                            shapeleng: visita.shapeleng,
+                            diagnostico: visita.diagnostico,
+                            criticidad: visita.criticidad,
+                            tipodiseno: visita.tipodiseno,
+                            propuesta: visita.propuesta,
+                            costo: visita.costo,
+                            cota: visita.cota,
+                            linkdiseno: visita.linkdiseno
+                        }
+
+                        this.hallazgos.push(newVisita)
                     })
                 })
             })
@@ -104,6 +158,12 @@ export const useContratoStore = defineStore("ContratoStore", {
             //             { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
             //         ]
             //     },
+        },
+        setComponentes(componentes) {
+            this.componentes = componentes
+        },
+        setEstados(estados) {
+            this.estados = estados
         }
     }
 })

@@ -10,7 +10,7 @@
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-observacion">
-        Se realizo remosión de barras de sedimento, el punto se encuentra bueno, ademas se implemento una barrera de acero para lograr mayor.... lo cual esta trayendo mejoras en todos los sentidos      </div>
+        Se realizo remosión de barras de sedimento, el punto se encuentra bueno, ademas se implemento una barrera de acero para lograr mayor.... lo cual esta trayendo mejoras en todos los sentidos  Se realizo remosión de barras de sedimento, el punto se encuentra bueno, ademas se implemento una barrera de acero para lograr mayor.... lo cual esta trayendo mejoras en todos los sentidos       </div>
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-title"><span id="subtitulos">Referencia:</span></div>

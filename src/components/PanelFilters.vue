@@ -58,17 +58,14 @@ contratoStore.fill()
       <div><label><input v-model="chkBarras" @change="selectComponente()" type="checkbox" id="cbox4" value="BARRAS"> BARRAS</label></div>
     </div>
     <div class="c-filtros-item" id="filtros-estados">
-      <div><label><input type="checkbox" id="cbox1" value="first_checkbox"> Repotenciado</label></div>
-      <div><label><input type="checkbox" id="cbox2" value="second_checkbox"> Bueno</label></div>
-      <div><label><input type="checkbox" id="cbox2" value="second_checkbox"> En mal estado</label></div>
-      <div><label><input type="checkbox" id="cbox2" value="second_checkbox"> Otro</label></div>
+      <div><label><input v-model="chkRepotenciado" @change="selectEstado()" type="checkbox" id="cbox1-1" value="Repotenciado"> Repotenciado</label></div>
+      <div><label><input v-model="chkBueno" @change="selectEstado()" type="checkbox" id="cbox2-2" value="Bueno"> Bueno</label></div>
+      <div><label><input v-model="chkCritico" @change="selectEstado()" type="checkbox" id="cbox3-3" value="Critico"> Critico</label></div>
+      <div><label><input v-model="chkOtro" @change="selectEstado()" type="checkbox" id="cbox4-4" value="Otro"> Otro</label></div>
     </div>
     <div class="c-filtros-item">
       <div>PANEL DE FILTROS</div>
     </div>
-    <!-- <div class="c-filtros-item">2</div>
-    <div class="c-filtros-item">3</div>
-    <div class="c-filtros-item">4</div> -->
   </div>
 </template>
 
@@ -79,14 +76,6 @@ export default {
   created() {},
   data() {
     return {
-      selected: [],
-        options: [
-          { item: 'A', name: 'Option A' },
-          { item: 'B', name: 'Option B' },
-          { item: 'D', name: 'Option C', notEnabled: true },
-          { item: { d: 1 }, name: 'Option D' }
-        ]
-      // optionContrato: String
     };
   },
   props: {},
@@ -96,6 +85,7 @@ export default {
     },
     fillCorrientes() {
       this.contratoStore.fillCorrientes(this.optionContrato)
+      document.getElementById("select-corrientes").selectedOptions = null
     },
     selectComponente() {
       var chkArray = []
@@ -112,7 +102,26 @@ export default {
         chkArray.push("BARRAS")
       }
 
-      this.contratoStore.drawHallazgos(chkArray, this.optionContrato, this.optionCorriente)
+      this.contratoStore.setComponentes(chkArray)
+      this.contratoStore.drawHallazgos(this.optionContrato, this.optionCorriente)
+    },
+    selectEstado() {
+      var chkEstado = []
+      if(this.chkRepotenciado) {
+        chkEstado.push("Repotenciado")
+      }
+      if(this.chkBueno) {
+        chkEstado.push("Bueno")
+      }
+      if(this.chkCritico) {
+        chkEstado.push("Critico")
+      }
+      if(this.chkOtro) {
+        chkEstado.push("Otro")
+      }
+
+      this.contratoStore.setEstados(chkEstado)
+      this.contratoStore.drawHallazgos(this.optionContrato, this.optionCorriente)
     }
   },
 };

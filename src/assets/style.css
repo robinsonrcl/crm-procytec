@@ -1,17 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima:wght@100;400&family=Bebas+Neue&family=Edu+NSW+ACT+Foundation:wght@600&family=Edu+SA+Beginner&family=Roboto:wght@100&display=swap");
 
 :root {
-  --bcolor: rgb(27,89,140);
-  --bcolor-title: rgb(88,132,169);
-  /* --bcolor-hallazgo: rgba(88,150,170, 0.3); */
+  --bcolor: rgb(27, 89, 140);
+  --bcolor-title: rgb(88, 132, 169);
   --bcolor-hallazgo: rgba(255, 255, 255, 0.3);
-  /* --bcolor-hallazgo-title: #004173; */
   --bcolor-hallazgo-title: #004173;
   --bcolor-hallazgo-footer: #004173;
-  /* // #0979b0; */
 }
-
-
 
 html,
 body,
@@ -55,7 +50,6 @@ body,
   /* position: absolute; */
   /* width: 140px; */
   vertical-align: middle;
-  
 }
 
 .centerImgDiv:hover img {
@@ -481,7 +475,8 @@ body,
   padding: 10px;
 }
 
-.carousel__prev, .carousel__next {
+.carousel__prev,
+.carousel__next {
   box-sizing: content-box;
   border: 5px solid white;
   background-color: var(--bcolor) !important;
@@ -999,6 +994,79 @@ body,
 .hr-marker {
   margin: 5px;
 }
+.c-bubble {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 10px;
+}
+.c-bubble-item:first-child {
+  grid-column: 1 / span 3;
+}
+.c-bubble-item:nth-child(2) {
+  grid-column: 1 / span 2;
+  border-radius: 5%;
+}
+.c-bubble-item:nth-child(17) {
+  grid-column: 2 / span 2;
+}
+#DivBubbleImg {
+  width: 100%;
+  height: auto;
+  align-self: end;
+  
+}
+#DivBubbleImg:hover img {
+  width: 150%;
+  object-fit: contain;
+}
+#imgBubble {
+  width: 100%;
+  height: auto;
+  transition: 0.5s;
+}
+.c-bubble-item fa {
+  color: #0091ff;
+}
+#div-buble-descripcion {
+  padding: 5px;
+  align-self: center;
+}
+#bubbleDescripcion {
+  padding: 5px;
+  opacity: 0.9;
+  text-align: left;
+  font-size: small;
+  color: #5c5c5c;
+  border: solid 1px;
+  border-radius: 5px;
+  border-color: #a8a8a8;
+}
+.bubble-title {
+  font-weight: 600;
+  font-size: large;
+  text-align: left;
+}
+.bubble-subtitle {
+  text-align: left;
+  font-weight: 600;
+}
+.c-bubble-item {
+  text-align: left;
+}
+#c-bubble-descripcion {
+  resize: none;
+  border: none;
+}
+.btn-bubble {
+  color: #3b5998; 
+  padding: 3px 7px; 
+  font-weight: 400;
+  font-style: italic;
+  -webkit-box-shadow: 2px 2px 5px 5px #e6e6e6; 
+  box-shadow: 2px 2px 3px 3px #d3d1d1;
+}
+
+
 /* font-family: 'Arima', cursive;
 font-family: 'Bebas Neue', cursive;
 font-family: 'Edu NSW ACT Foundation', cursive;

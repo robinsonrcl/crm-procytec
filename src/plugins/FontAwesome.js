@@ -7,7 +7,10 @@ import {
     faFileContract, 
     faBars, 
     faClose,
-    faCheck
+    faCheck,
+    faCamera,
+    faHistory,
+    faCaretRight
     } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -19,7 +22,10 @@ library.add(
     faFileContract, 
     faBars, 
     faClose,
-    faCheck 
+    faCheck,
+    faCamera,
+    faHistory,
+    faCaretRight
     )
 
 export default (app) => {

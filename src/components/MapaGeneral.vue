@@ -33,21 +33,21 @@ const contratoStore = useContratoStore()
     > -->
       <GMapMarker
         :key="index"
-        v-for="(m, index) in contratoStore.getHallazgos"
-        :position="m.position"
+        v-for="(hallazgo, index) in contratoStore.getHallazgos"
+        :position="hallazgo.position"
         :icon="{ 
             url: require('@/assets/images/gif/cuadradoAlert.gif'),
             scaledSize: { width: 32, height: 32 } }"
         :clickable="true"
         :draggable="false"
         :markerlabel="{ text: 'Hola Mundo' }"
-        @click="openMarker(m.id)"
+        @click="openMarker(hallazgo.id)"
         >
 
       <GMapInfoWindow
         :closeclick="true"
         @closeclick="openMarker(null)"
-        :opened="openedMarkerID == m.id"
+        :opened="openedMarkerID == hallazgo.id"
         :options=" {
               pixelOffset: {
                 width: 10, height: 0
@@ -56,28 +56,12 @@ const contratoStore = useContratoStore()
               maxHeight: 320,
        }"
         >
-        <div style="z-index:100; width: 100%; text-align: left; display: inline-block; display: table;">
-            <div>
-                <div style="display: table-row;">
-                    <div style="display: table-cell; ">
-                        <div class="titletextbubble" style="text-align: left">Contrato: {{ m.agreement }}</div>
-                        <div style="text-align: left; font-weight:500">Estructura: {{ m.componente }}</div>
-                        <div style="text-align: left;"><button @click.prevent="showHistoria" type="button">Historia</button></div>
-                        <hr class="hr-marker"/>
-                        <div style="text-align: left">{{ m.descripcion }}</div>
-                    </div>
-                    <div style="display: table-cell;" class="centerImgDiv">
-                        <img :src="m.fotos[0].url" class="photoPreview" />
-                        <div style="text-align: center">
-                          <button class="button__masfotos"
-                            @click.prevent="enviarShow">
-                            + fotos 📸
-                          </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <BubbleInfo
+          @show-modal-historia="showHistoria" 
+          @show-modal="enviarShow" 
+          v-bind:hallazgo="hallazgo"
+        />
+
       </GMapInfoWindow>
       
     </GMapMarker>
@@ -86,11 +70,15 @@ const contratoStore = useContratoStore()
 </template>
 
 <script>
-
+import BubbleInfo from "@/components/BubbleInfo.vue";
 import { ref, watch } from "vue";
 
 export default {
   name: "MapaGeneral",
+
+  components: {
+    BubbleInfo
+  },
 
   setup() {
     const myMapRef = ref();
@@ -123,112 +111,6 @@ export default {
         },
         clicked: false,
         center: [],
-        markers: [
-            {   
-                id: 1, 
-                position: { lat: 6.173826963, lng: -75.59775204 }, 
-                icono: require('@/assets/images/gif/cuadradoAlert.gif'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 2,
-                position: { lat: 6.151912551, lng: -75.63267438 }, 
-                icono: require('@/assets/images/marcadores/trianguloVerde.svg'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/200.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 3, 
-                position: { lat: 6.255081, lng: -75.577046 }, 
-                icono: require('@/assets/images/gif/circuloAlert.gif'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/300.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 4, 
-                position: { lat: 6.243654, lng: -75.579123 }, 
-                icono: require('@/assets/images/gif/barrasAlert.gif'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/400.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 5, 
-                position: { lat: 6.236059, lng: -75.575871 }, 
-                icono: require('@/assets/images/marcadores/barrasVioleta.svg'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/400.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 6, 
-                position: { lat: 6.241863, lng: -75.578380, }, 
-                icono: require('@/assets/images/gif/trianguloAlert.gif'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/400.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 7, 
-                position: { lat: 6.233974, lng: -75.575691 }, 
-                icono: require('@/assets/images/gif/circuloAlert.gif'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/400.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-            { 
-                id: 8, 
-                position: { lat: 6.239124, lng: -75.577575 }, 
-                icono: require('@/assets/images/marcadores/circuloAmarillo.svg'),
-                agreement: 'CI446-2012',
-                description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-                frame: 'PLACA',
-                photos: [
-                    { title: 'Margen del Rio', url: require('@/assets/photos/400.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                    { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-                ]
-            },
-        ],
         options: {
             zoomControl: true,
             mapTypeControl: true,
@@ -239,7 +121,7 @@ export default {
         },
         optionspoly: {
           strokeColor: "#0000FF",
-          strokeWeight: 4
+          strokeWeight: 1
         }
     };
   },
