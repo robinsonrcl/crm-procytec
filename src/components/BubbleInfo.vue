@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="c-bubble-item" id="DivBubbleImg">
-      <img id="imgBubble" :src="require(`@/assets/photos/${hallazgo.fotos[2].url}`)" alt="">
+      <img id="imgBubble" :src="require(`@/assets/photos/${hallazgo.fotos[0].url}`)" alt="">
     </div>
     <div class="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div class="c-bubble-item bubble-subtitle"><span>Zona:</span></div>

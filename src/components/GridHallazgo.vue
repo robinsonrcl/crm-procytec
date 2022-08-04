@@ -2,23 +2,22 @@
   <div class="container-hallazgo">
     <div class="container-hallazgo-item">
       <div class="cont-hall-title"><span>Componente:</span></div>
-      <div class="cont-hall-title"><span class="container-hallazgo-item-nom-complemento">PLACA</span></div>
+      <div class="cont-hall-title"><span class="container-hallazgo-item-nom-complemento">{{ hallazgo.componente }}</span></div>
     </div>
     <div class="container-hallazgo-item">
-      <div class="cont-hall-title"><span>Fecha:</span></div>
-      <div class="cont-hall-title"><span>2022-12-30</span></div> 
+      <div class="cont-hall-title"><span>{{ hallazgo.nombrecontrato }}</span></div> 
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-observacion">
-        Se realizo remosión de barras de sedimento, el punto se encuentra bueno, ademas se implemento una barrera de acero para lograr mayor.... lo cual esta trayendo mejoras en todos los sentidos  Se realizo remosión de barras de sedimento, el punto se encuentra bueno, ademas se implemento una barrera de acero para lograr mayor.... lo cual esta trayendo mejoras en todos los sentidos       </div>
+        {{ hallazgo.observacion }}</div>
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-title"><span id="subtitulos">Referencia:</span></div>
-      <div class="cont-hall-title"><span>Variante</span></div> 
+      <div class="cont-hall-title"><span>{{ hallazgo.referencia }}</span></div> 
     </div>
     <div class="container-hallazgo-item">
       <div class="cont-hall-title"><span id="subtitulos">Zona:</span></div>
-      <div class="cont-hall-title"><span>SUR CANALIZADA</span></div>
+      <div class="cont-hall-title"><span>{{ hallazgo.zona }}</span></div>
     </div>
     <div class="container-hallazgo-item" id="hallazgos">
       <div class="cont-hall-title"><span id="subtitulos">Hallazgos:</span></div>
@@ -27,28 +26,32 @@
       <div class="cont-hall-title"><span id="subtitulos">Tramo1:</span></div>
     </div>
     <div class="container-hallazgo-item" id="cont__hallazgo">
-      <div><fa icon="check" /> VEGETACIÓN</div>
-      <div><fa icon="check" /> EROSION</div>
-      <div><fa icon="check" /> FISURAS</div>
+      <div><fa v-show="hallazgo.hallazgo1" icon="fa-caret-right"/> {{ hallazgo.hallazgo1 }}</div>
+      <div><fa v-show="hallazgo.hallazgo2" icon="fa-caret-right"/> {{ hallazgo.hallazgo2 }}</div>
+      <div><fa v-show="hallazgo.hallazgo3" icon="fa-caret-right"/> {{ hallazgo.hallazgo3 }}</div>
     </div>
     <div class="container-hallazgo-item" id="cont-tramo">
-      <div>T1. Variante de Caldas - Estación Envigado</div>
+      <div>{{ hallazgo.tramo1 }}</div>
       <div id="abscisa">Abscisa:</div>
-      <div>K22+234</div>
+      <div>{{ hallazgo.abscisakm }}</div>
     </div>
     <div class="container-hallazgo-item" id="cont-hall-fotos">
-      <div class="cont-hall-div"><img class="cont-hall-img" :src="require('@/assets/photos/100.jpg')" alt="" /></div>
-      <div><img class="cont-hall-img" :src="require('@/assets/photos/100.jpg')" alt="" /></div>
-      <div><img class="cont-hall-img" :src="require('@/assets/photos/100.jpg')" alt="" /></div>
-      <div><img class="cont-hall-img" :src="require('@/assets/photos/100.jpg')" alt="" /></div>
+
+      <div v-for="foto in hallazgo.fotos" :key="foto">
+        <div><img class="cont-hall-img" :src="require(`@/assets/photos/${foto.url}`)" alt="" /></div>
+      </div>
+      
     </div>
     <div class="container-hallazgo-item" id="cont-hall-foot-1">
       <div class="cont-hall-estado-anterior">Estado diseño:</div> 
-      <div class="cont-hall-ejecutado">Ejecutado</div> 
+      <div class="cont-hall-ejecutado">{{ hallazgo.estadoanterior }}</div> 
     </div>
     <div class="container-hallazgo-item" id="cont-hall-foot-2">
       <div>Estado componente:</div> 
-      <div class="cont-hall-estado"><img class="cont-hall-estado-img" :src="require('@/assets/images/muestrasColor/colorAmarillo.png')" alt="" /></div> 
+      <div v-if="hallazgo.estado === 'Repotenciado'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="require('@/assets/images/muestrasColor/colorAmarillo.png')" alt="" /> Repotenciado</div> 
+      <div v-if="hallazgo.estado === 'Bueno'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="require('@/assets/images/muestrasColor/colorVerde.png')" alt="" /> Bueno</div> 
+      <div v-if="hallazgo.estado === 'Critico'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="require('@/assets/images/muestrasColor/colorRojo.png')" alt="" /> Critico</div> 
+      <div v-if="hallazgo.estado === 'Otro'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="require('@/assets/images/muestrasColor/colorVioleta.png')" alt="" /> Otro</div> 
     </div>
   </div>
 </template>
@@ -60,7 +63,9 @@ export default {
   data() {
     return {};
   },
-  props: {},
+  props: {
+    hallazgo: []
+  },
   methods: {},
 };
 </script>

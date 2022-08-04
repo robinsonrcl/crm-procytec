@@ -85,7 +85,9 @@ export default {
     },
     fillCorrientes() {
       this.contratoStore.fillCorrientes(this.optionContrato)
-      document.getElementById("select-corrientes").selectedOptions = null
+      if(document.getElementById("select-corrientes").selectedOptions.length > 1){
+        document.getElementById("select-corrientes").selectedOptions = null
+      }
     },
     selectComponente() {
       var chkArray = []

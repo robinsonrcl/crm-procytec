@@ -11,7 +11,7 @@
         {
           "id": "1",
           "nombre": "Rio Medellín",
-          "puntomedio": { "lng": -75.6125772437524, "lat": 6.03160636082705 },
+          "puntomedio": { "lng": -75.580147 , "lat": 6.247415 },
           "coordenadas": [
             { "lng": -75.612563727633869, "lat": 6.031606391621722 },
             { "lng": -75.612577243544933, "lat": 6.031606361044794 },
@@ -3710,25 +3710,41 @@
           "hallazgos": [
             {
               "id": "1",
-              "icono": "barrasAlert.gif",
+              "icono": "barrasAmarillo.svg",
+              "fecha": "02-03-2010",
               "componente": "AZUD",
-              "descripcion": "Ubicacion en la parte norte de la cuenca del rio....",
-              "estado": "Critico",
-              "position": { "lat": 6.173826963, "lng": -75.59775204 },
+              "nomenclatura": "AZ 30R",
+              "margen": "M_IZQUIERDA",
+              "hallazgo1": "BASURA",
+              "hallazgo2": "",
+              "hallazgo3": "",
+              "estado": "Repotenciado",
+              "observacion": "Ubicacion en RIO MEDELLIN... se encontro daño en las placas orientales, especicalmente en las ubicadas hacía el sur, se visitaron las placas adyacentes y tampocc se pudo visualizar afectacciones al interior del rio",
+              "estadoanterior": "0",
+              "afectacion": "",
+              "nivelriesgo": "ACEPTABLE",
               "coordenadas": [
                 { "lat": "6.456789", "lon": "-89.433123" },
                 { "lat": "5.454789", "lon": "-49.445123" }
-              ],
+              ], 
+              "position": { "lat": 6.267096, "lng": -75.571575 },
               "fotos": [
-                { "url": "@/assets/photos/C639-1998/100.jpg" },
-                { "url": "../images/639-2012-001/foto2.jpg" },
-                { "url": "../images/639-2012-001/foto3.jpg" }
+                { "url": "C639-1998/100.jpg" },
+                { "url": "C639-1998/200.jpg" }
               ],
+              "referencia": "NO APLICA",
+              "zona": "NORTE SIN CANALIZACION",
+              "tramo1": "T3. Variante Barbosa",
+              "abscisakm": "K34+546",
+              "revisor": "CM_HG, N_MR, S_AT",
+              "shapeleng": "",
               "diagnostico": "Se encontro....",
+              "criticidad": "2",
+              "tipodiseno": "",
               "propuesta": "Se propone adecuar....",
               "costo": "2800000000",
-              "criticidad": "1",
-              "agreement": "Contrato C298-2012"
+              "cota": "",
+              "linkdiseno": ""
             }
           ],
           "etiquetas": [
@@ -3742,41 +3758,17 @@
           "nombre": "Promatel",
           "puntomedio": { "lng": -75.63256207566154, "lat": 6.151953517996051 },
           "coordenadas": [
-            {
-              "lng": -75.63310972590477,
-              "lat": 6.15168536910301,
-              "dist": 1616.2169530000021
-            },
-            {
-              "lng": -75.6328550171726,
-              "lat": 6.151846661984762,
-              "dist": 1614.733953000002
-            },
-            {
-              "lng": -75.63256207566154,
-              "lat": 6.151953517996051,
-              "dist": 1614.056953000002
-            },
-            {
-              "lng": -75.63231356100387,
-              "lat": 6.152023022185955,
-              "dist": 1613.357953000002
-            },
-            {
-              "lng": -75.63212211112939,
-              "lat": 6.152069151557836,
-              "dist": 1612.7449530000022
-            },
-            {
-              "lng": -75.63197648744496,
-              "lat": 6.152086704172429,
-              "dist": 1612.4160530000022
-            }
+            { "lng": -75.63310972590477, "lat": 6.15168536910301, "dist": 1616.2169530000021 },
+            { "lng": -75.6328550171726, "lat": 6.151846661984762, "dist": 1614.733953000002 },
+            { "lng": -75.63256207566154, "lat": 6.151953517996051, "dist": 1614.056953000002 },
+            { "lng": -75.63231356100387, "lat": 6.152023022185955, "dist": 1613.357953000002 },
+            { "lng": -75.63212211112939, "lat": 6.152069151557836, "dist": 1612.7449530000022 },
+            { "lng": -75.63197648744496, "lat": 6.152086704172429, "dist": 1612.4160530000022 }
           ],
           "hallazgos": [
             {
-              "id": "1",
-              "icono": "cuadradoVerde.png",
+              "id": "2",
+              "icono": "cuadradoVioleta.svg",
               "fecha": "02-03-2010",
               "componente": "BARRAS",
               "nomenclatura": "AZ 30R",
@@ -3784,7 +3776,7 @@
               "hallazgo1": "BARRA CON VEGETACIÓN ",
               "hallazgo2": "ARBOLES",
               "hallazgo3": "MUCHA BASURA",
-              "estado": "Bueno",
+              "estado": "Otro",
               "observacion": "Ubicacion en PROMATEL... se encontro daño en las placas orientales, especicalmente en las ubicadas hacía el sur, se visitaron las placas adyacentes y tampocc se pudo visualizar afectacciones al interior del rio",
               "estadoanterior": "1",
               "afectacion": "",
@@ -3793,11 +3785,12 @@
                 { "lat": "6.456789", "lon": "-89.433123" },
                 { "lat": "5.454789", "lon": "-49.445123" }
               ],
-              "position": { "lat": 6.151912551, "lng": -75.63267438 },
+              "position": { "lat": 6.152069, "lng": -75.632078 },
               "fotos": [
                 { "url": "C639-1998/100.jpg" },
                 { "url": "C639-1998/200.jpg" },
-                { "url": "C639-1998/300.jpg" }
+                { "url": "C639-1998/300.jpg" },
+                { "url": "C639-1998/500.jpg" }
               ],
               "referencia": "Sin referencia",
               "zona": "SUR CANALIZADA",
@@ -3835,126 +3828,135 @@
           "nombre": "Viva Envigado",
           "puntomedio": { "lng": -75.59864112934297, "lat": 6.17319620499557 },
           "coordenadas": [
-            {
-              "lng": -75.59967126789395,
-              "lat": 6.172467667763533,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.5996695167824,
-              "lat": 6.172469004290262,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59965914745317,
-              "lat": 6.1724792567199716,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59948975947036,
-              "lat": 6.172593789816944,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59930021087693,
-              "lat": 6.1727298122859535,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59912446358292,
-              "lat": 6.1728520570110454,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59886129953476,
-              "lat": 6.173039234680898,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59864112934297,
-              "lat": 6.17319620499557,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59850170240053,
-              "lat": 6.173295665648276,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59832990200175,
-              "lat": 6.173418959253489,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59813810391705,
-              "lat": 6.1735528120647265,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.5979615888932,
-              "lat": 6.173679694188604,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59781147543602,
-              "lat": 6.173779968976495,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.59779380151626,
-              "lat": 6.173795822342911,
-              "dist": 1200.89
-            },
-            {
-              "lng": -75.5977093018682,
-              "lat": 6.173858838627653,
-              "dist": 1200.89
-            }
+            { "lng": -75.59967126789395, "lat": 6.172467667763533, "dist": 1200.89 },
+            { "lng": -75.5996695167824, "lat": 6.172469004290262, "dist": 1200.89 },
+            { "lng": -75.59965914745317, "lat": 6.1724792567199716, "dist": 1200.89 },
+            { "lng": -75.59948975947036, "lat": 6.172593789816944, "dist": 1200.89 },
+            { "lng": -75.59930021087693, "lat": 6.1727298122859535, "dist": 1200.89 },
+            { "lng": -75.59912446358292, "lat": 6.1728520570110454, "dist": 1200.89 },
+            { "lng": -75.59886129953476, "lat": 6.173039234680898, "dist": 1200.89 },
+            { "lng": -75.59864112934297, "lat": 6.17319620499557, "dist": 1200.89 },
+            { "lng": -75.59850170240053, "lat": 6.173295665648276, "dist": 1200.89 },
+            { "lng": -75.59832990200175, "lat": 6.173418959253489, "dist": 1200.89 },
+            { "lng": -75.59813810391705, "lat": 6.1735528120647265, "dist": 1200.89 },
+            { "lng": -75.5979615888932, "lat": 6.173679694188604, "dist": 1200.89 },
+            { "lng": -75.59781147543602, "lat": 6.173779968976495, "dist": 1200.89 },
+            { "lng": -75.59779380151626, "lat": 6.173795822342911, "dist": 1200.89 },
+            { "lng": -75.5977093018682, "lat": 6.173858838627653, "dist": 1200.89}
           ],
           "hallazgos": [
             {
-              "id": "1",
-              "icono": "trianguloAmarillo.png",
+              "id": "3",
+              "icono": "trianguloAlert.gif",
+              "fecha": "02-03-2015",
               "componente": "MURO",
-              "descripcion": "Ubicacion en ....",
-              "estado": "Repotenciado",
-              "position": { "lat": 6.255081, "lng": -75.577046 },
+              "nomenclatura": "MU 23D",
+              "margen": "M_IZQUIERDA",
+              "hallazgo1": "VEGETACION",
+              "hallazgo2": "PIEDRAS",
+              "hallazgo3": "",
+              "estado": "Critico",
+              "observacion": "TRIANGULO ALERT - Ubicacion en VIVA ENVIGADO... se encontro daño en las placas orientales, especicalmente en las ubicadas hacía el sur, se visitaron las placas adyacentes y tampocc se pudo visualizar afectacciones al interior del rio",
+              "estadoanterior": "0",
+              "afectacion": "",
+              "nivelriesgo": "ACEPTABLE",
               "coordenadas": [
                 { "lat": "6.456789", "lon": "-89.433123" },
                 { "lat": "5.454789", "lon": "-49.445123" }
               ],
+              "position": { "lat": 6.172135, "lng": -75.600109 },
               "fotos": [
-                { "url": "../images/639-2012-001/foto1.jpg" },
-                { "url": "../images/639-2012-001/foto2.jpg" },
-                { "url": "../images/639-2012-001/foto3.jpg" }
+                { "url": "C639-1998/100.jpg" }
               ],
+              "referencia": "No tenemos ninguna referencia",
+              "zona": "CENTRO ORIENTAL",
+              "tramo1": "R3. Centro y zona tramo1 al sur",
+              "abscisakm": "K98+222",
+              "revisor": "CM_HG, N_MR, S_AT",
+              "shapeleng": "",
               "diagnostico": "Se encontro....",
+              "criticidad": "2",
+              "tipodiseno": "",
               "propuesta": "Se propone adecuar....",
               "costo": "2800000000",
-              "criticidad": "2",
-              "agreement": "Contrato C298-2012"
+              "cota": "",
+              "linkdiseno": ""
             },
             {
-              "id": "2",
-              "icono": "circuloVioleta.png",
-              "componente": "PLACA",
-              "descripcion": "Ubicacion en ....",
-              "estado": "Otro",
-              "position": { "lat": 6.243654, "lng": -75.579123 },
+              "id": "4",
+              "icono": "barrasAmarillo.svg",
+              "fecha": "02-03-2015",
+              "componente": "BARRAS",
+              "nomenclatura": "BARRAS",
+              "margen": "M_CENTRAL",
+              "hallazgo1": "VEGETACION",
+              "hallazgo2": "PIEDRAS",
+              "hallazgo3": "MUCHA BASURA",
+              "estado": "Repotenciado",
+              "observacion": "BARRAS AMARILLO - Ubicacion en VIVA ENVIGADO... se encontro daño en las placas orientales, especicalmente en las ubicadas hacía el sur, se visitaron las placas adyacentes y tampocc se pudo visualizar afectacciones al interior del rio",
+              "estadoanterior": "0",
+              "afectacion": "",
+              "nivelriesgo": "ACEPTABLE",
               "coordenadas": [
                 { "lat": "6.456789", "lon": "-89.433123" },
                 { "lat": "5.454789", "lon": "-49.445123" }
               ],
+              "position": { "lat": 6.175849, "lng": -75.595264 },
               "fotos": [
-                { "url": "../images/639-2012-001/foto1.jpg" },
-                { "url": "../images/639-2012-001/foto2.jpg" },
-                { "url": "../images/639-2012-001/foto3.jpg" }
+                { "url": "C639-1998/100.jpg" },
+                { "url": "C639-1998/200.jpg" }
               ],
+              "referencia": "NO APLICA",
+              "zona": "NORTE SIN CANALIZACION",
+              "tramo1": "T3. Variante Barbosa",
+              "abscisakm": "K34+546",
+              "revisor": "CM_HG, N_MR, S_AT",
+              "shapeleng": "",
               "diagnostico": "Se encontro....",
+              "criticidad": "2",
+              "tipodiseno": "",
               "propuesta": "Se propone adecuar....",
               "costo": "2800000000",
-              "criticidad": "4",
-              "agreement": "Contrato C298-2012"
+              "cota": "",
+              "linkdiseno": ""
+            },
+            {
+              "id": "5",
+              "icono": "circuloVioleta.svg",
+              "fecha": "02-03-2015",
+              "componente": "PLACA",
+              "nomenclatura": "PLACA",
+              "margen": "M_CENTRAL",
+              "hallazgo1": "PIEDRAS",
+              "hallazgo2": "",
+              "hallazgo3": "BASURA",
+              "estado": "Otro",
+              "observacion": "CIRCULO VIOLETA - Ubicacion en VIVA ENVIGADO... se encontro daño en las placas orientales, especicalmente en las ubicadas hacía el sur, se visitaron las placas adyacentes y tampocc se pudo visualizar afectacciones al interior del rio",
+              "estadoanterior": "0",
+              "afectacion": "",
+              "nivelriesgo": "ACEPTABLE",
+              "coordenadas": [
+                { "lat": "6.456789", "lon": "-89.433123" },
+                { "lat": "5.454789", "lon": "-49.445123" }
+              ],
+              "position": { "lat": 6.171031362988478, "lng": -75.60131293098453 },
+              "fotos": [
+                { "url": "C639-1998/100.jpg" },
+                { "url": "C639-1998/200.jpg" }
+              ],
+              "referencia": "NO APLICA",
+              "zona": "NORTE SIN CANALIZACION",
+              "tramo1": "T3. Variante Barbosa",
+              "abscisakm": "K34+546",
+              "revisor": "CM_HG, N_MR, S_AT",
+              "shapeleng": "",
+              "diagnostico": "Se encontro....",
+              "criticidad": "2",
+              "tipodiseno": "",
+              "propuesta": "Se propone adecuar....",
+              "costo": "2800000000",
+              "cota": "",
+              "linkdiseno": ""
             }
           ],
           "etiquetas": [

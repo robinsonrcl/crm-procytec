@@ -1,4 +1,20 @@
 import { defineStore } from "pinia"
+import { ref, watch } from "vue";
+
+const myMapRef = ref();
+
+watch(myMapRef, (googleMap) => {
+  if (googleMap) {
+
+    // googleMap.$mapPromise.then(map => {
+    //   addLinea(map)
+    // })
+
+    // googleMap.$mapPromise.then((map) => {
+    //   addMyButton(map);
+    // });
+  }
+});
 
 export const useContratoStore = defineStore("ContratoStore", {
     // state
@@ -27,6 +43,7 @@ export const useContratoStore = defineStore("ContratoStore", {
             return this.puntomedio
         },
         getHallazgos() {
+            console.log("getHallazgos: " + this.hallazgos.length)
             return this.hallazgos
         }
     },
@@ -62,7 +79,12 @@ export const useContratoStore = defineStore("ContratoStore", {
                     return corrientesId.some(item => item.id === corriente.id)
                 })
                 corrientes.forEach(corriente => {
-                    this.path.push(corriente.coordenadas)
+                    const newPath = {
+                        corriente: corriente.coordenadas,
+                        puntomedio: corriente.puntomedio
+                    }
+
+                    this.path.push(newPath)
                     corrientesBk.push(corriente)
                 })
             })
@@ -144,20 +166,6 @@ export const useContratoStore = defineStore("ContratoStore", {
                     })
                 })
             })
-
-            //     {   
-            //         id: 1, 
-            //         position: { "lng": -75.579726299728918, "lat": 6.202010620893475 },
-            //         icono: require('@/assets/images/gif/cuadradoAlert.gif'),
-            //         agreement: 'CI446-2012',
-            //         description: 'Barra de sedimentos (curva interna) ocupando aproximadamente el 40% del ancho del canal y direcciona el flujo hacia el costado izquierdo; residuos muro antiguo canalización, descarga aguas residuales margen izquierda, placas con desgaste natural',
-            //         frame: 'PLACA',
-            //         photos: [
-            //             { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-            //             { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-            //             { title: 'Margen del Rio', url: require('@/assets/photos/100.jpg') },
-            //         ]
-            //     },
         },
         setComponentes(componentes) {
             this.componentes = componentes
@@ -165,6 +173,17 @@ export const useContratoStore = defineStore("ContratoStore", {
         setEstados(estados) {
             this.estados = estados
         }
+        // leerPatologia() {
+        //     var circulo = new myMapRef.value.maps.Circle({
+        //         center: "{ 'lng': -75.63256207566154, 'lat': 6.151953517996051 }",
+        //         radius: "200"
+        //     });
+
+        //     const puntoABuscar = "{ 'lng': -75.63256207566154, 'lat': 6.151953517996051 }"
+
+        //     var estaAdentro = myMapRef.value.maps.geometry.poly.containsLocation(puntoABuscar, circulo)
+
+        //     console.log(estaAdentro)
+        // }
     }
 })
-

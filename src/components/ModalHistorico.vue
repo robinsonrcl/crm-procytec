@@ -4,8 +4,9 @@
     <div class="hist-item hist-item-title"><p>HISTORIA / PATOLOGIA</p>
         <div class="modalIconCerrarHistorico" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div>
     </div>
-    <div v-for="item in 6" :key="item.id">
-        <GridHallazgo />    
+    
+    <div v-for="hallazgo in hallazgos" :key="hallazgo.id">
+        <GridHallazgo v-bind:hallazgo="hallazgo" />    
     </div>
   </div>
 </template>
@@ -19,7 +20,9 @@ export default {
     data() {
         return {};
     },
-    props: {},
+    props: {
+        hallazgos: []
+    },
     methods: {
         cerrarModal() {
             this.$emit("showModal", false)

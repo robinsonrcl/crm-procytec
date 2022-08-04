@@ -1,13 +1,23 @@
 <template>
   <div class="map__container">
     <div class="map__body">
-      <MapaGeneral @show-modal="showModalImg" @show-modal-historia="showModalHistoricoView" />
+      <MapaGeneral 
+        @show-modal="showModalImg" 
+        @show-modal-historia="showModalHistoricoView" 
+      />
     </div>
     <div>
-      <ModalImagenes v-show=showModalImage @show-modal="showModalImg" />
+      <ModalImagenes 
+        v-show=showModalImage 
+        @show-modal="showModalImg" 
+      />
     </div>
     <div>
-      <ModalHistorico v-show=showModalHistorico @show-modal="showModalHistoricoView" />
+      <ModalHistorico 
+        v-show=showModalHistorico 
+        @show-modal="showModalHistoricoView"
+        v-bind:hallazgos="hallazgos"
+      />
     </div>
     <div>
       <PanelFilters />
@@ -53,7 +63,8 @@ export default {
   data() {
     return {
       showModalImage: false,
-      showModalHistorico: false
+      showModalHistorico: false,
+      hallazgos: []
     }
   },
 
@@ -61,8 +72,9 @@ export default {
     showModalImg(newValue) {
       this.showModalImage = newValue
     },
-    showModalHistoricoView(show) {
+    showModalHistoricoView(show, hallazgos) {
       this.showModalHistorico = show
+      this.hallazgos = hallazgos
     }
 
   }
