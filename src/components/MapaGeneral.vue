@@ -1,37 +1,26 @@
+<!-- eslint-disable vue/no-dupe-keys -->
 <script setup>
-  import { useContratoStore } from "@/stores/ContratoStore";
-  const contratoStore = useContratoStore()
+import { useContratoStore } from "@/stores/ContratoStore";
+import { ref, onMounted  } from "vue";
+import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
 
+    const contratoStore = useContratoStore()
     const myMapRef = ref();
     const mapPolygon = ref();
 
-    function arePointsNear(checkPoint, centerPoint, km) { 
-      var ky = 40000 / 360;
-      var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
-      var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
-      var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
-      return Math.sqrt(dx * dx + dy * dy) <= km;
-    }
+    function createCircleHallazgo(position) {
 
-    function handleClick(event) {
-
-      const centerPoint = { "lat": 6.172135, "lng": -75.600109 }
-      const checkPoint = { "lat": 6.171031362988478, "lng": -75.60131293098453 }
-
-      const result = arePointsNear(checkPoint, centerPoint, 0.2);
-      console.log("DENTRO DEL CIRCULO? " + result)
-
-      if (event.latLng?.lat) {
-        mapPolygon.value.$polygonPromise.then(res => {
-          let isWithinPolygon = res.containsLatLng(event.latLng.lat(), event.latLng.lng());
-          console.log({isWithinPolygon})
-        })
-      }
+      position === undefined ? position = {"lat": 0.0, "lng": 0.0 } :
+      
+      this.circles = [
+        { position: position }
+      ]
     }
 
     onMounted(() => {
       myMapRef.value.$mapPromise.then(() => {
         setupContainsLatLng();
+        createCircleHallazgo();
       })
     })
 
@@ -41,7 +30,7 @@
   <GMapMap
     ref="myMapRef"
     :click="true"
-    @click="handleClick"
+    @click="handleEventClick"
     :center="contratoStore.getPuntomedio"
     :zoom="15"
     map-type-id="roadmap"
@@ -95,6 +84,12 @@
         :draggable="false"
         @click="openMarker(hallazgo.id)"
         >
+        
+        <GMapPolyline 
+          :path=hallazgo.coordenadas
+          :editable="true"
+          :options="optionspoly"
+        />
 
         <GMapInfoWindow
           :closeclick="true"
@@ -114,22 +109,24 @@
             v-bind:hallazgo="hallazgo"
           />
 
-          <GMapCircle
-            :radius="200"
-            :center="hallazgo.position"
-            :options="circleOptions"
-          />
         </GMapInfoWindow>
       </GMapMarker>
+
+      <div v-for="circle in circles" :key="circle">
+        <GMapCircle
+          :radius="200"
+          :center="circle.position"
+          :options="circleOptions"
+        />
+      </div>
     <!-- </GMapCluster> -->
+    
   </GMapMap>
 </template>
 
 <script>
 import BubbleInfo from "@/components/BubbleInfo.vue";
-import { ref, onMounted  } from "vue";
-import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
-
+    
 export default {
   name: "MapaGeneral",
 
@@ -139,6 +136,7 @@ export default {
 
   data() {
     return {
+      circles: [],
       circleOptions: {
         strokeColor: "#7768D3",
         strokeOpacity: 0.8,
@@ -169,7 +167,7 @@ export default {
         },
         optionspoly: {
           strokeColor: "#0000FF",
-          strokeWeight: 1
+          strokeWeight: 5
         }
     };
   },
@@ -178,30 +176,10 @@ export default {
     enviarShow() {
       this.$emit('showModal', true)
     },
-    showHistoria() {
-      this.$emit('showModalHistoria', true, this.contratoStore.getHallazgos)
-      
-  //     const map = new VueGoogleMaps.maps.Map(
-  //   document.getElementById("map"),
-  //   {
-  //     zoom: 4,
-  //     center: { lat: 37.09, lng: -95.712 },
-  //     mapTypeId: "terrain",
-  //   }
-  // )
-
-        // var circulo = new VueGoogleMaps.gmapApi.maps.Circle({
-          var circulo = this.$refs.myMapRef.maps.Circle({
-                center: "{ 'lng': -75.63256207566154, 'lat': 6.151953517996051 }",
-                radius: 200
-            })
-
-            const puntoABuscar = "{ 'lng': -75.63256207566154, 'lat': 6.151953517996051 }"
-
-            var estaAdentro = this.google.maps.geometry.poly.containsLocation(puntoABuscar, circulo)
-
-            console.log(estaAdentro)
-    
+    showHistoria(show, position) {
+      this.contratoStore.loadPatologia(position)
+      this.$emit('showModalHistoria', show, this.contratoStore.getPatologia)
+      show ? this.createCircleHallazgo(position) : this.circles = []
     },
     openMarker(id) {
         this.openedMarkerID = id
@@ -211,8 +189,10 @@ export default {
       this.infoWindow.open = true;
 
       this.clicked = true;
-    }
+    },
+
   }
 
 }
 </script>
+

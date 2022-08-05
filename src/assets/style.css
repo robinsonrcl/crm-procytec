@@ -1065,7 +1065,12 @@ body,
   -webkit-box-shadow: 2px 2px 5px 5px #e6e6e6; 
   box-shadow: 2px 2px 3px 3px #d3d1d1;
 }
-
+.btn-oculto {
+  position:absolute;
+  z-index: 200;
+  top: 250px;
+  left: 20px;
+}
 
 /* font-family: 'Arima', cursive;
 font-family: 'Bebas Neue', cursive;

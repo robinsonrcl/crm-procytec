@@ -1,20 +1,5 @@
 import { defineStore } from "pinia"
-import { ref, watch } from "vue";
-
-const myMapRef = ref();
-
-watch(myMapRef, (googleMap) => {
-  if (googleMap) {
-
-    // googleMap.$mapPromise.then(map => {
-    //   addLinea(map)
-    // })
-
-    // googleMap.$mapPromise.then((map) => {
-    //   addMyButton(map);
-    // });
-  }
-});
+import { arePointsNear } from "@/utils/utilidades"
 
 export const useContratoStore = defineStore("ContratoStore", {
     // state
@@ -27,7 +12,8 @@ export const useContratoStore = defineStore("ContratoStore", {
             puntomedio: { lat: 6.248353, lng: -75.580265 },
             hallazgos: [],
             componentes: [],
-            estados: []
+            estados: [],
+            patologia: []
         }
     },
 
@@ -45,6 +31,9 @@ export const useContratoStore = defineStore("ContratoStore", {
         getHallazgos() {
             console.log("getHallazgos: " + this.hallazgos.length)
             return this.hallazgos
+        },
+        getPatologia() {
+            return this.patologia
         }
     },
 
@@ -89,7 +78,8 @@ export const useContratoStore = defineStore("ContratoStore", {
                 })
             })
 
-            this.puntomedio = corrientesBk[0].puntomedio
+
+            this.puntomedio = corrientesBk[(corrientesBk.length - 1)].puntomedio
             this.drawHallazgos(contratosId, corrientesId)
         },
         drawHallazgos(contratosId, corrientesId) {
@@ -125,44 +115,45 @@ export const useContratoStore = defineStore("ContratoStore", {
                         return estadosName.some(item => item === evento.estado)
                     }) 
 
-                    hallazgosSegunEstado.forEach(visita => {
+                    hallazgosSegunEstado.forEach(hallazgo => {
                         console.log("Nombre contrato: " + nombreContrato)
 
-                        const newVisita = {
-                            id: visita.id,
+                        const newhallazgo = {
+                            id: hallazgo.id,
                             nombrecontrato: nombreContrato,
-                            icono: visita.icono,
-                            fecha: visita.fecha,
-                            componente: visita.componente,
-                            nomenclatura: visita.nomenclatura,
-                            margen: visita.margen,
-                            hallazgo1: visita.hallazgo1,
-                            hallazgo2: visita.hallazgo2,
-                            hallazgo3: visita.hallazgo3,
-                            estado: visita.estado,
-                            observacion: visita.observacion,
-                            estadoanterior: visita.estadoanterior,
-                            afectacion: visita.afectacion,
-                            nivelriesgo: visita.nivelriesgo,
-                            coordenadas: visita.coordenadas,
-                            position: visita.position,
-                            fotos: visita.fotos,
-                            referencia: visita.referencia,
-                            zona: visita.zona,
-                            tramo1: visita.tramo1,
-                            abscisakm: visita.abscisakm,
-                            revisor: visita.revisor,
-                            shapeleng: visita.shapeleng,
-                            diagnostico: visita.diagnostico,
-                            criticidad: visita.criticidad,
-                            tipodiseno: visita.tipodiseno,
-                            propuesta: visita.propuesta,
-                            costo: visita.costo,
-                            cota: visita.cota,
-                            linkdiseno: visita.linkdiseno
+                            icono: hallazgo.icono,
+                            fecha: hallazgo.fecha,
+                            componente: hallazgo.componente,
+                            nomenclatura: hallazgo.nomenclatura,
+                            margen: hallazgo.margen,
+                            hallazgo1: hallazgo.hallazgo1,
+                            hallazgo2: hallazgo.hallazgo2,
+                            hallazgo3: hallazgo.hallazgo3,
+                            estado: hallazgo.estado,
+                            observacion: hallazgo.observacion,
+                            estadoanterior: hallazgo.estadoanterior,
+                            afectacion: hallazgo.afectacion,
+                            nivelriesgo: hallazgo.nivelriesgo,
+                            coordenadas: hallazgo.coordenadas,
+                            position: hallazgo.position,
+                            fotos: hallazgo.fotos,
+                            referencia: hallazgo.referencia,
+                            zona: hallazgo.zona,
+                            tramo1: hallazgo.tramo1,
+                            abscisakm: hallazgo.abscisakm,
+                            revisor: hallazgo.revisor,
+                            shapeleng: hallazgo.shapeleng,
+                            diagnostico: hallazgo.diagnostico,
+                            criticidad: hallazgo.criticidad,
+                            tipodiseno: hallazgo.tipodiseno,
+                            propuesta: hallazgo.propuesta,
+                            costo: hallazgo.costo,
+                            cota: hallazgo.cota,
+                            linkdiseno: hallazgo.linkdiseno
                         }
 
-                        this.hallazgos.push(newVisita)
+                        this.hallazgos.push(newhallazgo)
+                        this.puntomedio = newhallazgo.position
                     })
                 })
             })
@@ -172,18 +163,63 @@ export const useContratoStore = defineStore("ContratoStore", {
         },
         setEstados(estados) {
             this.estados = estados
+        },
+        loadPatologia(centerPoint) {
+            this.patologia = []
+            this.contratos.contrato.forEach(contrato => {
+                const nombreContrato = contrato.nombre
+
+                contrato.corrientes.forEach(corriente => {
+                    corriente.hallazgos.forEach(hallazgo => {
+                        const checkPoint = hallazgo.position
+
+                        if(centerPoint.lat != checkPoint.lat && centerPoint.lng != checkPoint.lng){
+
+                            if(arePointsNear(checkPoint, centerPoint, 0.2)){
+                                const newHallazgo = {
+                                    id: hallazgo.id,
+                                    nombrecontrato: nombreContrato,
+                                    icono: hallazgo.icono,
+                                    fecha: hallazgo.fecha,
+                                    componente: hallazgo.componente,
+                                    nomenclatura: hallazgo.nomenclatura,
+                                    margen: hallazgo.margen,
+                                    hallazgo1: hallazgo.hallazgo1,
+                                    hallazgo2: hallazgo.hallazgo2,
+                                    hallazgo3: hallazgo.hallazgo3,
+                                    estado: hallazgo.estado,
+                                    observacion: hallazgo.observacion,
+                                    estadoanterior: hallazgo.estadoanterior,
+                                    afectacion: hallazgo.afectacion,
+                                    nivelriesgo: hallazgo.nivelriesgo,
+                                    coordenadas: hallazgo.coordenadas,
+                                    position: hallazgo.position,
+                                    fotos: hallazgo.fotos,
+                                    referencia: hallazgo.referencia,
+                                    zona: hallazgo.zona,
+                                    tramo1: hallazgo.tramo1,
+                                    abscisakm: hallazgo.abscisakm,
+                                    revisor: hallazgo.revisor,
+                                    shapeleng: hallazgo.shapeleng,
+                                    diagnostico: hallazgo.diagnostico,
+                                    criticidad: hallazgo.criticidad,
+                                    tipodiseno: hallazgo.tipodiseno,
+                                    propuesta: hallazgo.propuesta,
+                                    costo: hallazgo.costo,
+                                    cota: hallazgo.cota,
+                                    linkdiseno: hallazgo.linkdiseno
+                                }
+                                this.patologia.push(newHallazgo)
+                            }
+                        }
+                    })
+                })
+            })
         }
-        // leerPatologia() {
-        //     var circulo = new myMapRef.value.maps.Circle({
-        //         center: "{ 'lng': -75.63256207566154, 'lat': 6.151953517996051 }",
-        //         radius: "200"
-        //     });
-
-        //     const puntoABuscar = "{ 'lng': -75.63256207566154, 'lat': 6.151953517996051 }"
-
-        //     var estaAdentro = myMapRef.value.maps.geometry.poly.containsLocation(puntoABuscar, circulo)
-
-        //     console.log(estaAdentro)
-        // }
     }
 })
+
+// 1. Que Panel de patología solo muestre hallazgos en 200 mts -> OK
+// 2. Dibujar la geometria del hallazgo -> OK
+// 3. Programa que convierta excel en JSON
+// 4. Publicar la aplicación

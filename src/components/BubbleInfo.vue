@@ -43,7 +43,9 @@ export default {
   name: "BubbleInfo",
   created() {},
   data() {
-    return {};
+    return {
+      showHistoriaToggle: false
+    };
   },
   props: {
     hallazgo: Object,
@@ -52,7 +54,7 @@ export default {
   
   methods: {
     showHistoria() {
-      this.$emit('showModalHistoria', true)
+      this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
     },
     enviarShow() {
       this.$emit('showModal', true)
