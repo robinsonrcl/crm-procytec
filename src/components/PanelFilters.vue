@@ -3,6 +3,8 @@ import { useContratoStore } from "../stores/ContratoStore.js";
 
 const contratoStore = useContratoStore()
 
+useContratoStore()
+
 // contratoStore.fill()
 
 </script>

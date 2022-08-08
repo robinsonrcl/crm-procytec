@@ -10,9 +10,7 @@ const routes = [
   {
     path: "/fluvial",
     name: "MapaFluvial",
-    component: () =>
-      import(
-        /* webpackChunkName: "mapaFluvial" */ "../views/MapaFluvialView.vue"
+    component: () => import(/* webpackChunkName: "mapaFluvial" */ "../views/MapaFluvialView.vue"
       ),
   },
   {
