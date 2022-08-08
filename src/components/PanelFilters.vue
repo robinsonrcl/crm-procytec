@@ -95,6 +95,7 @@ export default {
       var chkArray = []
       if(this.chkAzud) {
         chkArray.push("AZUD")
+        alert("chk AZUD")
       }
       if(this.chkPlaca) {
         chkArray.push("PLACA")
