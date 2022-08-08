@@ -1,9 +1,9 @@
 <script  setup>
-import { useContratoStore } from "@/stores/ContratoStore";
+import { useContratoStore } from "../stores/ContratoStore.js";
 
 const contratoStore = useContratoStore()
 
-contratoStore.fill()
+// contratoStore.fill()
 
 </script>
 
@@ -31,7 +31,7 @@ contratoStore.fill()
           v-for="(contrato, index) in contratoStore.contratos.contrato"
           v-bind:value="{ id: contrato.id, text: contrato.nombre }"
           :key="index"
-          @click.prevent="fillCorrientes()">
+          @click.prevent="corrientesLocal()">
           {{ contrato.nombre }}
         </option>
       </select>
@@ -83,7 +83,7 @@ export default {
     drawPath() {
       this.contratoStore.drawCorriente(this.optionContrato, this.optionCorriente)
     },
-    fillCorrientes() {
+    corrientesLocal() {
       this.contratoStore.fillCorrientes(this.optionContrato)
       if(document.getElementById("select-corrientes").selectedOptions.length > 1){
         document.getElementById("select-corrientes").selectedOptions = null

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { arePointsNear } from "@/utils/utilidades"
+import { arePointsNear } from "../utils/utilidades"
 
 export const useContratoStore = defineStore("ContratoStore", {
     // state
@@ -40,7 +40,7 @@ export const useContratoStore = defineStore("ContratoStore", {
     // actions
     actions: {
         async fill() {
-            this.contratos = (await import("@/data/contratos.json")).default
+            this.contratos = (await import("../data/contratos.json")).default
            this.drawHallazgos()
         },
         fillCorrientes(contratosId) {

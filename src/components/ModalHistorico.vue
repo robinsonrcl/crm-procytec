@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import GridHallazgo from '@/components//GridHallazgo.vue';
+import GridHallazgo from '../components//GridHallazgo.vue';
 
 export default {
     name: "ModalHistorico",

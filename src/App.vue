@@ -1,7 +1,7 @@
 <template>
     <div class="grid-containerH">
       <div class="grid-itemH grid-item__icono">
-        <img src="@/assets/images/iconoBitacoraBlanco.svg" alt="" class="iconoBitacora" />
+        <img src="./assets/images/iconoBitacoraBlanco.svg" alt="" class="iconoBitacora" />
       </div>
       <div class="grid-itemH">
         <nav class="nav">

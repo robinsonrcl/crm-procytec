@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-dupe-keys -->
 <script setup>
-import { useContratoStore } from "@/stores/ContratoStore";
+import { useContratoStore } from "../stores/ContratoStore";
 import { ref, onMounted  } from "vue";
 import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
 
@@ -57,7 +57,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
         :key="index"
         :position=item.puntomedio
         :icon="{ 
-            url: require('@/assets/images/marcadores/puntomedio.svg'),
+            url: require('../assets/images/marcadores/puntomedio.svg'),
             labelOrigin: {x: 16, y: -10},
             scaledSize: { width: 42, height: 42 }
         }"
@@ -78,7 +78,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
         v-for="(hallazgo, index) in contratoStore.getHallazgos"
         :position="hallazgo.position"
         :icon="{ 
-            url: require(`@/assets/images/marcadores/${hallazgo.icono}`),
+            url: require(`../assets/images/marcadores/${hallazgo.icono}`),
             scaledSize: { width: 32, height: 32 } }"
         :clickable="true"
         :draggable="false"
@@ -125,7 +125,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
 </template>
 
 <script>
-import BubbleInfo from "@/components/BubbleInfo.vue";
+import BubbleInfo from "../components/BubbleInfo.vue";
     
 export default {
   name: "MapaGeneral",

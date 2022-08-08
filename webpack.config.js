@@ -2,7 +2,6 @@ const { VueLoaderPlugin } = require("vue-loader");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const autoprefixer = require("autoprefixer");
 const path = require("path");
 
 module.exports = {
@@ -42,21 +41,11 @@ module.exports = {
           outputPath: "assets/img",
           esModule: false,
         },
+        
       },
       {
-        test: /\.s?css$/,
-        use: [
-          "style-loader",
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: () => [autoprefixer()],
-            },
-          },
-          "sass-loader",
-        ],
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -74,7 +63,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      vue$: "vue/dist/vue.runtime.esm.js",
+      components: path.resolve(__dirname, 'src/components'),
     },
     extensions: ["*", ".js", ".vue", ".json"],
   },
