@@ -99,6 +99,7 @@ export default {
       }
       if(this.chkPlaca) {
         chkArray.push("PLACA")
+        alert("chk PLACA")
       }
       if(this.chkMuro) {
         chkArray.push("MURO")
