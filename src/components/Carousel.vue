@@ -5,11 +5,11 @@
   :slide-to="position"
   :autoplay="5000"
       >
-    <Slide v-for="slide in imagenes" :key="slide">
+    <Slide v-for="slide in images" :key="slide">
       <div class="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
       
       <div class="carousel__item">
-        <img class="img__modal-carousel" :src="slide.url" alt="" />
+        <img class="img__modal-carousel" :src="require(`../assets/photos/${slide.url}`)" alt="" />
       </div>
     </Slide>
 
@@ -49,7 +49,7 @@ export default {
     }
   },
   props: {
-    images: [Object],
+    images: [],
     position: Number,
     mostrarBoton: Boolean
   },
@@ -79,12 +79,6 @@ export default {
 }
 
 };
-
-
-
-// onBeforeMount(() => {
-//   this.setup()
-// })
 
 </script>
 

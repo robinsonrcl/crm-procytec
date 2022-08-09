@@ -15,7 +15,7 @@
     <div class="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div class="c-bubble-item bubble-subtitle"><span>Zona:</span></div>
     <div class="c-bubble-item">
-      <a class="btn-bubble" href="#!" role="button" @click.prevent="enviarShow">
+      <a class="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)">
         <fa icon="fa-camera" /> Fotos
       </a>
     </div>
@@ -56,8 +56,8 @@ export default {
     showHistoria() {
       this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
     },
-    enviarShow() {
-      this.$emit('showModal', true)
+    enviarShow(fotos) {
+      this.$emit('showModal', true, fotos)
     },
   },
 };

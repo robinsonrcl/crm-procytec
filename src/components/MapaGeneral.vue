@@ -8,19 +8,9 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
     const myMapRef = ref();
     const mapPolygon = ref();
 
-    function createCircleHallazgo(position) {
-
-      position === undefined ? position = {"lat": 0.0, "lng": 0.0 } :
-      
-      this.circles = [
-        { position: position }
-      ]
-    }
-
     onMounted(() => {
       myMapRef.value.$mapPromise.then(() => {
         setupContainsLatLng();
-        createCircleHallazgo();
       })
     })
 
@@ -126,12 +116,17 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
 
 <script>
 import BubbleInfo from "../components/BubbleInfo.vue";
-    
+import { mapActions, mapState } from "pinia";
+
 export default {
   name: "MapaGeneral",
 
   components: {
     BubbleInfo
+  },
+
+  computed: {
+    ...mapState(useContratoStore, ["getPatologia"])
   },
 
   data() {
@@ -173,13 +168,23 @@ export default {
   },
 
   methods: {
-    enviarShow() {
-      this.$emit('showModal', true)
+    ...mapActions(useContratoStore, [
+        "loadPatologia"
+        ]),
+    enviarShow(show, fotos) {
+      this.$emit('showModal', show, fotos)
     },
     showHistoria(show, position) {
-      this.contratoStore.loadPatologia(position)
-      this.$emit('showModalHistoria', show, this.contratoStore.getPatologia)
+      this.loadPatologia(position)
+      this.$emit('showModalHistoria', show, this.getPatologia)
       show ? this.createCircleHallazgo(position) : this.circles = []
+    },
+    createCircleHallazgo(position) {
+      position === undefined ? position = {"lat": 0.0, "lng": 0.0 } :
+    
+      this.circles = [
+        { position: position }
+      ]
     },
     openMarker(id) {
         this.openedMarkerID = id

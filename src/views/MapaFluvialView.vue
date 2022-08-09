@@ -19,6 +19,7 @@ contratoStore.fill()
       <ModalImagenes 
         v-show=showModalImage 
         @show-modal="showModalImg" 
+        v-bind:fotos="fotos"
       />
     </div>
     <div>
@@ -73,13 +74,15 @@ export default {
     return {
       showModalImage: false,
       showModalHistorico: false,
-      hallazgos: []
+      hallazgos: [],
+      fotos: []
     }
   },
 
   methods: {
-    showModalImg(newValue) {
+    showModalImg(newValue, fotos) {
       this.showModalImage = newValue
+      this.fotos = fotos
     },
     showModalHistoricoView(show, hallazgos) {
       this.showModalHistorico = show

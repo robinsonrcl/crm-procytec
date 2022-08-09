@@ -333,11 +333,11 @@ body,
 }
 .modalImgUnico {
   width: 60%;
-  height: 60%;
+  /* height: 60%; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background-color: var(--bcolor);
-  /* border: 2px solid green; */
+  border: 2px solid green;
   grid-gap: 5px;
   padding: 20px;
   border-radius: 25px;
@@ -798,14 +798,14 @@ body,
   background-color: var(--bcolor-hallazgo-title);
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 15px;
 }
 #hallazgos,
 #tramouno {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 5px;
 }
 .container-hallazgo-item-nom-complemento {
@@ -832,13 +832,13 @@ body,
 .container-hallazgo-item:nth-child(4) {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 5px;
 }
 .container-hallazgo-item:nth-child(5) {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 5px;
 }
 #subtitulos {
@@ -1070,6 +1070,10 @@ body,
   z-index: 200;
   top: 250px;
   left: 20px;
+}
+.divImgModal {
+  display: grid;
+  align-self: auto;
 }
 
 /* font-family: 'Arima', cursive;

@@ -6,13 +6,14 @@ import VueGoogleMaps from "@fawmi/vue-google-maps";
 import FontAwesome from "./plugins/FontAwesome";
 import { createPinia } from "pinia"
 
+const store = createPinia()
+
 createApp(App)
-  .use(createPinia())
-  .use(FontAwesome)
+.use(router)
   .use(VueGoogleMaps, {
     load: {
       key: "AIzaSyBohMnnUQFiW1mEaFAlUYS3kZHhjuFHBj4",
     },
-  })
-  .use(router)
+  }, FontAwesome, )
+  .use(store)
   .mount("#app");

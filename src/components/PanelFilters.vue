@@ -3,8 +3,6 @@ import { useContratoStore } from "../stores/ContratoStore.js";
 
 const contratoStore = useContratoStore()
 
-useContratoStore()
-
 // contratoStore.fill()
 
 </script>
@@ -72,21 +70,34 @@ useContratoStore()
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
 
 export default {
   name: "PanelFilters",
   created() {},
+
+    computed: {
+    ...mapState(useContratoStore, ["getCorrientes"]),
+  },
+
   data() {
     return {
     };
   },
   props: {},
   methods: {
+    ...mapActions(useContratoStore, [
+        "fillCorrientes",
+        "setComponentes",
+        "drawCorriente",
+        "drawHallazgos",
+        "setEstados"
+        ]),
     drawPath() {
-      this.contratoStore.drawCorriente(this.optionContrato, this.optionCorriente)
+      this.drawCorriente(this.optionContrato, this.optionCorriente)
     },
     corrientesLocal() {
-      this.contratoStore.fillCorrientes(this.optionContrato)
+      this.fillCorrientes(this.optionContrato)
       if(document.getElementById("select-corrientes").selectedOptions.length > 1){
         document.getElementById("select-corrientes").selectedOptions = null
       }
@@ -95,11 +106,9 @@ export default {
       var chkArray = []
       if(this.chkAzud) {
         chkArray.push("AZUD")
-        alert("chk AZUD")
       }
       if(this.chkPlaca) {
         chkArray.push("PLACA")
-        alert("chk PLACA")
       }
       if(this.chkMuro) {
         chkArray.push("MURO")
@@ -108,8 +117,8 @@ export default {
         chkArray.push("BARRAS")
       }
 
-      this.contratoStore.setComponentes(chkArray)
-      this.contratoStore.drawHallazgos(this.optionContrato, this.optionCorriente)
+      this.setComponentes(chkArray)
+      this.drawHallazgos(this.optionContrato, this.optionCorriente)
     },
     selectEstado() {
       var chkEstado = []
@@ -126,8 +135,8 @@ export default {
         chkEstado.push("Otro")
       }
 
-      this.contratoStore.setEstados(chkEstado)
-      this.contratoStore.drawHallazgos(this.optionContrato, this.optionCorriente)
+      this.setEstados(chkEstado)
+      this.drawHallazgos(this.optionContrato, this.optionCorriente)
     }
   },
 };
