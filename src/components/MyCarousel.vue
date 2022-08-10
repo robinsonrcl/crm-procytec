@@ -24,20 +24,7 @@
     props: {
       images: Array
     },
-    setup(props) {
-
-      var temp = ref(props.images)
-
-      if(temp.value.length === 0){
-        temp = [
-        {
-          src: "https://mdbootstrap.com/img/Photos/Slides/img%20(15).webp",
-          alt: "...",
-          label: "First slide label",
-          caption: "Nulla vitae elit libero, a pharetra augue mollis interdum."
-        }
-        ]
-      }
+    setup() {
 
       // const items = temp
       // [
