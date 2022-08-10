@@ -18,7 +18,7 @@
     <div class="container__carousel" v-show="showCarousel">
       <div class="div__carousel">
         <!-- <Carousel :images="fotos" :position="position" :mostrar-boton="true" @show-carousel-modal="showCarouselModal" /> -->
-        <MyCarousel />
+        <MyCarousel @show-carousel-modal="showCarouselModal" />
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@ export default {
     fotos: []
   },
   methods: {
-    cerrarModal () {
+    cerrarModal() {
       this.$emit('showModal', false)
     },
     showModalCarousel(pos) {

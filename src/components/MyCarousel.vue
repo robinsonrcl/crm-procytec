@@ -1,22 +1,24 @@
 <template>
-  <MDBCarousel v-model="testCarousel1" :items="items1" ref="testCarousel" :interval="false" fade innerClass="rounded-5 shadow-4-strong"/>
-
-  <MDBBtn @click.stop="$refs.testCarousel.prev()" color="primary" size="sm">Prev</MDBBtn>
-  <MDBBtn @click.stop="$refs.testCarousel.next()" color="primary" size="sm">Next</MDBBtn>
-  <MDBBtn @click.stop="testCarousel1 = 0" color="primary" size="sm">0</MDBBtn>
-  <MDBBtn @click.stop="testCarousel1 = 1" color="primary" size="sm">1</MDBBtn>
-  <MDBBtn @click.stop="testCarousel1 = 2" color="primary" size="sm">2</MDBBtn>
+  <MDBCarousel 
+    class="mdbcarousel"
+    v-model="testCarousel1" 
+    :items="items1" 
+    ref="testCarousel" 
+    :interval="false" 
+    fade 
+    innerClass="rounded-5 shadow-4-strong"
+    :controls="false" />
+    <div class="modalIconCerrarCarousel" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div>
 </template>
 
 <script>
   import 'mdb-vue-ui-kit/css/mdb.min.css';
   import { ref } from "vue";
-  import {  MDBCarousel, MDBBtn } from "mdb-vue-ui-kit";
+  import {  MDBCarousel } from "mdb-vue-ui-kit";
 
   export default {
     components: {
-      MDBCarousel,
-      MDBBtn
+      MDBCarousel
     },
     setup() {
       const items1 = [
@@ -45,6 +47,11 @@
         items1,
         testCarousel1
       };
+    },
+    methods: {
+      cerrarModal() {
+      this.$emit('showCarouselModal', false)
+    },
     }
   };
 </script>

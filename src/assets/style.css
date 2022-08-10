@@ -360,14 +360,28 @@ body,
   padding-left: 5px;
 }
 .modalIconCerrar {
-  position: absolute;
+  position: fixed;
   color: rgb(255, 255, 255);
   background-color: red;
   width: 32px;
   height: 32px;
   clip-path: circle(50% at 50% 50%);
   text-align: center;
-  top: -3;
+  /* top: -3; */
+  margin: -5px;
+  z-index: 20;
+  /* right: 0; */
+}
+.modalIconCerrarCarousel {
+  position: fixed;
+  color: rgb(255, 255, 255);
+  background-color: red;
+  width: 42px;
+  height: 32px;
+  clip-path: circle(50% at 50% 50%);
+  text-align: center;
+  /* top: -3; */
+  margin: 15px;
   z-index: 20;
   /* right: 0; */
 }
@@ -616,6 +630,9 @@ body,
 }
 
 @media screen and (min-width: 1700px) {
+  .container__carousel {
+    width: 81%;
+  }
   .nav__li a {
     font-size: 1.3em;
     font-weight: 200;
@@ -660,6 +677,7 @@ body,
     text-transform: uppercase;
     /* font-variant-caps:petite-caps; */
   }
+
 }
 
 /* img__modal-carousel
@@ -680,6 +698,7 @@ body,
   .img__modal-carousel {
     width: 90%;
   }
+
 }
 
 @media screen and (min-width: 2000px) {
@@ -704,18 +723,19 @@ body,
   .img__modal-carousel {
     width: 50%;
   }
+  
 }
 
 .icon-close-carousel {
-  position: absolute;
+  position: fixed;
   color: rgb(255, 255, 255);
   background-color: red;
   width: 32px;
   height: 32px;
   clip-path: circle(50% at 50% 50%);
   text-align: center;
-  top: 0px;
-  right: 0px;
+  z-index: 100;
+  margin: 20px;
 }
 .icon-close-carousel2 {
   position: static;
@@ -1074,6 +1094,10 @@ body,
 .divImgModal {
   display: grid;
   align-self: auto;
+}
+.mdbcarousel {
+  height: 80%;
+  width: 100%;
 }
 
 /* font-family: 'Arima', cursive;

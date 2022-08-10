@@ -53,7 +53,7 @@
    <router-view />
 </template>
 
-<style>
+<style lang="css">
 @import "assets/style.css";
 
 #app {
@@ -78,4 +78,7 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>
+
+
