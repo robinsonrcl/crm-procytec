@@ -1,6 +1,14 @@
 <template>
 <div class="padre">
-  <div class="hijo">Gestión Contratos</div>
+  <div class="hijo">
+    Gestión Contratos
+    <hr>
+    CRUD contratos - 
+    Corrientes - 
+    Hallazgos
+    <hr>
+    Gráfica de corrientes y Componentes
+  </div>
 </div>
 </template>
 
