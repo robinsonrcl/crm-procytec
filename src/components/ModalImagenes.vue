@@ -18,7 +18,8 @@
     <div class="container__carousel" v-show="showCarousel">
       <div class="div__carousel">
         <!-- <Carousel :images="fotos" :position="position" :mostrar-boton="true" @show-carousel-modal="showCarouselModal" /> -->
-        <MyCarousel @show-carousel-modal="showCarouselModal" />
+        <!-- <MyCarousel :images="fotos" @show-carousel-modal="showCarouselModal" /> -->
+        <FotosCarousel :images="fotos" @show-carousel-modal="showCarouselModal" />
       </div>
     </div>
   </div>
@@ -26,13 +27,15 @@
 
 <script>
 // import Carousel from "../components/Carousel.vue"
-import MyCarousel from "../components/MyCarousel.vue";
+// import MyCarousel from "../components/MyCarousel.vue";
+import FotosCarousel from "../components/FotosCarousel.vue";
 
 export default {
   name: "ModalImagenes",
   components: {
     // Carousel,
-    MyCarousel
+    // MyCarousel
+    FotosCarousel
 },
   data() {
     return {
