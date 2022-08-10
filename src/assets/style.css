@@ -1101,17 +1101,37 @@ body,
 }
 .padre {
   height: 100%;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0px 60px 0px 60px;
+  column-gap: 20px;
+  background-color: #fff;
 }
 
 .hijo {
   width: 620px;
   font-family: 'Arima', cursive;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  text-align: justify;
 }
 
+.hijo span {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pieppal {
+  display: flex;
+  background-color: var(--bcolor);
+  position: sticky;
+  bottom: 0px;
+  color: #fff;
+  font-size: 0.7rem;
+  height: 30px;
+  padding: 5px 0px 0px 15px; 
+}
 /* font-family: 'Arima', cursive;
 font-family: 'Bebas Neue', cursive;
 font-family: 'Edu NSW ACT Foundation', cursive;
