@@ -1,5 +1,7 @@
 <template>
-  <div>Setup SPA</div>
+<div class="padre">
+  <div class="hijo">Administración de la aplicación</div>
+</div>
 </template>
 
 <script>
@@ -14,4 +16,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+
+</style>

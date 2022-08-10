@@ -1,5 +1,7 @@
 <template>
-  <div>Gestión Contratos</div>
+<div class="padre">
+  <div class="hijo">Gestión Contratos</div>
+</div>
 </template>
 
 <script>

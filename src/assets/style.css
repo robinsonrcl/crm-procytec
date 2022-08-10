@@ -1099,6 +1099,18 @@ body,
   height: 80%;
   width: 100%;
 }
+.padre {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hijo {
+  width: 320px;
+  font-family: 'Arima', cursive;
+  font-size: 2rem;
+}
 
 /* font-family: 'Arima', cursive;
 font-family: 'Bebas Neue', cursive;
