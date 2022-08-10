@@ -1,0 +1,156 @@
+commit 18a9201bd5639e4c24e0cbcee6af746a39339bd2
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Wed Aug 10 08:19:40 2022 -0500
+
+    Se creo el homepage tomando como base la imagen y texto del actual sitio Bitacora - Fluvial, se adiciono un footer fijo
+
+commit 7dd7eda984aef494908ac17c2390fe05a5c7f525
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Tue Aug 9 20:33:45 2022 -0500
+
+    Ajustes basicos en paginas de Inicio, Contratos, Configuración y Usuarios V2
+
+commit 65e3a31d91065e0dcdaf5bb34382e7788482db78
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Tue Aug 9 20:27:04 2022 -0500
+
+    Ajustes basicos en paginas de Inicio, Contratos, Configuración y Usuarios
+
+commit df3db31985c9571d9d87332a3e65cb45711e6fb0
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Tue Aug 9 19:44:13 2022 -0500
+
+    Se reconstruyo el componente de Carousel porque no funcionaba automaticamente, pero el nuevo componente aún no carga las fotos pero si realiza el despliegue automatico de los slides. Se corrigio del despliegue de ayer en Netlify que la función del store fillCorrientes no funcionaba, se corrigio implementando los mapActions y mapState para habilitar los getters y actions del storage en el componente MapaGeneral. Ayer se efectue el despliegue en Netlify realizando varias veces hasta lograr su funcionamiento pleno y conexión para despliegue automatico al estar vinculado con el repository github.
+
+commit c218cba6affecbc7f0e0a52d82d94011e3896d36
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Tue Aug 9 11:59:56 2022 -0500
+
+    Menor change...
+
+commit c84a9c76322808cc7077f164cf6faf359753effc
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 18:14:49 2022 -0500
+
+    Menor change...
+
+commit e6740ba7af30c553df413bbf8d83401d7cff767a
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 18:13:47 2022 -0500
+
+    Menor change...
+
+commit 50d267f9eb0502bed195da8d525185daa2d28fc4
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 18:08:54 2022 -0500
+
+    Menor change...
+
+commit 9217b1b226bd2956585d4904ea57f9c23dbfe272
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 18:07:04 2022 -0500
+
+    Menor change...
+
+commit 65239d47939fee9f2a30a8ea9b6fb7fd12746ccb
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 17:58:18 2022 -0500
+
+    Menor change...
+
+commit 8ffa6b3ad99f510bf8a8eebed472ca89911f3579
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 17:34:33 2022 -0500
+
+    Menor change...
+
+commit 0adaa33ef78837c448980ba2ab15efca1d8ad2ff
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 16:38:57 2022 -0500
+
+    Menor change...
+
+commit 6602a11f4df91436f2d8586212891ad2de9fa48d
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Mon Aug 8 16:26:08 2022 -0500
+
+    Se crearon las corrientes Quebrada Aguacatala y Quebrada La Presidenta, se ajusto el JSON con los componentes asociados a estas corrientes y también se ajusto el eje de Rio, se pueden visualizar todas las corrientes, componentes y la patología asociada a cada componente cuando existe alguna 200 metros alrededor de este.  Se configuro el webpack para efectuar el empaquetamiento de la aplicación para su despliegue
+
+commit 86a28efcaa843e5109ca5886c8959a73906161d4
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Fri Aug 5 15:17:45 2022 -0500
+
+    Se crearon las corrientes de Quebrada Presidenta con varios componentes, sus coordenadas y puntos de referencia, también para Quebrada La Iguana. . Se despliegan en el panel de paología todos los hallazgos que hubieran alrededor del hallazgo activo, se optimizo el eje del rio pasando de casi 4000 coordenadas a casi 800. Se encuentra totalmente funcional la aplicación en su componente de Mapa Fluvial según los requerimientos, se crearon iconos para el punto medio y se muestra las coordenadas de las corrientes y las geometrias de los hallazgos/componentes así como sus puntos de referencia con el icono correspondiente.
+
+commit 8db757b4a7df6e95b7dc8fd167d07d3302e82e28
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Wed Aug 3 20:02:35 2022 -0500
+
+    Se implemento totalmente el rediseño de la nueva burbuja de información para cada hallazgo, se implemento el dibujo de un Circle 200mts alrededor de cada hallazgo para mirar que otros hallazgos harían parte de su patología, se creo un nuevo icono para identificar el punto medio de las corrientes, se implemento el uso del panel de historico con información pasada de los hallazgos en el storage, y se implemento una función para determinar si un hallazgo esta dentro del rango de influencia de otro.
+
+commit 96fea43435562519dc4ccd1b9452491e75194361
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Tue Aug 2 17:42:32 2022 -0500
+
+    Se termino de implementar y ajustar la funcionalidad del panel de filtros, se construyo el componente
+    BubbleInfo para mostrar la info en los marcadores sobre el mapa, se ajusto el JSON de acuerdo a los últimos cambios reportados por la UNAL
+    se implementaron y ajustron metodos adicionales en el store ContratoStore
+
+commit 246289a1d1cebf909d3fac058a357cc5c906f4ae
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Sat Jul 30 07:17:33 2022 -0500
+
+    Se creo el store con pinia, se hace lectura del JSON contratos.json y con los metodos y getters del caso se llenan las listas de Contratos y Corrientes en el PANEL DE FILTROS, también se ha incluido los metodos para responder a los cambios en la selección de contratos, corrientes y componentes, es decir, para que dichas corrientes y componentes sean dibujados dinamicamente en el mapa según la selección de filtros, se continua depurando selección de filtros para que la info en el mapa se mantenga actualizada.
+
+commit 006e7b4ed3c74f3aea14f17c67eda5d6db02a044
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Sat Jul 23 13:41:34 2022 -0500
+
+    Se termino de construir el pnal de filtros y hacerlo responsive, tambien se hicieron algunos ajutes en el panel de historia / patologia
+
+commit 99a64027d5782345e9309262dbb1a36521a09827
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Sat Jul 23 11:57:35 2022 -0500
+
+    Se hicieron ajustes en el panal de historico y patologia y se hizo el diseño del pnal de filtros, se creo el dicho componente y se esta en su etapa inicial de maqueta
+
+commit 2c2afbb925a768634bf9c815062eb0b796d2a7cf
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Fri Jul 22 21:12:09 2022 -0500
+
+    Se diseño e implemento el panel lateral para desplegar dentro de el los paneles de cada hallazgo historico asociado al punto o hallazgo seleccionado en el mapa, se hizo manteniendo el diseño responsive entre resoluciones 1500 y 3000
+
+commit 1e8b7002869566e87e69f9a28d4dbde54e104fa9
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Fri Jul 22 08:40:04 2022 -0500
+
+    Se implemento el diseño de SPA para visualizar
+    el mapa fluvial, se crearon los iconos para representar las estructuras, los gif
+    para las estructuras en estado malo o critico, los iconos de las muestras de colores.
+    Se implemento el diseño responsive para resoluciones superiores a 1300px hasta 3000 pixeles.
+    Se incluyo un carousel para visualización de las fotos y las leyendas en burbujas de los marcadores.
+    Se configuro la API KEY para la implementación y uso de la api de google maps.
+
+commit 0c848fd209f1bd325e03f2ae8deacaac1349b549
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Sat Jul 16 08:49:22 2022 -0500
+
+    Update test
+
+commit 097530c6eac01160e857535cd94aac0c6ea37c36
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Sat Jul 16 08:48:18 2022 -0500
+
+    Actualización luego de habilitar el mapa con icono
+
+commit 8b79a69dcf717a223c2abefd33ab655efe1aa80f
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Thu Jul 14 08:05:13 2022 -0500
+
+    1er Commit luego de habilitar el mapa con la api de google, mostrar marcadores con iconos personalizados, abrir burbuja con info sobre cada punto, foto en miniatura y leyenda dentro del mapa del codigo de colores asociados a los estados e iconos asociados a los diferentes tipos de estructuras
+
+commit 5caa8b7aef653d8b99299842afd41281d4a9f522
+Author: Robinson Cartagena <robinsonrcl@gmail.com>
+Date:   Tue Jul 12 19:10:29 2022 -0500
+
+    init

@@ -10,7 +10,8 @@ import {
     faCheck,
     faCamera,
     faHistory,
-    faCaretRight
+    faCaretRight,
+    faDisplay
     } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -25,7 +26,8 @@ library.add(
     faCheck,
     faCamera,
     faHistory,
-    faCaretRight
+    faCaretRight,
+    faDisplay
     )
 
 export default (app) => {

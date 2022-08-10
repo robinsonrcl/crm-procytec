@@ -630,6 +630,9 @@ body,
 }
 
 @media screen and (min-width: 1700px) {
+  .imgPpal {
+    width: 65%;
+  }
   .container__carousel {
     width: 81%;
   }
@@ -677,7 +680,6 @@ body,
     text-transform: uppercase;
     /* font-variant-caps:petite-caps; */
   }
-
 }
 
 /* img__modal-carousel
@@ -698,7 +700,6 @@ body,
   .img__modal-carousel {
     width: 90%;
   }
-
 }
 
 @media screen and (min-width: 2000px) {
@@ -723,7 +724,6 @@ body,
   .img__modal-carousel {
     width: 50%;
   }
-  
 }
 
 .icon-close-carousel {
@@ -1033,7 +1033,6 @@ body,
   width: 100%;
   height: auto;
   align-self: end;
-  
 }
 #DivBubbleImg:hover img {
   width: 150%;
@@ -1078,15 +1077,15 @@ body,
   border: none;
 }
 .btn-bubble {
-  color: #3b5998; 
-  padding: 3px 7px; 
+  color: #3b5998;
+  padding: 3px 7px;
   font-weight: 400;
   font-style: italic;
-  -webkit-box-shadow: 2px 2px 5px 5px #e6e6e6; 
+  -webkit-box-shadow: 2px 2px 5px 5px #e6e6e6;
   box-shadow: 2px 2px 3px 3px #d3d1d1;
 }
 .btn-oculto {
-  position:absolute;
+  position: absolute;
   z-index: 200;
   top: 250px;
   left: 20px;
@@ -1112,7 +1111,7 @@ body,
 
 .hijo {
   width: 620px;
-  font-family: 'Arima', cursive;
+  font-family: "Arima", cursive;
   font-size: 1rem;
   text-align: justify;
 }
@@ -1123,15 +1122,40 @@ body,
 }
 
 .pieppal {
-  display: flex;
-  background-color: var(--bcolor);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: rgb(232 230 230);
   position: sticky;
   bottom: 0px;
-  color: #fff;
+  color: #070707;
   font-size: 0.7rem;
-  height: 30px;
-  padding: 5px 0px 0px 15px; 
+  height: auto;
+  padding: 10px 0px 0px 15px;
+  align-items: baseline;
 }
+
+.imgCromo {
+  width: 6%;
+  float: right;
+  margin: 5px;
+}
+
+.imgUNAL {
+  width: 30%;
+  float: left;
+  padding-bottom: 10px;
+}
+
+.item__pieppal {
+  display: flexbox;
+  align-self: baseliner;
+  text-align: right;
+}
+
+.item__pieppal span {
+  vertical-align: -webkit-baseline-middle;
+}
+
 /* font-family: 'Arima', cursive;
 font-family: 'Bebas Neue', cursive;
 font-family: 'Edu NSW ACT Foundation', cursive;

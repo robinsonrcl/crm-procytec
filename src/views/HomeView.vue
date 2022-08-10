@@ -1,6 +1,6 @@
 <template>
 <div class="padre">
-  <div><img src="../assets/images/RioMedellin.png" alt=""></div>
+  <div><img class="imgPpal" src="../assets/images/RioMedellin.png" alt=""></div>
   <div class="hijo">
     Los paisajes fluviales, considerados bienes públicos, 
     requieren de monitoreo y mantenimiento, para garantizar su conservación y minimizar 
@@ -26,7 +26,18 @@
   <div></div>
   <div></div>
 </div>
-<div class="pieppal">Universidad Nacional de Colombia</div>
+<div class="pieppal">
+  <div class="item__pieppal">
+    <img class="imgUNAL" src="../assets/images/logo_unal.svg" alt="">
+  </div>
+  <div></div>
+  <div class="item__pieppal">
+      <span>Browser recomendado</span>  
+      <img class="imgCromo" src="../assets/images/cromo.png" alt=""><br/>
+     <fa icon="fa-display"/> Resolución minima 1200x800<br/>
+      
+  </div>
+</div>
 </template>
 
 <script>
