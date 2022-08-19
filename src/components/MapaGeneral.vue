@@ -3,6 +3,7 @@
 import { useContratoStore } from "../stores/ContratoStore";
 import { ref, onMounted  } from "vue";
 import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
+import ImportarJson from "./ImportarJson.vue";
 
     const contratoStore = useContratoStore()
     const myMapRef = ref();
@@ -23,7 +24,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
     @click="handleEventClick"
     :center="contratoStore.getPuntomedio"
     :zoom="15"
-    map-type-id="roadmap"
+    map-type-id="satellite"
     style="width: 100%; height: 100%;"
     >
 
@@ -111,6 +112,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
       </div>
     <!-- </GMapCluster> -->
     
+  <ImportarJson />
   </GMapMap>
 </template>
 
@@ -135,7 +137,7 @@ export default {
       circleOptions: {
         strokeColor: "#7768D3",
         strokeOpacity: 0.8,
-        strokeWeight: 2,
+        strokeWeight: 1,
         fillColor: "#9B91D8",
         fillOpacity: 0.35,
       },
@@ -162,7 +164,7 @@ export default {
         },
         optionspoly: {
           strokeColor: "#0000FF",
-          strokeWeight: 5
+          strokeWeight: 1
         }
     };
   },

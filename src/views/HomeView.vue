@@ -28,7 +28,7 @@
 </div>
 <div class="pieppal">
   <div class="item__pieppal">
-    <img class="imgUNAL" src="../assets/images/logo_unal.svg" alt="">
+    <img class="imgUNAL" src="../assets/images/logo_unal.jpg" alt="">
   </div>
   <div></div>
   <div class="item__pieppal">

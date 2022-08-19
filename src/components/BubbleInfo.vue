@@ -9,8 +9,8 @@
         </textarea> 
       </div>
     </div>
-    <div class="c-bubble-item" id="DivBubbleImg">
-      <img id="imgBubble" :src="require(`../assets/photos/${hallazgo.fotos[0].url}`)" alt="">
+    <div  class="c-bubble-item" id="DivBubbleImg">
+      <img  id="imgBubble" :src="require(`../assets/photos/${hallazgo.fotos[0].src}`)" alt="">
     </div>
     <div class="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div class="c-bubble-item bubble-subtitle"><span>Zona:</span></div>

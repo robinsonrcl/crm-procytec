@@ -727,7 +727,7 @@ body,
 }
 
 .icon-close-carousel {
-  position: fixed;
+  position: absolute;
   color: rgb(255, 255, 255);
   background-color: red;
   width: 32px;
@@ -735,7 +735,9 @@ body,
   clip-path: circle(50% at 50% 50%);
   text-align: center;
   z-index: 100;
-  margin: 20px;
+  /* margin: 20px; */
+  top: 30px;
+  right: 30px;
 }
 .icon-close-carousel2 {
   position: static;
@@ -1141,7 +1143,7 @@ body,
 }
 
 .imgUNAL {
-  width: 30%;
+  width: 35%;
   float: left;
   padding-bottom: 10px;
 }
@@ -1154,6 +1156,12 @@ body,
 
 .item__pieppal span {
   vertical-align: -webkit-baseline-middle;
+}
+.divLoad {
+  z-index: 120;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
 }
 
 /* font-family: 'Arima', cursive;

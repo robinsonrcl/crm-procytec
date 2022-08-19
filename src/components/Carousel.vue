@@ -9,7 +9,7 @@
       <div class="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
       
       <div class="carousel__item">
-        <img class="img__modal-carousel" :src="require(`../assets/photos/${slide.url}`)" alt="" />
+        <img class="img__modal-carousel" :src="require(`../assets/photos/${slide.src}`)" alt="" />
       </div>
     </Slide>
 

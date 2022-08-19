@@ -38,7 +38,7 @@
     <div class="container-hallazgo-item" id="cont-hall-fotos">
 
       <div v-for="foto in hallazgo.fotos" :key="foto">
-        <div><img class="cont-hall-img" :src="require(`../assets/photos/${foto.url}`)" alt="" /></div>
+        <div><img class="cont-hall-img" :src="require(`../assets/photos/${foto.src}`)" alt="" /></div>
       </div>
       
     </div>
