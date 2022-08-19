@@ -116,7 +116,6 @@ export const useContratoStore = defineStore("ContratoStore", {
                     }) 
 
                     hallazgosSegunEstado.forEach(hallazgo => {
-                        console.log("Nombre contrato: " + nombreContrato)
 
                         if(hallazgo.fotos === ""){
                             hallazgo.fotos = [{ "src": "sinfoto.jpg" }]

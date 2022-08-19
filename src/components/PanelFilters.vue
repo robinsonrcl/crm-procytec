@@ -82,6 +82,16 @@ export default {
 
   data() {
     return {
+      optionContrato: [],
+      optionCorriente: [],
+      chkAzud: Boolean,
+      chkPlaca: Boolean,
+      chkMuro: Boolean,
+      chkBarras: Boolean,
+      chkBueno: Boolean,
+      chkRepotenciado: Boolean,
+      chkCritico : Boolean,
+      chkOtro: Boolean
     };
   },
   props: {},
@@ -104,16 +114,16 @@ export default {
     },
     selectComponente() {
       var chkArray = []
-      if(this.chkAzud) {
+      if(this.chkAzud === true) {
         chkArray.push("AZUD")
       }
-      if(this.chkPlaca) {
+      if(this.chkPlaca === true) {
         chkArray.push("PLACA")
       }
-      if(this.chkMuro) {
+      if(this.chkMuro === true) {
         chkArray.push("MURO")
       }
-      if(this.chkBarras) {
+      if(this.chkBarras === true) {
         chkArray.push("BARRAS")
       }
 
@@ -122,16 +132,16 @@ export default {
     },
     selectEstado() {
       var chkEstado = []
-      if(this.chkRepotenciado) {
+      if(this.chkRepotenciado === true) {
         chkEstado.push("Repotenciado")
       }
-      if(this.chkBueno) {
+      if(this.chkBueno === true) {
         chkEstado.push("Bueno")
       }
-      if(this.chkCritico) {
+      if(this.chkCritico === true) {
         chkEstado.push("Critico")
       }
-      if(this.chkOtro) {
+      if(this.chkOtro === true) {
         chkEstado.push("Otro")
       }
 

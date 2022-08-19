@@ -1,13 +1,9 @@
 <template>
-  <button id="botonCarousel" v-show="mostrarMsg"  class="icon-close-carousel2" type="button" @click="newSlide">Inicio</button>
-  <Carousel :settings="settings" ref="myCarousel" :wrap-around="true"
-  :items-to-scroll="1"
-  :slide-to="position"
-  :autoplay="5000"
-      >
+  <!-- <button id="botonCarousel" v-show="mostrarMsg"  class="icon-close-carousel2" type="button" @click="newSlide">Inicio</button> -->
+  <div class="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
+  <Carousel ref="myCarousel" :wrap-around="true"  :items-to-scroll="1" :autoplay="5000">
+
     <Slide v-for="slide in images" :key="slide">
-      <div class="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
-      
       <div class="carousel__item">
         <img class="img__modal-carousel" :src="require(`../assets/photos/${slide.src}`)" alt="" />
       </div>
@@ -29,13 +25,12 @@ const myCarousel = ref(null)
 export default {
   name: "BasicCarousel",
   emits: ["showCarouselModal"],
-  setup(props) {
+  setup() {
     
     function newSlide() {
       const elemento = document.getElementById("botonCarousel")
       this.mostrarMsg = false
       elemento.hidden = true
-      myCarousel.value.slideTo(props.position)
       myCarousel.value.updateSlideWidth()
     }
     const carouselUpdate = () => myCarousel.value.wrapAround(true)
@@ -49,8 +44,7 @@ export default {
     }
   },
   props: {
-    images: [],
-    position: Number,
+    images: { type: Array },
     mostrarBoton: Boolean
   },
    components: {

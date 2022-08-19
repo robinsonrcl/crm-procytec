@@ -21,7 +21,7 @@ export default {
         return {};
     },
     props: {
-        hallazgos: []
+        hallazgos: { type: Array }
     },
     methods: {
         cerrarModal() {

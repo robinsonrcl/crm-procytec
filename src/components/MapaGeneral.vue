@@ -7,7 +7,7 @@ import ImportarJson from "./ImportarJson.vue";
 
     const contratoStore = useContratoStore()
     const myMapRef = ref();
-    const mapPolygon = ref();
+    // const mapPolygon = ref();
 
     onMounted(() => {
       myMapRef.value.$mapPromise.then(() => {
@@ -21,21 +21,11 @@ import ImportarJson from "./ImportarJson.vue";
   <GMapMap
     ref="myMapRef"
     :click="true"
-    @click="handleEventClick"
     :center="contratoStore.getPuntomedio"
     :zoom="15"
     map-type-id="satellite"
     style="width: 100%; height: 100%;"
     >
-
-    <GMapPolygon
-      :options="{
-          clickable: false
-        }"
-      :clickable="false"
-      ref="mapPolygon"
-      :paths="paths"
-    />
 
     <div v-for="item in contratoStore.getPath" :key="item.id">
       <GMapPolyline 
@@ -45,7 +35,6 @@ import ImportarJson from "./ImportarJson.vue";
       ref="polyline" />
 
       <GMapMarker
-        :key="index"
         :position=item.puntomedio
         :icon="{ 
             url: require('../assets/images/marcadores/puntomedio.svg'),
@@ -141,11 +130,11 @@ export default {
         fillColor: "#9B91D8",
         fillOpacity: 0.35,
       },
-      paths: [
-        {lat: 25.774, lng: -80.19},
-        {lat: 18.466, lng: -66.118},
-        {lat: 32.321, lng: -64.757},
-      ],
+      // paths: [
+      //   {lat: 25.774, lng: -80.19},
+      //   {lat: 18.466, lng: -66.118},
+      //   {lat: 32.321, lng: -64.757},
+      // ],
         openedMarkerID: null,
         infoWindow: {
             position: { lat: 6.248353, lng: -75.580265 },
