@@ -77,7 +77,7 @@ export default {
   created() {},
 
     computed: {
-    ...mapState(useContratoStore, ["getCorrientes"]),
+    ...mapState(useContratoStore, ["getCorrientes"])
   },
 
   data() {

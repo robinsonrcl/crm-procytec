@@ -17,7 +17,9 @@
     </div>
     <div class="container__carousel" v-show="showCarousel">
       <div class="div__carousel">
-        <Carousel :images="fotos" :mostrar-boton="true" @show-carousel-modal="showCarouselModal" />
+        <div class="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
+        <!-- <Carousel :images="fotos" :mostrar-boton="true" @show-carousel-modal="showCarouselModal" /> -->
+        <Carousel :images="fotos"  />
       </div>
     </div>
   </div>
@@ -38,9 +40,7 @@ export default {
     };
   },
   props: {
-    fotos: {
-      type: Array
-    }
+    fotos: { type: Array }
   },
   methods: {
     cerrarModal() {
@@ -51,6 +51,9 @@ export default {
       this.showCarousel = true
     },
     showCarouselModal() {
+      this.showCarousel = false
+    },
+    closeModalCarousel() {
       this.showCarousel = false
     }
     

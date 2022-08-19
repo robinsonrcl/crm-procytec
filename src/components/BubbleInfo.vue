@@ -16,7 +16,7 @@
     <div class="c-bubble-item bubble-subtitle"><span>Zona:</span></div>
     <div class="c-bubble-item">
       <a class="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)">
-        <fa icon="fa-camera" /> Fotos
+        <fa icon="fa-camera" /> Fotos ({{ hallazgo.fotos.length }})
       </a>
     </div>
     <div class="c-bubble-item">{{ hallazgo.referencia }}</div>
