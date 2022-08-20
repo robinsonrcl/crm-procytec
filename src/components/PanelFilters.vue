@@ -3,7 +3,31 @@ import { useContratoStore } from "../stores/ContratoStore.js";
 
 const contratoStore = useContratoStore()
 
-// contratoStore.fill()
+      const optionContrato = []
+      const optionCorriente = []
+      const chkAzud = Boolean
+      const chkPlaca = Boolean
+      const chkMuro = Boolean
+      const chkBarras = Boolean
+      const chkBueno = Boolean
+      const chkRepotenciado = Boolean
+      const chkCritico = Boolean
+      const chkOtro = Boolean
+
+    // data() {
+  //   return {
+      // optionContrato: []
+      // const optionCorriente: []
+      // chkAzud: Boolean,
+      // chkPlaca: Boolean,
+      // chkMuro: Boolean,
+      // chkBarras: Boolean,
+      // chkBueno: Boolean,
+      // chkRepotenciado: Boolean,
+      // chkCritico : Boolean,
+      // chkOtro: Boolean
+  //   };
+  // }
 
 </script>
 
@@ -22,7 +46,7 @@ const contratoStore = useContratoStore()
       Estados
     </div>
     <div class="c-filtros-item">
-      <select v-model="optionContrato" 
+      <select v-model="optionContrato"
         class="form-control" 
         id="select-contratos" 
         multiple size="3" 
@@ -80,21 +104,6 @@ export default {
     ...mapState(useContratoStore, ["getCorrientes"])
   },
 
-  data() {
-    return {
-      optionContrato: [],
-      optionCorriente: [],
-      chkAzud: Boolean,
-      chkPlaca: Boolean,
-      chkMuro: Boolean,
-      chkBarras: Boolean,
-      chkBueno: Boolean,
-      chkRepotenciado: Boolean,
-      chkCritico : Boolean,
-      chkOtro: Boolean
-    };
-  },
-  props: {},
   methods: {
     ...mapActions(useContratoStore, [
         "fillCorrientes",
