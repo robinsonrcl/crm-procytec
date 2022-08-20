@@ -14,6 +14,13 @@ const contratoStore = useContratoStore()
       var chkCritico = Boolean
       var chkOtro = Boolean
 
+  function corrientesLocal() {
+    contratoStore.fillCorrientes(this.optionContrato)
+    if(document.getElementById("select-corrientes").selectedOptions.length > 1){
+      document.getElementById("select-corrientes").selectedOptions = null
+    }
+  }
+
 </script>
 
 <template>
@@ -100,12 +107,7 @@ export default {
     drawPath() {
       this.drawCorriente(this.optionContrato, this.optionCorriente)
     },
-    corrientesLocal() {
-      this.fillCorrientes(this.optionContrato)
-      if(document.getElementById("select-corrientes").selectedOptions.length > 1){
-        document.getElementById("select-corrientes").selectedOptions = null
-      }
-    },
+
     selectComponente() {
       var chkArray = []
       if(this.chkAzud === true) {
