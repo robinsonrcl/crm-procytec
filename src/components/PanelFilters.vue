@@ -22,6 +22,10 @@ const contratoStore = useContratoStore()
     }
   }
 
+  function drawPath() {
+    contratoStore.drawCorriente(optionContrato.value, this.optionCorriente)
+  }
+
 </script>
 
 <template>
@@ -105,9 +109,6 @@ export default {
         "drawHallazgos",
         "setEstados"
         ]),
-    drawPath() {
-      this.drawCorriente(optionContrato, this.optionCorriente)
-    },
 
     selectComponente() {
       var chkArray = []
