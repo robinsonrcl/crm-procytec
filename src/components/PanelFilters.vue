@@ -5,7 +5,7 @@ import { ref } from 'vue'
 const contratoStore = useContratoStore()
 
       var optionContrato = ref([])
-      var optionCorriente = []
+      var optionCorriente = ref([])
       var chkAzud = Boolean
       var chkPlaca = Boolean
       var chkMuro = Boolean
@@ -23,8 +23,46 @@ const contratoStore = useContratoStore()
   }
 
   function drawPath() {
-    contratoStore.drawCorriente(optionContrato.value, this.optionCorriente)
+    contratoStore.drawCorriente(optionContrato.value, optionCorriente.value)
   }
+
+  function selectComponente() {
+      var chkArray = []
+      if(this.chkAzud === true) {
+        chkArray.push("AZUD")
+      }
+      if(this.chkPlaca === true) {
+        chkArray.push("PLACA")
+      }
+      if(this.chkMuro === true) {
+        chkArray.push("MURO")
+      }
+      if(this.chkBarras === true) {
+        chkArray.push("BARRAS")
+      }
+
+      contratoStore.setComponentes(chkArray)
+      contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
+    }
+    
+    function selectEstado() {
+      var chkEstado = []
+      if(this.chkRepotenciado === true) {
+        chkEstado.push("Repotenciado")
+      }
+      if(this.chkBueno === true) {
+        chkEstado.push("Bueno")
+      }
+      if(this.chkCritico === true) {
+        chkEstado.push("Critico")
+      }
+      if(this.chkOtro === true) {
+        chkEstado.push("Otro")
+      }
+
+      contratoStore.setEstados(chkEstado)
+      contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
+    }
 
 </script>
 
@@ -109,43 +147,6 @@ export default {
         "drawHallazgos",
         "setEstados"
         ]),
-
-    selectComponente() {
-      var chkArray = []
-      if(this.chkAzud === true) {
-        chkArray.push("AZUD")
-      }
-      if(this.chkPlaca === true) {
-        chkArray.push("PLACA")
-      }
-      if(this.chkMuro === true) {
-        chkArray.push("MURO")
-      }
-      if(this.chkBarras === true) {
-        chkArray.push("BARRAS")
-      }
-
-      this.setComponentes(chkArray)
-      this.drawHallazgos(this.optionContrato, this.optionCorriente)
-    },
-    selectEstado() {
-      var chkEstado = []
-      if(this.chkRepotenciado === true) {
-        chkEstado.push("Repotenciado")
-      }
-      if(this.chkBueno === true) {
-        chkEstado.push("Bueno")
-      }
-      if(this.chkCritico === true) {
-        chkEstado.push("Critico")
-      }
-      if(this.chkOtro === true) {
-        chkEstado.push("Otro")
-      }
-
-      this.setEstados(chkEstado)
-      this.drawHallazgos(this.optionContrato, this.optionCorriente)
-    }
   },
 };
 </script>
