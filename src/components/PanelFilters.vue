@@ -6,14 +6,14 @@ const contratoStore = useContratoStore()
 
       var optionContrato = ref([])
       var optionCorriente = ref([])
-      var chkAzud = Boolean
-      var chkPlaca = Boolean
-      var chkMuro = Boolean
-      var chkBarras = Boolean
-      var chkBueno = Boolean
-      var chkRepotenciado = Boolean
-      var chkCritico = Boolean
-      var chkOtro = Boolean
+      var chkAzud = ref(Boolean)
+      var chkPlaca = ref(Boolean)
+      var chkMuro = ref(Boolean)
+      var chkBarras = ref(Boolean)
+      var chkBueno = ref(Boolean)
+      var chkRepotenciado = ref(Boolean)
+      var chkCritico = ref(Boolean)
+      var chkOtro = ref(Boolean)
 
   function corrientesLocal() {
     contratoStore.fillCorrientes(optionContrato.value)
@@ -28,16 +28,16 @@ const contratoStore = useContratoStore()
 
   function selectComponente() {
       var chkArray = []
-      if(this.chkAzud === true) {
+      if(chkAzud.value === true) {
         chkArray.push("AZUD")
       }
-      if(this.chkPlaca === true) {
+      if(chkPlaca.value === true) {
         chkArray.push("PLACA")
       }
-      if(this.chkMuro === true) {
+      if(chkMuro.value === true) {
         chkArray.push("MURO")
       }
-      if(this.chkBarras === true) {
+      if(chkBarras.value === true) {
         chkArray.push("BARRAS")
       }
 
@@ -47,16 +47,16 @@ const contratoStore = useContratoStore()
     
     function selectEstado() {
       var chkEstado = []
-      if(this.chkRepotenciado === true) {
+      if(chkRepotenciado.value === true) {
         chkEstado.push("Repotenciado")
       }
-      if(this.chkBueno === true) {
+      if(chkBueno.value === true) {
         chkEstado.push("Bueno")
       }
-      if(this.chkCritico === true) {
+      if(chkCritico.value === true) {
         chkEstado.push("Critico")
       }
-      if(this.chkOtro === true) {
+      if(chkOtro.value === true) {
         chkEstado.push("Otro")
       }
 
