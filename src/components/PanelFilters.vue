@@ -1,9 +1,10 @@
 <script  setup>
 import { useContratoStore } from "../stores/ContratoStore.js";
+import { ref } from 'vue'
 
 const contratoStore = useContratoStore()
 
-      var optionContrato = []
+      var optionContrato = ref([])
       var optionCorriente = []
       var chkAzud = Boolean
       var chkPlaca = Boolean
@@ -15,7 +16,7 @@ const contratoStore = useContratoStore()
       var chkOtro = Boolean
 
   function corrientesLocal() {
-    contratoStore.fillCorrientes(this.optionContrato)
+    contratoStore.fillCorrientes(optionContrato.value)
     if(document.getElementById("select-corrientes").selectedOptions.length > 1){
       document.getElementById("select-corrientes").selectedOptions = null
     }
@@ -105,7 +106,7 @@ export default {
         "setEstados"
         ]),
     drawPath() {
-      this.drawCorriente(this.optionContrato, this.optionCorriente)
+      this.drawCorriente(optionContrato, this.optionCorriente)
     },
 
     selectComponente() {
