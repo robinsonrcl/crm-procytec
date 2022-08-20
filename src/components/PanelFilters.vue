@@ -17,9 +17,9 @@ const contratoStore = useContratoStore()
 
   function corrientesLocal() {
     contratoStore.fillCorrientes(optionContrato.value)
-    // if(document.getElementById("select-corrientes").selectedOptions.length > 1){
-    //   document.getElementById("select-corrientes").selectedOptions = null
-    // }
+    if(document.getElementById("select-corrientes").selectedOptions.length > 1){
+      document.getElementById("select-corrientes").selectedOptions = null
+    }
   }
 
   function drawPath() {

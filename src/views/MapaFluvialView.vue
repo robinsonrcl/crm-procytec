@@ -81,8 +81,8 @@ export default {
 
   methods: {
     showModalImg(newValue, fotos) {
-      this.showModalImage = newValue
       this.fotos = fotos
+      this.showModalImage = newValue
     },
     showModalImgDos(newValue) {
       this.showModalImage = newValue
