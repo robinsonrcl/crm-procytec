@@ -1,13 +1,26 @@
 <template>
   <div>
     <div class="modalImg">
-      <div class="modalImgUnico">
+      <div v-if="fotos.length > 1" class="modalImgUnico">
         <div class="modalIconCerrar" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div>
 
         <div class="divImgModal" v-for="foto in fotos" :key="foto">
           <div class="modalImg__foto">
-            <div>
-              <img class="img__modal" :src="require(`../assets/photos/${foto.src}`)" alt="" @click.prevent="showModalCarousel()" />
+            <div class="bgdivimg">
+              <img class="img__modal" :src="require(`../assets/photos/${foto.src}`)" alt="" />
+            </div>
+            <div class="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
+        </div>
+
+        </div>
+      </div>
+      <div v-else class="modalImgUnico2">
+        <div class="modalIconCerrar" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div>
+
+        <div class="divImgModal" v-for="foto in fotos" :key="foto">
+          <div class="modalImg__foto">
+            <div class="bgdivimg">
+              <img class="img__modal" :src="require(`../assets/photos/${foto.src}`)" alt="" />
             </div>
             <div class="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
         </div>
@@ -27,6 +40,7 @@
 <script>
 import Carousel from "../components/Carousel.vue"
 // import PersonalCarousel from "../components/PersonalCarousel.vue"
+// @click.prevent="showModalCarousel()"
 
 export default {
   name: "ModalImagenes",

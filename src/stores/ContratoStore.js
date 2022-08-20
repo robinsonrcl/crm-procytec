@@ -32,6 +32,9 @@ export const useContratoStore = defineStore("ContratoStore", {
             console.log("getHallazgos: " + this.hallazgos.length)
             return this.hallazgos
         },
+        getCountHallazgos() {
+            return this.hallazgos.length
+        },
         getPatologia() {
             return this.patologia
         }

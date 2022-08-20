@@ -1,5 +1,6 @@
 export function setupContainsLatLng() {
     // Polygon containsLatLng - method to determine if a latLng is within a polygon
+    
     window.google.maps.Polygon.prototype.containsLatLng = function(latLng) {
       // Exclude points outside of bounds as there is no way they are in the poly
   

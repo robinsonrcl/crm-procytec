@@ -3,7 +3,7 @@
 import { useContratoStore } from "../stores/ContratoStore";
 import { ref, onMounted  } from "vue";
 import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
-import ImportarJson from "./ImportarJson.vue";
+// import ImportarJson from "./ImportarJson.vue";
 
     const contratoStore = useContratoStore()
     const myMapRef = ref();
@@ -23,7 +23,19 @@ import ImportarJson from "./ImportarJson.vue";
     :click="true"
     :center="contratoStore.getPuntomedio"
     :zoom="15"
+    :options="{
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: true,
+            streetViewControl: true,
+            rotateControl: true,
+            fullscreenControl: false,
+            mapTypeControlOptions: {
+              position: 6
+            },
+        }"
     map-type-id="satellite"
+    map-type-control-options="control-position: LEFT_CENTER"
     style="width: 100%; height: 100%;"
     >
 
@@ -101,7 +113,7 @@ import ImportarJson from "./ImportarJson.vue";
       </div>
     <!-- </GMapCluster> -->
     
-  <ImportarJson />
+  <!-- <ImportarJson /> -->
   </GMapMap>
 </template>
 
@@ -130,11 +142,6 @@ export default {
         fillColor: "#9B91D8",
         fillOpacity: 0.35,
       },
-      // paths: [
-      //   {lat: 25.774, lng: -80.19},
-      //   {lat: 18.466, lng: -66.118},
-      //   {lat: 32.321, lng: -64.757},
-      // ],
         openedMarkerID: null,
         infoWindow: {
             position: { lat: 6.248353, lng: -75.580265 },
@@ -149,7 +156,7 @@ export default {
             scaleControl: true,
             streetViewControl: true,
             rotateControl: true,
-            fullscreenControl: true,
+            fullscreenControl: true
         },
         optionspoly: {
           strokeColor: "#0000FF",

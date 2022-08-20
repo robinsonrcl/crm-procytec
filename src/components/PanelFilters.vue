@@ -122,6 +122,9 @@ const contratoStore = useContratoStore()
       <div><label><input v-model="chkCritico" @change="selectEstado()" type="checkbox" id="cbox3-3" value="Critico"> Critico</label></div>
       <div><label><input v-model="chkOtro" @change="selectEstado()" type="checkbox" id="cbox4-4" value="Otro"> Otro</label></div>
     </div>
+    <div  class="c-filtros-item">
+      <div v-if="(contratoStore.getCountHallazgos > 0)">({{ contratoStore.getCountHallazgos }}) Hallazgos encontrados</div>
+    </div>
     <div class="c-filtros-item">
       <div>PANEL DE FILTROS</div>
     </div>
