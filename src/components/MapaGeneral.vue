@@ -85,7 +85,7 @@ import ImportarJson from "./ImportarJson.vue";
 
           <BubbleInfo
             @show-modal-historia="showHistoria" 
-            @show-modal="enviarShow" 
+            @show-modal-images-bubble="enviarShowBubble" 
             v-bind:hallazgo="hallazgo"
           />
 
@@ -162,8 +162,8 @@ export default {
     ...mapActions(useContratoStore, [
         "loadPatologia"
         ]),
-    enviarShow(show, fotos) {
-      this.$emit('showModal', show, fotos)
+    enviarShowBubble(show, fotos) {
+      this.$emit('showModalMapaFluvial', show, fotos)
     },
     showHistoria(show, position) {
       this.loadPatologia(position)

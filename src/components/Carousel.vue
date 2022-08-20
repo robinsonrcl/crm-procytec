@@ -1,7 +1,7 @@
 <template>
-  <Carousel ref="carousel" :wrapAround="true" :items-to-scroll="1" :autoplay="5000">
+  <Carousel ref="carousel" :wrapAround="true" :items-to-scroll="1" :autoplay="3000">
 
-    <Slide v-for="slide in newimages" :key="slide">
+    <Slide v-for="slide in newimages" :key="slide._id">
       <div class="carousel__item">
         <img class="img__modal-carousel" :src="require(`../assets/photos/${slide.src}`)" alt="" />
       </div>
@@ -15,16 +15,16 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue-demi'
+import {  shallowReactive } from 'vue-demi'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
-export default defineComponent({
+export default {
   name: "BasicCarousel",
 
   computed: {
     newimages() {
-        return this.images
+        return shallowReactive(this.images)
     }
   },
   props: {
@@ -36,7 +36,7 @@ export default defineComponent({
     Navigation,
     Pagination
    }
-});
+};
 
 </script>
 

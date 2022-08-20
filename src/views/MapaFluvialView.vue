@@ -11,15 +11,15 @@ contratoStore.fill()
   <div class="map__container">
     <div class="map__body">
       <MapaGeneral 
-        @show-modal="showModalImg" 
+        @show-modal-mapa-fluvial="showModalImg" 
         @show-modal-historia="showModalHistoricoView" 
       />
     </div>
     <div>
       <ModalImagenes 
         v-show=showModalImage 
-        @show-modal="showModalImg" 
-        v-bind:fotos="fotos"
+        @show-modal-images="showModalImgDos" 
+        :fotos="fotos"
       />
     </div>
     <div>
@@ -83,6 +83,9 @@ export default {
     showModalImg(newValue, fotos) {
       this.showModalImage = newValue
       this.fotos = fotos
+    },
+    showModalImgDos(newValue) {
+      this.showModalImage = newValue
     },
     showModalHistoricoView(show, hallazgos) {
       this.showModalHistorico = show

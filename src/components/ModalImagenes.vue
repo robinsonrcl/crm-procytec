@@ -7,7 +7,7 @@
         <div class="divImgModal" v-for="foto in fotos" :key="foto">
           <div class="modalImg__foto">
             <div>
-              <img class="img__modal" :src="require(`../assets/photos/${foto.src}`)" alt="" @click.prevent="showModalCarousel(0)" />
+              <img class="img__modal" :src="require(`../assets/photos/${foto.src}`)" alt="" @click.prevent="showModalCarousel()" />
             </div>
             <div class="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
         </div>
@@ -18,7 +18,6 @@
     <div class="container__carousel" v-show="showCarousel">
       <div class="div__carousel">
         <div class="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
-        <!-- <Carousel :images="fotos" :mostrar-boton="true" @show-carousel-modal="showCarouselModal" /> -->
         <Carousel :images="fotos"  />
       </div>
     </div>
@@ -27,11 +26,12 @@
 
 <script>
 import Carousel from "../components/Carousel.vue"
+// import PersonalCarousel from "../components/PersonalCarousel.vue"
 
 export default {
   name: "ModalImagenes",
   components: {
-    Carousel
+    Carousel,
 },
   data() {
     return {
@@ -44,10 +44,9 @@ export default {
   },
   methods: {
     cerrarModal() {
-      this.$emit('showModal', false)
+      this.$emit('showModalImages', false)
     },
-    showModalCarousel(pos) {
-      this.position = pos
+    showModalCarousel() {
       this.showCarousel = true
     },
     showCarouselModal() {

@@ -15,9 +15,8 @@
     <div class="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div class="c-bubble-item bubble-subtitle"><span>Zona:</span></div>
     <div class="c-bubble-item">
-      <a class="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)">
-        <fa icon="fa-camera" /> Fotos ({{ hallazgo.fotos.length }})
-      </a>
+      <a v-if="hallazgo.fotos[0].src != 'sinfoto.svg'" class="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)"><fa icon="fa-camera" /> Fotos ({{ hallazgo.fotos.length }})</a>
+      <a v-else class="btn-bubble" href="#!" role="button" @click.prevent=""><fa icon="fa-camera" /> Fotos (0)</a>
     </div>
     <div class="c-bubble-item">{{ hallazgo.referencia }}</div>
     <div class="c-bubble-item">{{ hallazgo.zona }}</div>
@@ -39,6 +38,7 @@
 </template>
 
 <script>
+
 export default {
   name: "BubbleInfo",
   created() {},
@@ -57,7 +57,7 @@ export default {
       this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
     },
     enviarShow(fotos) {
-      this.$emit('showModal', true, fotos)
+      this.$emit('showModalImagesBubble', true, fotos)
     },
   },
 };

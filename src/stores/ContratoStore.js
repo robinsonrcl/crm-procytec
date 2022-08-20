@@ -118,7 +118,7 @@ export const useContratoStore = defineStore("ContratoStore", {
                     hallazgosSegunEstado.forEach(hallazgo => {
 
                         if(hallazgo.fotos === ""){
-                            hallazgo.fotos = [{ "src": "sinfoto.jpg" }]
+                            hallazgo.fotos = [{ "id": "1000", "src": "sinfoto.svg" }]
                         }
 
                         const newhallazgo = {
