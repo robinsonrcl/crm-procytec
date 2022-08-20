@@ -3,16 +3,16 @@ import { useContratoStore } from "../stores/ContratoStore.js";
 
 const contratoStore = useContratoStore()
 
-      const optionContrato = []
-      const optionCorriente = []
-      const chkAzud = Boolean
-      const chkPlaca = Boolean
-      const chkMuro = Boolean
-      const chkBarras = Boolean
-      const chkBueno = Boolean
-      const chkRepotenciado = Boolean
-      const chkCritico = Boolean
-      const chkOtro = Boolean
+      var optionContrato = []
+      var optionCorriente = []
+      var chkAzud = Boolean
+      var chkPlaca = Boolean
+      var chkMuro = Boolean
+      var chkBarras = Boolean
+      var chkBueno = Boolean
+      var chkRepotenciado = Boolean
+      var chkCritico = Boolean
+      var chkOtro = Boolean
 
 </script>
 
