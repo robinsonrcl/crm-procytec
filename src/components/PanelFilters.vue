@@ -14,21 +14,6 @@ const contratoStore = useContratoStore()
       const chkCritico = Boolean
       const chkOtro = Boolean
 
-    // data() {
-  //   return {
-      // optionContrato: []
-      // const optionCorriente: []
-      // chkAzud: Boolean,
-      // chkPlaca: Boolean,
-      // chkMuro: Boolean,
-      // chkBarras: Boolean,
-      // chkBueno: Boolean,
-      // chkRepotenciado: Boolean,
-      // chkCritico : Boolean,
-      // chkOtro: Boolean
-  //   };
-  // }
-
 </script>
 
 <template>
