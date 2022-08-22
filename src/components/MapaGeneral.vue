@@ -35,7 +35,6 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
             },
         }"
     map-type-id="satellite"
-    map-type-control-options="control-position: LEFT_CENTER"
     style="width: 100%; height: 100%;"
     >
 
@@ -59,12 +58,16 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
       </GMapMarker>
     </div>
 
-    <!-- <GMapCluster
+    <GMapCluster
         :minimumClusterSize="3"
-        :styles="clusterIcon"
         :zoomOnClick="true"
-        
-    > -->
+        :styles="[{
+          textColor: 'white',
+          url: require('../assets/images/marcadores/cluster.svg'),
+          height: 60,
+          width: 60
+        }]"
+    >
       <GMapMarker
         :key="index"
         v-for="(hallazgo, index) in contratoStore.getHallazgos"
@@ -95,11 +98,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
             maxHeight: 320,
           }">
 
-          <BubbleInfo
-            @show-modal-historia="showHistoria" 
-            @show-modal-images-bubble="enviarShowBubble" 
-            v-bind:hallazgo="hallazgo"
-          />
+          <BubbleInfo @show-modal-historia="showHistoria"  @show-modal-images-bubble="enviarShowBubble" v-bind:hallazgo="hallazgo" />
 
         </GMapInfoWindow>
       </GMapMarker>
@@ -111,7 +110,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
           :options="circleOptions"
         />
       </div>
-    <!-- </GMapCluster> -->
+    </GMapCluster>
     
   <!-- <ImportarJson /> -->
   </GMapMap>

@@ -26,8 +26,8 @@ const contratoStore = useContratoStore()
     contratoStore.drawCorriente(optionContrato.value, optionCorriente.value)
   }
 
-  function selectComponente() {
-      var chkArray = []
+  function fillComponentes() {
+    var chkArray = []
       if(chkAzud.value === true) {
         chkArray.push("AZUD")
       }
@@ -41,28 +41,49 @@ const contratoStore = useContratoStore()
         chkArray.push("BARRAS")
       }
 
-      contratoStore.setComponentes(chkArray)
-      contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
+      return chkArray
+  }
+
+  function fillEstado() {
+    var chkEstado = []
+    if(chkRepotenciado.value === true) {
+      chkEstado.push("Repotenciado")
+    }
+    if(chkBueno.value === true) {
+      chkEstado.push("Bueno")
+    }
+    if(chkCritico.value === true) {
+      chkEstado.push("Critico")
+    }
+    if(chkOtro.value === true) {
+      chkEstado.push("Otro")
+    }
+
+    return chkEstado
+  }
+
+  async function selectComponente() {
+    let chkArray = fillComponentes()
+    let chkEstado = fillEstado()
+
+    contratoStore.setComponentes(chkArray)
+
+    if(chkArray.length > 0 && chkEstado.length > 0) {
+      await contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
     }
     
-    function selectEstado() {
-      var chkEstado = []
-      if(chkRepotenciado.value === true) {
-        chkEstado.push("Repotenciado")
-      }
-      if(chkBueno.value === true) {
-        chkEstado.push("Bueno")
-      }
-      if(chkCritico.value === true) {
-        chkEstado.push("Critico")
-      }
-      if(chkOtro.value === true) {
-        chkEstado.push("Otro")
-      }
+  }
+    
+  async function selectEstado() {
+    let chkEstado = fillEstado()
+    let chkArray = fillComponentes()
 
-      contratoStore.setEstados(chkEstado)
-      contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
+    contratoStore.setEstados(chkEstado)
+    
+    if(chkArray.length > 0 && chkEstado.length > 0) {
+      await contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
     }
+  }
 
 </script>
 

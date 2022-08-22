@@ -29,7 +29,6 @@ export const useContratoStore = defineStore("ContratoStore", {
             return this.puntomedio
         },
         getHallazgos() {
-            console.log("getHallazgos: " + this.hallazgos.length)
             return this.hallazgos
         },
         getCountHallazgos() {
@@ -186,7 +185,7 @@ export const useContratoStore = defineStore("ContratoStore", {
                                 if(hallazgo.fotos === ""){
                                     hallazgo.fotos = [{ "id": "1000", "src": "sinfoto.svg" }]
                                 }
-                                
+
                                 const newHallazgo = {
                                     id: hallazgo.id,
                                     nombrecontrato: nombreContrato,
