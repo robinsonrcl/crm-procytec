@@ -182,6 +182,11 @@ export const useContratoStore = defineStore("ContratoStore", {
                         if(centerPoint.lat != checkPoint.lat && centerPoint.lng != checkPoint.lng){
 
                             if(arePointsNear(checkPoint, centerPoint, 0.2)){
+
+                                if(hallazgo.fotos === ""){
+                                    hallazgo.fotos = [{ "id": "1000", "src": "sinfoto.svg" }]
+                                }
+                                
                                 const newHallazgo = {
                                     id: hallazgo.id,
                                     nombrecontrato: nombreContrato,
