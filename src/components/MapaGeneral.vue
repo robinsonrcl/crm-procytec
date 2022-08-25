@@ -15,13 +15,14 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
       })
     })
 
+//:center="contratoStore.getPuntomedio"
 </script>
 
 <template>
   <GMapMap
     ref="myMapRef"
     :click="true"
-    :center="contratoStore.getPuntomedio"
+    :center="{ lat: 6.248353, lng: -75.580265 }"
     :zoom="15"
     :options="{
             zoomControl: true,

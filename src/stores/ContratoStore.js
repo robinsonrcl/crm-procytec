@@ -228,8 +228,3 @@ export const useContratoStore = defineStore("ContratoStore", {
         }
     }
 })
-
-// 1. Que Panel de patología solo muestre hallazgos en 200 mts -> OK
-// 2. Dibujar la geometria del hallazgo -> OK
-// 3. Programa que convierta excel en JSON
-// 4. Publicar la aplicación
