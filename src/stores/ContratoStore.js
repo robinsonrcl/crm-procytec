@@ -13,7 +13,8 @@ export const useContratoStore = defineStore("ContratoStore", {
             hallazgos: [],
             componentes: [],
             estados: [],
-            patologia: []
+            patologia: [],
+            login: false
         }
     },
 
@@ -36,11 +37,17 @@ export const useContratoStore = defineStore("ContratoStore", {
         },
         getPatologia() {
             return this.patologia
+        },
+        getLogin() {
+            return this.login
         }
     },
 
     // actions
     actions: {
+        setLogin(newValue) {
+            this.login = newValue
+        },
         async fill() {
             this.contratos = (await import("../data/contratos.json")).default
            this.drawHallazgos()
