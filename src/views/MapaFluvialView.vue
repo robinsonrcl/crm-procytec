@@ -7,6 +7,10 @@ const contratoStore = useContratoStore()
 
 contratoStore.fill()
 
+function showPaneles(respuesta) {
+  contratoStore.setLogin(respuesta)
+}
+
 </script>
 
 <template>
@@ -52,7 +56,6 @@ import ModalImagenes from "../components/ModalImagenes.vue";
 import ModalHistorico from "../components/ModalHistorico.vue";
 import PanelFilters from "../components/PanelFilters.vue";
 
-
 export default {
   name: "FluvialView",
   components: { 
@@ -73,10 +76,7 @@ export default {
   },
 
   methods: {
-    showPaneles(respuesta) {
-      // this.login = respuesta
-      this.contratoStore.setLogin(respuesta)
-    },
+
     showModalImg(newValue, fotos) {
       this.fotos = fotos
       this.showModalImage = newValue
