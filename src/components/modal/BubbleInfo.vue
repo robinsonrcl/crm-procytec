@@ -31,7 +31,7 @@
       </div>
     </div>
     <div  className="c-bubble-item" id="DivBubbleImg">
-      <img  id="imgBubble" :src="getImage(`../assets/photos/`, hallazgo.fotos[0].src)" alt="">
+      <img  id="imgBubble" :src="getImage(`/images/photos/`, hallazgo.fotos[0].src)" alt="">
     </div>
     <div className="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div className="c-bubble-item bubble-subtitle"><span>Zona:</span></div>

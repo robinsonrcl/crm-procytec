@@ -20,7 +20,7 @@
         <div className="divImgModal" v-for="foto in fotos" :key="foto.id">
           <div className="modalImg__foto">
             <div className="bgdivimg">
-              <img className="img__modal" :src="getImage(`../assets/photos/`, foto.src)" alt="" />
+              <img className="img__modal" :src="getImage(`/images/photos/`, foto.src)" alt="" />
             </div>
             <div className="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
         </div>
@@ -33,7 +33,7 @@
         <div className="divImgModal" v-for="foto in fotos" :key="foto.id">
           <div className="modalImg__foto">
             <div className="bgdivimg">
-              <img className="img__modal" :src="getImage(`../assets/photos/`, foto.src)" alt="" />
+              <img className="img__modal" :src="getImage(`/images/photos/`, foto.src)" alt="" />
             </div>
             <div className="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
         </div>

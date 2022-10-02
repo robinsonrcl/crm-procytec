@@ -41,7 +41,7 @@
     <div class="container-hallazgo-item" id="cont-hall-fotos">
 
       <div v-for="foto in hallazgo.fotos" :key="foto">
-        <div><img class="cont-hall-img" :src="getImage(`../assets/photos/`, foto.src)" alt="" /></div>
+        <div><img class="cont-hall-img" :src="getImage(`/images/photos/`, foto.src)" alt="" /></div>
       </div>
       
     </div>
@@ -51,10 +51,10 @@
     </div>
     <div class="container-hallazgo-item" id="cont-hall-foot-2">
       <div>Estado componente:</div> 
-      <div v-if="hallazgo.estado === 'Repotenciado'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('../assets/images/muestrasColor/', 'colorAmarillo.png')" alt="" /> Repotenciado</div> 
-      <div v-if="hallazgo.estado === 'Bueno'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('../assets/images/muestrasColor/', 'colorVerde.png')" alt="" /> Bueno</div> 
-      <div v-if="hallazgo.estado === 'Critico'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('../assets/images/muestrasColor/', 'colorRojo.png')" alt="" /> Critico</div> 
-      <div v-if="hallazgo.estado === 'Otro'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('../assets/images/muestrasColor/', 'colorVioleta.png')" alt="" /> Otro</div> 
+      <div v-if="hallazgo.estado === 'Repotenciado'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('/images/muestrasColor/', 'colorAmarillo.png')" alt="" /> Repotenciado</div> 
+      <div v-if="hallazgo.estado === 'Bueno'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('/images/muestrasColor/', 'colorVerde.png')" alt="" /> Bueno</div> 
+      <div v-if="hallazgo.estado === 'Critico'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('/images/muestrasColor/', 'colorRojo.png')" alt="" /> Critico</div> 
+      <div v-if="hallazgo.estado === 'Otro'" class="cont-hall-estado"><img class="cont-hall-estado-img" :src="getImage('/images/muestrasColor/', 'colorVioleta.png')" alt="" /> Otro</div> 
     </div>
   </div>
 </template>

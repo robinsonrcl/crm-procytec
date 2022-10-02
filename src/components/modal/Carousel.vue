@@ -8,7 +8,7 @@
 
     <Slide v-for="slide in images" :key="slide._id">
       <div class="carousel__item">
-        <img class="img__modal-carousel" :src="getImage(`../assets/photos/`, slide.src)" alt="" />
+        <img class="img__modal-carousel" :src="getImage(`/images/photos/`, slide.src)" alt="" />
       </div>
     </Slide>
 
