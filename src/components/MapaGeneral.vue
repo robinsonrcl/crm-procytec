@@ -14,8 +14,8 @@ import { getImage } from "../utils/utilidades";
     })
   })
 
-  let imgUrl = new URL('../assets/images/marcadores/puntomedio.svg', import.meta.url).href
-  let imgCluster = new URL('../assets/images/marcadores/cluster.svg', import.meta.url).href
+  let imgUrl = new URL('/images/marcadores/puntomedio.svg', import.meta.url).href
+  let imgCluster = new URL('/images/marcadores/cluster.svg', import.meta.url).href
 
 </script>
 
@@ -75,7 +75,7 @@ import { getImage } from "../utils/utilidades";
         v-for="(hallazgo, index) in contratoStore.getHallazgos"
         :position="hallazgo.position"
         :icon="{ 
-            url: getImage(`../assets/images/marcadores/`, hallazgo.icono),
+            url: getImage(`/images/marcadores/`, hallazgo.icono),
             scaledSize: { width: 32, height: 32 } }"
         :clickable="true"
         :draggable="false"
