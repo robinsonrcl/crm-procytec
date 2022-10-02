@@ -143,7 +143,7 @@
         v-for="(estado) in contratoStore.getEstados" 
         :key="estado.id"
       >
-        <img className="imgMuestraColor" :src="getImage(`images/muestrasColor/`, estado.src)" alt="" />
+        <img className="imgMuestraColor" :src="getImage(`/images/muestrasColor/`, estado.src)" alt="" />
         <input type="checkbox" v-model="estado.completed" @change="selectEstado"> {{ estado.name }}
       </div>
     </div>
