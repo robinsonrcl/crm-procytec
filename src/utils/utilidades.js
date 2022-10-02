@@ -6,4 +6,8 @@ function arePointsNear(checkPoint, centerPoint, km) {
     return Math.sqrt(dx * dx + dy * dy) <= km;
   }
 
-  export { arePointsNear }
+  function getImage(path, imageName) {
+    return new URL(path + imageName, import.meta.url).href
+  }
+
+  export { arePointsNear, getImage }

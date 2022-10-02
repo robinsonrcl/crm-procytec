@@ -1,12 +1,31 @@
 import { defineStore } from "pinia"
 import { arePointsNear } from "../utils/utilidades"
 
+class typeEstructura { 
+    id = 0 
+    name = ''
+    src = ''
+    completed = false
+}
+
+class typeEstados { 
+    id = 0 
+    name = ''
+    src = ''
+    completed = false
+}
+
 export const useContratoStore = defineStore("ContratoStore", {
     // state
     state: () => {
         return {
-            contratos: [],
-            corrientes: [],
+            contratos: {
+                contrato: [{
+                    id: 0,
+                    nombre: ""
+                }]
+            },
+            corrientes: [String],
             corriente: [],
             path: [[]],
             puntomedio: { lat: 6.248353, lng: -75.580265 },
@@ -14,12 +33,47 @@ export const useContratoStore = defineStore("ContratoStore", {
             componentes: [],
             estados: [],
             patologia: [],
-            login: false
+            login: false,
+            showPanel: Boolean(false),
+            optionContrato: [],
+            optionCorriente: [],
+            estructuras: [
+                { id: 1, name:"AZUD", src:"barrasAzud.png", completed: false },
+                { id: 2, name:"PLACA", src:"circuloPlaca.png", completed: false },
+                { id: 3, name:"MURO", src:"trianguloMuro.png", completed: false },
+                { id: 4, name:"BARRAS", src:"cuadradoBarras.png", completed: false },
+                { id: 5, name:"BANCA", src:"trianguloMuro.png", completed: false },
+                { id: 6, name:"BOCATOMA", src:"cuadradoBarras.png", completed: false },
+                { id: 7, name:"BOLSA DE GRAVILLA", src:"cuadradoBarras.png", completed: false },
+                { id: 8, name:"CONTRADIQUE", src:"cuadradoBarras.png", completed: false },
+                { id: 9, name:"CONTROL DE GRADIENTE", src:"cuadradoBarras.png", completed: false },
+                { id: 10, name:"DIQUE", src:"cuadradoBarras.png", completed: false },
+                { id: 11, name:"DIRECCIONADOR", src:"cuadradoBarras.png", completed: false },
+                { id: 12, name:"GAVIÓN", src:"cuadradoBarras.png", completed: false },
+                { id: 13, name:"LLAVE", src:"cuadradoBarras.png", completed: false },
+                { id: 14, name:"TABIQUE", src:"cuadradoBarras.png", completed: false },
+                { id: 15, name:"TRAVIEZA", src:"cuadradoBarras.png", completed: false },
+            ],
+            estadosfinales: [
+                { id: 1, name:"Bueno", src:"colorVerde.png", completed: false },
+                { id: 2, name:"Repotenciado", src:"colorAmarillo.png", completed: false },
+                { id: 3, name:"Critico", src:"colorRojo.png", completed: false },
+                { id: 4, name:"Otro", src:"colorVioleta.png", completed: false },
+            ]
         }
     },
 
     // getters
     getters: {
+        getEstados() {
+            return this.estadosfinales
+        },
+        getEstructuras() {
+            return this.estructuras
+        },
+        getComponentes() {
+            return this.componentes
+        },
         getCorrientes() {
             return this.corrientes
         },
@@ -40,17 +94,35 @@ export const useContratoStore = defineStore("ContratoStore", {
         },
         getLogin() {
             return this.login
+        },
+        getShowPanel() {
+            return this.showPanel
+        },
+        getOptionContrato() {
+            return this.optionContrato
+        },
+        getOptionCorriente() {
+            return this.optionCorriente
         }
     },
 
     // actions
     actions: {
+        setOptionCorriente(newValue) {
+            this.optionCorriente = newValue
+        },
+        setOptionContrato(newValue) {
+            this.optionContrato = newValue
+        },
+        setShowPanel(newValue) {
+            this.showPanel = !this.showPanel
+        },
         setLogin(newValue) {
             this.login = newValue
         },
         async fill() {
             this.contratos = (await import("../data/contratos.json")).default
-           this.drawHallazgos()
+            this.drawHallazgos()
         },
         fillCorrientes(contratosId) {
             this.corrientes = []
@@ -71,7 +143,7 @@ export const useContratoStore = defineStore("ContratoStore", {
             })
 
             this.path = []
-            var corrientesBk = []
+            var corrientesBk = [{puntomedio: "" }]
             contratos.forEach(contrato => {
                 var corrientes = contrato.corrientes.filter(function(corriente) {
                     return corrientesId.some(item => item.id === corriente.id)
@@ -105,7 +177,7 @@ export const useContratoStore = defineStore("ContratoStore", {
             }
 
             const contratos = this.contratos.contrato.filter(function(contratolocal) {
-                return contratosId.some(itemuno => itemuno.id === contratolocal.id)
+                return contratosId.some((itemuno: { id: any }) => itemuno.id === contratolocal.id)
             })
 
             this.hallazgos = []
@@ -117,11 +189,11 @@ export const useContratoStore = defineStore("ContratoStore", {
 
                 corrientes.forEach(corriente => {
                     var hallazgos = corriente.hallazgos.filter(function(hallazgo) {
-                        return componentesName.some(item => item === hallazgo.componente)
+                        return componentesName.some((item: typeEstructura) => item.name === hallazgo.componente)
                     })
 
                     var hallazgosSegunEstado = hallazgos.filter(function(evento) {
-                        return estadosName.some(item => item === evento.estado)
+                        return estadosName.some((item: typeEstados) => item.name === evento.estado)
                     }) 
 
                     hallazgosSegunEstado.forEach(hallazgo => {
@@ -142,6 +214,8 @@ export const useContratoStore = defineStore("ContratoStore", {
                             hallazgo2: hallazgo.hallazgo2,
                             hallazgo3: hallazgo.hallazgo3,
                             estado: hallazgo.estado,
+                            
+                            
                             observacion: hallazgo.observacion,
                             estadoanterior: hallazgo.estadoanterior,
                             afectacion: hallazgo.afectacion,

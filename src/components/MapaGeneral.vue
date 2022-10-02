@@ -1,21 +1,22 @@
 <!-- eslint-disable vue/no-dupe-keys -->
-<script setup>
+<script setup lang="ts">
 import { useContratoStore } from "../stores/ContratoStore";
 import { ref, onMounted  } from "vue";
 import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
-// import ImportarJson from "./ImportarJson.vue";
+import { getImage } from "../utils/utilidades";
 
-    const contratoStore = useContratoStore()
-    const myMapRef = ref();
-    // const mapPolygon = ref();
+  const contratoStore = useContratoStore()
+  const myMapRef = ref();
 
-    onMounted(() => {
-      myMapRef.value.$mapPromise.then(() => {
-        setupContainsLatLng();
-      })
+  onMounted(() => {
+    myMapRef.value.$mapPromise.then(() => {
+      setupContainsLatLng();
     })
+  })
 
-//:center="contratoStore.getPuntomedio"
+  let imgUrl = new URL('../assets/images/marcadores/puntomedio.svg', import.meta.url).href
+  let imgCluster = new URL('../assets/images/marcadores/cluster.svg', import.meta.url).href
+
 </script>
 
 <template>
@@ -49,7 +50,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
       <GMapMarker
         :position=item.puntomedio
         :icon="{ 
-            url: require('../assets/images/marcadores/puntomedio.svg'),
+            url: imgUrl,
             labelOrigin: {x: 16, y: -10},
             scaledSize: { width: 42, height: 42 }
         }"
@@ -64,7 +65,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
         :zoomOnClick="true"
         :styles="[{
           textColor: 'white',
-          url: require('../assets/images/marcadores/cluster.svg'),
+          url: imgCluster,
           height: 60,
           width: 60
         }]"
@@ -74,7 +75,7 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
         v-for="(hallazgo, index) in contratoStore.getHallazgos"
         :position="hallazgo.position"
         :icon="{ 
-            url: require(`../assets/images/marcadores/${hallazgo.icono}`),
+            url: getImage(`../assets/images/marcadores/`, hallazgo.icono),
             scaledSize: { width: 32, height: 32 } }"
         :clickable="true"
         :draggable="false"
@@ -117,8 +118,8 @@ import { setupContainsLatLng } from "../utils/is-point-within-polygon.js"
   </GMapMap>
 </template>
 
-<script>
-import BubbleInfo from "../components/BubbleInfo.vue";
+<script lang="ts">
+import BubbleInfo from "../components/modal/BubbleInfo.vue";
 import { mapActions, mapState } from "pinia";
 
 export default {

@@ -1,7 +1,7 @@
-<script  setup>
+<script  setup lang="ts">
 import { useContratoStore } from "../stores/ContratoStore.js";
-import PanelConvenciones from "../components/PanelConvenciones.vue";
-import PanelLogin from "../components/PanelLogin.vue"
+import PanelConvenciones from "../components/panel/PanelConvenciones.vue";
+import PanelLogin from "../components/login/PanelLogin.vue"
 
 const contratoStore = useContratoStore()
 
@@ -11,14 +11,20 @@ function showPaneles(respuesta) {
   contratoStore.setLogin(respuesta)
 }
 
+function makeClick() {
+  if(contratoStore.getShowPanel)
+    contratoStore.setShowPanel("mapa")
+}
+
 </script>
 
 <template>
-  <div class="map__container">
-    <div class="map__body">
+  <div className="map__container">
+    <div className="map__body">
       <MapaGeneral 
         @show-modal-mapa-fluvial="showModalImg" 
         @show-modal-historia="showModalHistoricoView" 
+        @click="makeClick"
       />
     </div>
     <div>
@@ -36,28 +42,32 @@ function showPaneles(respuesta) {
       />
     </div>
     <div v-if=contratoStore.getLogin>
-      <div>
+      <!-- <div>
         <PanelFilters />
-      </div>
-      <div>
+      </div> -->
+      <!-- <div>
         <PanelConvenciones />
+      </div> -->
+      <div>
+        <PanelLateral />
       </div>
     </div>
-    <div v-else class="class__panellogin">
+    <div v-else className="class__panellogin">
       <PanelLogin 
         @ingresoseguro="showPaneles" />
     </div>
   </div>
 </template>
 
-<script>
-import MapaGeneral from "../components/MapaGeneral.vue";
-import ModalImagenes from "../components/ModalImagenes.vue";
-import ModalHistorico from "../components/ModalHistorico.vue";
-import PanelFilters from "../components/PanelFilters.vue";
+<script lang="ts">
+import MapaGeneral from "@/components/MapaGeneral.vue";
+import ModalImagenes from "../components/modal/ModalImagenes.vue";
+import ModalHistorico from "../components/modal/ModalHistorico.vue";
+import PanelFilters from "../components/panel/PanelFilters.vue";
+import PanelLateral from "../components/panel/PanelLateral.vue";
 
 export default {
-  name: "FluvialView",
+  name: "MapaFluvial",
   components: { 
     MapaGeneral, 
     ModalImagenes, 

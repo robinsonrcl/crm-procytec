@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima:wght@100;400&family=Bebas+Neue&family=Edu+NSW+ACT+Foundation:wght@600&family=Edu+SA+Beginner&family=Roboto:wght@100&display=swap");
 
 :root {
-  --bcolor: rgb(27, 89, 140);
+  --bcolor: rgba(38, 34, 98, 0.75);
   --bcolor-title: rgb(88, 132, 169);
   --bcolor-hallazgo: rgba(255, 255, 255, 0.3);
   --bcolor-hallazgo-title: #004173;
   --bcolor-hallazgo-footer: #004173;
+  --fontSizeFilter: 12px;
+  --bcolor-filtros-1: #2a2a2a;
+  --bcolor-filtros-2: #03021b; 
 }
 
 html,
@@ -320,7 +323,7 @@ body,
   position: absolute;
   display: grid;
   grid-template-columns: 1fr;
-  z-index: 20;
+  z-index: 200;
   /* background-color: rgb(118, 120, 118); */
   top: 0px;
   width: 100%;
@@ -358,6 +361,7 @@ body,
   overflow: scroll;
   opacity: 0.97;
   align-items: center;
+  /* z-index: 1300; */
 }
 .bgdivimg {
   background-color: dimgray;
@@ -645,9 +649,6 @@ body,
   background-color: var(--bcolor-title);
   border-radius: 5px 5px 0px 0px;
 }
-.imgMuestraColor {
-  width: 32px;
-}
 .conv-item:nth-child(10) {
   grid-column: 1 / span 2;
 }
@@ -777,7 +778,7 @@ body,
 
 .container-historico {
   position: absolute;
-  z-index: 10;
+  z-index: 200;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   top: 100px;
@@ -991,10 +992,6 @@ body,
   border-radius: 0px 0px 0px 25px;
   gap: 5px;
 }
-.c-filtros-item {
-  display: grid;
-  padding-right: 4px;
-}
 #select-contratos {
   border-radius: 5px;
   font-size: 12px;
@@ -1006,40 +1003,6 @@ body,
   font-size: 12px;
   padding: 5px;
   margin-left: 5px;
-}
-#filtros-componentes {
-  place-items: flex-start;
-  font-size: 12px;
-}
-#filtros-estados {
-  place-items: flex-start;
-  font-size: 12px;
-  padding-right: 7px;
-}
-.c-filtros-item:nth-last-child(2) {
-  font-size: smaller;
-  grid-column: 1 / span 4;
-  font-weight: 500;
-  color: yellow;
-  /* background-color: gray; */
-  /* border-radius: 0px 0px 0px 25px; */
-}
-.c-filtros-item:nth-last-child(1) {
-  grid-column: 1 / span 4;
-  background-color: var(--bcolor-title);
-  border-radius: 0px 0px 0px 25px;
-}
-.c-filtros-item:nth-child(1) {
-  font-weight: 600;
-}
-.c-filtros-item:nth-child(2) {
-  font-weight: 600;
-}
-.c-filtros-item:nth-child(3) {
-  font-weight: 600;
-}
-.c-filtros-item:nth-child(4) {
-  font-weight: 600;
 }
 #contratos {
   padding-left: 7px;
@@ -1211,7 +1174,7 @@ body,
   color: rgb(106, 92, 92);
   border-radius: 15px;
   padding: 20px;
-  position:absolute;
+  position: absolute;
   top: auto;
   left: auto;
   z-index: 220;
