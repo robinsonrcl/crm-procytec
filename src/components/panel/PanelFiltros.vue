@@ -133,7 +133,7 @@
           v-for="(estructura) in contratoStore.getEstructuras" 
           :key="estructura.id"
         >
-          <img className="imgMuestraEstructura" :src="getImage(`/src/assets/images/iconoEstructura/`, estructura.src)" alt="" />
+          <img className="imgMuestraEstructura" :src="getImage(`/images/iconoEstructura/`, estructura.src)" alt="" />
           <input type="checkbox" v-model="estructura.completed" @change="selectComponente"> {{ estructura.name }}
         </div>
       </div>
@@ -143,7 +143,7 @@
         v-for="(estado) in contratoStore.getEstados" 
         :key="estado.id"
       >
-        <img className="imgMuestraColor" :src="getImage(`/src/assets/images/muestrasColor/`, estado.src)" alt="" />
+        <img className="imgMuestraColor" :src="getImage(`/images/muestrasColor/`, estado.src)" alt="" />
         <input type="checkbox" v-model="estado.completed" @change="selectEstado"> {{ estado.name }}
       </div>
     </div>
