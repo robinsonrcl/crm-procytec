@@ -12,64 +12,80 @@ const showFiltros = ref(contratoStore.getShowPanel)
 </script>
 
 <template>
-  <div id="menu_dviv" className="panel_menu">
-    <a href="" title="Bitacora Fluvial">
-      <img src="../../assets/images/bitacoraHead.png" className="imgHead">
-    </a>
-    <a href="" title="Bitacora Fluvial">
-      <img src="../../assets/images/bitacoraSubHead.png" className="imgSubHead">
-    </a>
-    <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-    <br>
-    <RouterLink to="/">
+  <div class="c-lateral">
+    <div class="c-lateral__item">
+      <a href="" title="Bitacora Fluvial">
+        <img src="../../assets/images/bitacoraHead.png" className="imgHead">
+      </a>
+    </div>
+    <div class="c-lateral__item"></div>
+    <div class="c-lateral__item c-lateral__item-opcion">
+      <a href="" title="Bitacora Fluvial">
+        <img src="../../assets/images/bitacoraSubHead.png" className="imgSubHead">
+      </a>
+    </div>
+    <div class="c-lateral__item"></div>
+    <div class="c-lateral__item c-lateral__item-opcion">
+      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
+      <RouterLink to="/">
         <span className="toolTip"><img src="../../assets/images/iconos/icohome.png" className="imgIcon">
-        <span className="tooltiptext">Ir a inicio</span></span>
-    </RouterLink>
-    <br>
-    <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-    <br>
+        <span className="tooltiptext">Bienvenido a Bitacora Fluvial</span></span>
+      </RouterLink>
+    </div>
+    <div class="c-lateral__item">
+      <PanelFiltros v-if="contratoStore.getShowPanel" />
+    </div>
+    <div class="c-lateral__item c-lateral__item-opcion">
+      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
       <span className="toolTip"><img src="../../assets/images/iconos/icouser.png" className="imgIcon">
       <span className="tooltiptext">Usuario</span></span>
-    <br>
-    <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-    <br>
+    </div>
+    <div class="c-lateral__item c-lateral__item-opcion">
+      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
       <span className="toolTip">
         <img src="../../assets/images/iconos/icolayer.png" className="imgIcon"
         @click.prevent="contratoStore.setShowPanel('panel')">
         <span className="tooltiptext">Mapa Fluvial</span>
       </span>
-      <PanelFiltros v-if="contratoStore.getShowPanel" />
-    <br>
-    <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-    <br>
-    <a href="" title="User">
+    </div>
+    <div class="c-lateral__item c-lateral__item-opcion">
+      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
       <span className="toolTip"><img src="../../assets/images/iconos/iconAgreement.png" className="imgIcon">
       <span className="tooltiptext">Gestión Contratos</span></span>
-    </a>
-    <br>
-    <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-    <br>
-    <a href="" title="User">
+    </div>
+    <div class="c-lateral__item c-lateral__item-opcion">
+      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
       <span className="toolTip"><img src="../../assets/images/iconos/iconSetup.png" className="imgIcon">
       <span className="tooltiptext">Configuración</span></span>
-    </a>
-    <br>
-    <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
+      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
+    </div>
+    <div class="c-lateral__item c-lateral__item-opcion"></div>
   </div>
 </template>
 
 <style lang="css" scoped>
-  .panel_menu {
-    display: block;
-    height: 100% !important;
-    width: 5%;
-    min-width: 55px;
-    padding: 0%;
-    background: rgb(38,34,98);
-    float: left;
+  .c-lateral {
     position: absolute;
-    top: 0px;
+    display: grid;
+    grid-template-columns: 5rem 20rem;
+    grid-template-rows: min-content min-content repeat(4, max-content) max-content;
+    height: 100%;
+    padding: 0%;
+    /* background: rgba(197, 197, 198, 0.5); */
+    float: left;
+    top: 0%;
     z-index: 150;
+  }
+  .c-lateral__item {
+    display: grid;
+    /* border: 1px solid white; */
+  }
+  .c-lateral__item-opcion {
+    background-color: var(--bcolor-lateral);
+    /* padding: 10px 0 10px; */
+  }
+  .c-lateral__item:nth-child(6) {
+    grid-row: span 6;
   }
   .imgHead {
     width: 16rem;
@@ -79,7 +95,8 @@ const showFiltros = ref(contratoStore.getShowPanel)
     margin-top: -3px;
   }
   .imgSeparador {
-    width: 38px;
+    width: 4.5rem;
+    padding: 6px 0 6px 0;
   }
   .tooltiptext {
     visibility: hidden;
@@ -97,10 +114,8 @@ const showFiltros = ref(contratoStore.getShowPanel)
   }
   .imgIcon {
     width: 1.8rem;
+    height: auto;
   }
-  /* .imgIcon2 {
-    width: 1.8rem;
-  } */
   .toolTip:hover .tooltiptext {
     visibility: visible;
     /* width: 3rem; */

@@ -1,6 +1,5 @@
 <script  setup lang="ts">
 import { useContratoStore } from "../stores/ContratoStore.js";
-import PanelConvenciones from "../components/panel/PanelConvenciones.vue";
 import PanelLogin from "../components/login/PanelLogin.vue"
 
 const contratoStore = useContratoStore()
@@ -34,20 +33,16 @@ function makeClick() {
         :fotos="fotos"
       />
     </div>
+    
+    <!-- v-show=showModalHistorico -->
     <div>
       <ModalHistorico 
-        v-show=showModalHistorico 
         @show-modal="showModalHistoricoView"
+        v-if="contratoStore.getShowHistorico"    
         v-bind:hallazgos="hallazgos"
       />
     </div>
     <div v-if=contratoStore.getLogin>
-      <!-- <div>
-        <PanelFilters />
-      </div> -->
-      <!-- <div>
-        <PanelConvenciones />
-      </div> -->
       <div>
         <PanelLateral />
       </div>
@@ -63,7 +58,6 @@ function makeClick() {
 import MapaGeneral from "@/components/MapaGeneral.vue";
 import ModalImagenes from "../components/modal/ModalImagenes.vue";
 import ModalHistorico from "../components/modal/ModalHistorico.vue";
-import PanelFilters from "../components/panel/PanelFilters.vue";
 import PanelLateral from "../components/panel/PanelLateral.vue";
 
 export default {
@@ -71,8 +65,7 @@ export default {
   components: { 
     MapaGeneral, 
     ModalImagenes, 
-    ModalHistorico,
-    PanelFilters
+    ModalHistorico
   },
 
   data() {

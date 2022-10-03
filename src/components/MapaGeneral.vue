@@ -7,6 +7,8 @@ import { getImage } from "../utils/utilidades";
 
   const contratoStore = useContratoStore()
   const myMapRef = ref();
+  const openedMarkerID = ref()
+  const circles = ref()
 
   onMounted(() => {
     myMapRef.value.$mapPromise.then(() => {
@@ -17,6 +19,13 @@ import { getImage } from "../utils/utilidades";
   let imgUrl = new URL('/images/marcadores/puntomedio.svg', import.meta.url).href
   let imgCluster = new URL('/images/marcadores/cluster.svg', import.meta.url).href
 
+function openMarker(id) {
+  openedMarkerID.value = id
+  if(contratoStore.getShowHistorico) {
+    contratoStore.setShowHistorico("historico")
+    circles.value = []
+  }
+}
 </script>
 
 <template>
@@ -135,7 +144,6 @@ export default {
 
   data() {
     return {
-      circles: [],
       circleOptions: {
         strokeColor: "#7768D3",
         strokeOpacity: 0.8,
@@ -143,7 +151,6 @@ export default {
         fillColor: "#9B91D8",
         fillOpacity: 0.35,
       },
-        openedMarkerID: null,
         infoWindow: {
             position: { lat: 6.248353, lng: -75.580265 },
             open: false,
@@ -173,10 +180,11 @@ export default {
     enviarShowBubble(show, fotos) {
       this.$emit('showModalMapaFluvial', show, fotos)
     },
-    showHistoria(show, position) {
-      this.loadPatologia(position)
-      this.$emit('showModalHistoria', show, this.getPatologia)
-      show ? this.createCircleHallazgo(position) : this.circles = []
+    showHistoria(position) {
+      // this.loadPatologia(position)
+      // this.$emit('showModalHistoria', show, this.getPatologia)
+      // show ? this.createCircleHallazgo(position) : this.circles = []
+      this.createCircleHallazgo(position)
     },
     createCircleHallazgo(position) {
       position === undefined ? position = {"lat": 0.0, "lng": 0.0 } :
@@ -184,9 +192,6 @@ export default {
       this.circles = [
         { position: position }
       ]
-    },
-    openMarker(id) {
-        this.openedMarkerID = id
     },
     openInfoWindowTemplate(pos) {
       this.infoWindow.position = pos;

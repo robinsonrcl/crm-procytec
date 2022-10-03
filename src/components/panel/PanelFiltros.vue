@@ -183,19 +183,15 @@
 <style lang="css" scoped>
   .cont-filtros {
     position: fixed;
-    display: inline-grid;
-    left: 84px;
+    display: grid;
     z-index: 10;
     background-color: var(--bcolor);
     opacity: 0.99;
     grid-template-columns: repeat(2, 1fr);
-    max-width: 20%;
     color: #fff;
     padding: 10px;
     gap: 5px;
-    margin-top: -10px;
     height: 100%;
-    top: 134px;
     grid-auto-rows: min-content;
     font-size: medium;
   }

@@ -1,5 +1,12 @@
 <script setup lang="ts">
-  import { getImage } from '../../utils/utilidades';
+import { useContratoStore } from "../../stores/ContratoStore.js";
+import { getImage } from '../../utils/utilidades';
+
+const emit = defineEmits<{
+  (e: 'showModalHistoria', value: String): void
+}>()
+
+  const contratoStore = useContratoStore()
 
   const props = defineProps<{
     hallazgo: {
@@ -13,9 +20,23 @@
       hallazgo2: string
       hallazgo3: string
       tramo1: string
+      position: string
     }
     contratonombre: string
   }>()
+
+  async function showHistoria() {
+      contratoStore.setShowHistorico("historico")
+      // 1.
+      await contratoStore.loadPatologia(props.hallazgo.position)
+      await contratoStore.getPatologia
+
+      emit('showModalHistoria', props.hallazgo.position)
+
+      // show ? this.createCircleHallazgo(position) : this.circles = []
+      
+      // this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
+    }
 
 </script>
 
@@ -70,9 +91,15 @@ export default {
   },
   
   methods: {
-    showHistoria() {
-      this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
-    },
+    // showHistoria() {
+      // this.contratoStore.setShowHistorico("historico")
+      // 1.
+      // this.contratoStore.loadPatologia(this.hallazgo.position)
+      // this.contratoStore.getPatologia
+
+      // this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
+      // this.$emit('showModalHistoria', this.hallazgo.position)
+    // },
     enviarShow(fotos) {
       this.$emit('showModalImagesBubble', true, fotos)
     },

@@ -35,6 +35,7 @@ export const useContratoStore = defineStore("ContratoStore", {
             patologia: [],
             login: false,
             showPanel: Boolean(false),
+            showHistorico: Boolean(false),
             optionContrato: [],
             optionCorriente: [],
             estructuras: [
@@ -65,6 +66,12 @@ export const useContratoStore = defineStore("ContratoStore", {
 
     // getters
     getters: {
+        getShowPanel() {
+            return this.showPanel
+        },
+        getShowHistorico() {
+            return this.showHistorico
+        },
         getEstados() {
             return this.estadosfinales
         },
@@ -95,9 +102,6 @@ export const useContratoStore = defineStore("ContratoStore", {
         getLogin() {
             return this.login
         },
-        getShowPanel() {
-            return this.showPanel
-        },
         getOptionContrato() {
             return this.optionContrato
         },
@@ -116,6 +120,9 @@ export const useContratoStore = defineStore("ContratoStore", {
         },
         setShowPanel(newValue) {
             this.showPanel = !this.showPanel
+        },
+        setShowHistorico(newValue) {
+            this.showHistorico = !this.showHistorico
         },
         setLogin(newValue) {
             this.login = newValue
