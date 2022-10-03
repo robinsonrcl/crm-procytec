@@ -23,7 +23,7 @@ function openMarker(id) {
   openedMarkerID.value = id
   if(contratoStore.getShowHistorico) {
     contratoStore.setShowHistorico("historico")
-    circles.value = []
+    contratoStore.setCircles([])
   }
 }
 
@@ -31,6 +31,7 @@ function createCircleHallazgo(position) {
   position === undefined ? position = { 'lat': 0.0, 'lng': 0.0 } :
 
   circles.value = [ { position: position } ]
+  // contratoStore.setCircles([ { position: position } ])
 }
 </script>
 
@@ -120,7 +121,7 @@ function createCircleHallazgo(position) {
         </GMapInfoWindow>
       </GMapMarker>
 
-      <div v-for="circle in circles" :key="circle">
+      <div v-for="circle in contratoStore.getCircles" :key="circle">
         <GMapCircle
           :radius="200"
           :center="circle.position"

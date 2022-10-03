@@ -60,12 +60,16 @@ export const useContratoStore = defineStore("ContratoStore", {
                 { id: 2, name:"Repotenciado", src:"colorAmarillo.png", completed: false },
                 { id: 3, name:"Critico", src:"colorRojo.png", completed: false },
                 { id: 4, name:"Otro", src:"colorVioleta.png", completed: false },
-            ]
+            ],
+            circles: []
         }
     },
 
     // getters
     getters: {
+        getCircles() {
+            return this.circles
+        },
         getShowPanel() {
             return this.showPanel
         },
@@ -112,6 +116,9 @@ export const useContratoStore = defineStore("ContratoStore", {
 
     // actions
     actions: {
+        setCircles(newValue) {
+            this.circles = newValue
+        },
         setOptionCorriente(newValue) {
             this.optionCorriente = newValue
         },

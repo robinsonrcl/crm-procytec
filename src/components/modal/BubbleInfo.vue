@@ -27,11 +27,17 @@ const props = defineProps<{
 
 async function showHistoria() {
   contratoStore.setShowHistorico("historico")
+  // contratoStore.setCircles([])
+
+  if(contratoStore.getShowHistorico)
+    contratoStore.setCircles([ { position: props.hallazgo.position } ])
+  else
+    contratoStore.setCircles([ { position: { 'lat': 0.0, 'lng': 0.0 } } ])
 
   await contratoStore.loadPatologia(props.hallazgo.position)
   await contratoStore.getPatologia
 
-  emit('showModalHistoria', props.hallazgo.position)
+  // emit('showModalHistoria', props.hallazgo.position)
 
 }
 
