@@ -8,35 +8,32 @@ const emit = defineEmits<{
 
   const contratoStore = useContratoStore()
 
-  const props = defineProps<{
-    hallazgo: {
-      nombrecontrato: string
-      observacion: string
-      fotos: [{src: string}]
-      referencia: string
-      zona: string
-      abscisakm: string
-      hallazgo1: string
-      hallazgo2: string
-      hallazgo3: string
-      tramo1: string
-      position: string
-    }
-    contratonombre: string
-  }>()
+const props = defineProps<{
+  hallazgo: {
+    nombrecontrato: string
+    observacion: string
+    fotos: [{src: string}]
+    referencia: string
+    zona: string
+    abscisakm: string
+    hallazgo1: string
+    hallazgo2: string
+    hallazgo3: string
+    tramo1: string
+    position: string
+  }
+  contratonombre: string
+}>()
 
-  async function showHistoria() {
-      contratoStore.setShowHistorico("historico")
-      // 1.
-      await contratoStore.loadPatologia(props.hallazgo.position)
-      await contratoStore.getPatologia
+async function showHistoria() {
+  contratoStore.setShowHistorico("historico")
 
-      emit('showModalHistoria', props.hallazgo.position)
+  await contratoStore.loadPatologia(props.hallazgo.position)
+  await contratoStore.getPatologia
 
-      // show ? this.createCircleHallazgo(position) : this.circles = []
-      
-      // this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
-    }
+  emit('showModalHistoria', props.hallazgo.position)
+
+}
 
 </script>
 

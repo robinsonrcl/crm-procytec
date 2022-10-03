@@ -26,6 +26,12 @@ function openMarker(id) {
     circles.value = []
   }
 }
+
+function createCircleHallazgo(position) {
+  position === undefined ? position = { 'lat': 0.0, 'lng': 0.0 } :
+
+  circles.value = [ { position: position } ]
+}
 </script>
 
 <template>
@@ -109,7 +115,7 @@ function openMarker(id) {
             maxHeight: 320,
           }">
 
-          <BubbleInfo @show-modal-historia="showHistoria"  @show-modal-images-bubble="enviarShowBubble" v-bind:hallazgo="hallazgo" />
+          <BubbleInfo @show-modal-historia="createCircleHallazgo"  @show-modal-images-bubble="enviarShowBubble" v-bind:hallazgo="hallazgo" />
 
         </GMapInfoWindow>
       </GMapMarker>
@@ -179,19 +185,6 @@ export default {
         ]),
     enviarShowBubble(show, fotos) {
       this.$emit('showModalMapaFluvial', show, fotos)
-    },
-    showHistoria(position) {
-      // this.loadPatologia(position)
-      // this.$emit('showModalHistoria', show, this.getPatologia)
-      // show ? this.createCircleHallazgo(position) : this.circles = []
-      this.createCircleHallazgo(position)
-    },
-    createCircleHallazgo(position) {
-      position === undefined ? position = {"lat": 0.0, "lng": 0.0 } :
-    
-      this.circles = [
-        { position: position }
-      ]
     },
     openInfoWindowTemplate(pos) {
       this.infoWindow.position = pos;
