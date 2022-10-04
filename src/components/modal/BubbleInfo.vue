@@ -42,6 +42,11 @@ async function showHistoria() {
 
 }
 
+function enviarShow(fotos) {
+  contratoStore.setShowModalImages("Images")
+  contratoStore.setCurrentPhotos(fotos)
+  //this.$emit('showModalImagesBubble', true, fotos)
+}
 </script>
 
 <template>
@@ -63,7 +68,10 @@ async function showHistoria() {
     <div className="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div className="c-bubble-item bubble-subtitle"><span>Zona:</span></div>
     <div className="c-bubble-item">
-      <a v-if="hallazgo.fotos[0].src != 'sinfoto.svg'" className="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)">
+      <a v-if="hallazgo.fotos[0].src != 'sinfoto.svg'" 
+        className="btn-bubble" href="#!" role="button" 
+        @click.prevent="enviarShow(hallazgo.fotos)"
+      >
         <fa icon="fa-camera" /> Fotos ({{ hallazgo.fotos.length }})
       </a>
       <a v-else className="btn-bubble" href="#!" role="button" @click.prevent="">
@@ -110,9 +118,6 @@ export default {
       // this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
       // this.$emit('showModalHistoria', this.hallazgo.position)
     // },
-    enviarShow(fotos) {
-      this.$emit('showModalImagesBubble', true, fotos)
-    },
   },
 };
 </script>

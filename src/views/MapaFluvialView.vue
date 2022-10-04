@@ -11,12 +11,14 @@ function showPaneles(respuesta) {
 }
 
 function makeClick() {
-  if(contratoStore.getShowPanel)
-    contratoStore.setShowPanel("mapa")
+  if(contratoStore.getShowModalImages){
+    contratoStore.setShowModalImages("Images")
+  } else {
+    if(contratoStore.getShowPanel)
+      contratoStore.setShowPanel("mapa")
+  }
 }
-
 </script>
-
 <template>
   <div className="map__container">
     <div className="map__body">
@@ -28,13 +30,12 @@ function makeClick() {
     </div>
     <div>
       <ModalImagenes 
-        v-show=showModalImage 
-        @show-modal-images="showModalImgDos" 
+        v-show=contratoStore.getShowModalImages
+        @show-modal-images="showModalImgDos"
+        @click="makeClick"
         :fotos="fotos"
       />
     </div>
-    
-    <!-- v-show=showModalHistorico -->
     <div>
       <ModalHistorico 
         @show-modal="showModalHistoricoView"

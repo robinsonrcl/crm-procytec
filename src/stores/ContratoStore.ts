@@ -36,6 +36,7 @@ export const useContratoStore = defineStore("ContratoStore", {
             login: false,
             showPanel: Boolean(false),
             showHistorico: Boolean(false),
+            showModalImages: Boolean(false),
             optionContrato: [],
             optionCorriente: [],
             estructuras: [
@@ -61,12 +62,16 @@ export const useContratoStore = defineStore("ContratoStore", {
                 { id: 3, name:"Critico", src:"colorRojo.png", completed: false },
                 { id: 4, name:"Otro", src:"colorVioleta.png", completed: false },
             ],
-            circles: []
+            circles: [],
+            currentPhotos: []
         }
     },
 
     // getters
     getters: {
+        getCurrentPhotos() {
+            return this.currentPhotos
+        },
         getCircles() {
             return this.circles
         },
@@ -75,6 +80,9 @@ export const useContratoStore = defineStore("ContratoStore", {
         },
         getShowHistorico() {
             return this.showHistorico
+        },
+        getShowModalImages() {
+            return this.showModalImages
         },
         getEstados() {
             return this.estadosfinales
@@ -116,6 +124,9 @@ export const useContratoStore = defineStore("ContratoStore", {
 
     // actions
     actions: {
+        setCurrentPhotos(newValue) {
+            this.currentPhotos = newValue
+        },
         setCircles(newValue) {
             this.circles = newValue
         },
@@ -124,6 +135,9 @@ export const useContratoStore = defineStore("ContratoStore", {
         },
         setOptionContrato(newValue) {
             this.optionContrato = newValue
+        },
+        setShowModalImages(newValue) {
+            this.showModalImages = !this.showModalImages
         },
         setShowPanel(newValue) {
             this.showPanel = !this.showPanel
