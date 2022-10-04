@@ -52,7 +52,7 @@ function createCircleHallazgo(position) {
               position: 6
             },
         }"
-    map-type-id="satellite"
+    map-type-id="roadmap"
     style="width: 100%; height: 100%;"
     >
 

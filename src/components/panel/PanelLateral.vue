@@ -67,7 +67,7 @@ const showFiltros = ref(contratoStore.getShowPanel)
   .c-lateral {
     position: absolute;
     display: grid;
-    grid-template-columns: 5rem 20rem;
+    grid-template-columns: 4rem 20rem;
     grid-template-rows: min-content min-content repeat(4, max-content) max-content;
     height: 100%;
     padding: 0%;
