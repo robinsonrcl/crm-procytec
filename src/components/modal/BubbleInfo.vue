@@ -2,14 +2,15 @@
 import { useContratoStore } from "../../stores/ContratoStore.js";
 import { getImage } from '../../utils/utilidades';
 
+const contratoStore = useContratoStore()
+
 const emit = defineEmits<{
   (e: 'showModalHistoria', value: String): void
 }>()
 
-  const contratoStore = useContratoStore()
-
 const props = defineProps<{
   hallazgo: {
+    id: string
     nombrecontrato: string
     observacion: string
     fotos: [{src: string}]
@@ -45,7 +46,9 @@ async function showHistoria() {
 
 <template>
   <div className="c-bubble">
-    <div className="c-bubble-item bubble-title">{{ hallazgo.nombrecontrato }}</div>
+    <div className="c-bubble-item bubble-title">
+      {{ hallazgo.nombrecontrato }} - <span style="font-size: 0.8rem; font-weight: 400;">(Id:{{ hallazgo.id }})</span>
+    </div>
     <!-- <div class="c-bubble-item bubble-title"></div> -->
     
     <div className="c-bubble-item" id="div-buble-descripcion">
@@ -60,8 +63,12 @@ async function showHistoria() {
     <div className="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div className="c-bubble-item bubble-subtitle"><span>Zona:</span></div>
     <div className="c-bubble-item">
-      <a v-if="hallazgo.fotos[0].src != 'sinfoto.svg'" className="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)"><fa icon="fa-camera" /> Fotos ({{ hallazgo.fotos.length }})</a>
-      <a v-else className="btn-bubble" href="#!" role="button" @click.prevent=""><fa icon="fa-camera" /> Fotos (0)</a>
+      <a v-if="hallazgo.fotos[0].src != 'sinfoto.svg'" className="btn-bubble" href="#!" role="button" @click.prevent="enviarShow(hallazgo.fotos)">
+        <fa icon="fa-camera" /> Fotos ({{ hallazgo.fotos.length }})
+      </a>
+      <a v-else className="btn-bubble" href="#!" role="button" @click.prevent="">
+        <fa icon="fa-camera" /> Fotos (0)
+      </a>
     </div>
     <div className="c-bubble-item">{{ hallazgo.referencia }}</div>
     <div className="c-bubble-item">{{ hallazgo.zona }}</div>

@@ -7,6 +7,7 @@
   <Carousel ref="carousel" :wrapAround="true" :items-to-scroll="1" :autoplay="3000">
 
     <Slide v-for="slide in images" :key="slide._id">
+      <span class="etiqueta__foto">{{ slide.etiqueta }}</span>
       <div class="carousel__item">
         <img class="img__modal-carousel" :src="getImage(`/images/photos/`, slide.src)" alt="" />
       </div>
@@ -20,7 +21,6 @@
 </template>
 
 <script>
-// import {  shallowReactive } from 'vue-demi'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
@@ -44,5 +44,11 @@ export default {
 };
 
 </script>
+
+<style lang="css" scoped>
+  .etiqueta__foto {
+    font-size: 1.2rem;
+  }
+</style>
 
 

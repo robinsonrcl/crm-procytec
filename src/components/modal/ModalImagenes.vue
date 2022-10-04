@@ -16,37 +16,33 @@
     <div className="modalImg">
       <div v-if="fotos.length > 1" className="modalImgUnico">
         <div className="modalIconCerrar" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div>
-
         <div className="divImgModal" v-for="foto in fotos" :key="foto.id">
           <div className="modalImg__foto">
+            <div className="modalImg__desc2">{{ foto.etiqueta }}</div>
             <div className="bgdivimg">
               <img className="img__modal" :src="getImage(`/images/photos/`, foto.src)" alt="" />
             </div>
-            <div className="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
-        </div>
-
+          </div>
         </div>
       </div>
       <div v-else className="modalImgUnico2">
         <div className="modalIconCerrar" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div>
-
         <div className="divImgModal" v-for="foto in fotos" :key="foto.id">
           <div className="modalImg__foto">
+            <div className="modalImg__desc">{{ foto.etiqueta }}</div>
             <div className="bgdivimg">
               <img className="img__modal" :src="getImage(`/images/photos/`, foto.src)" alt="" />
             </div>
-            <div className="modalImg__desc"><p>{{ foto.etiqueta }}</p></div>
-        </div>
-
+          </div>
         </div>
       </div>
     </div>
-    <div className="container__carousel" v-show="showCarousel">
+    <!-- <div className="container__carousel" v-show="showCarousel">
       <div className="div__carousel">
         <div className="icon-close-carousel" @click.prevent="closeModalCarousel"><fa icon="close" size="2x"/></div>
         <Carousel :images="fotos"  />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -84,4 +80,24 @@ export default {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+  .modalImg__desc {
+    font-size: 1.2rem;
+    background-color: #928787;
+    color: white;
+    display: grid;
+    position: fixed;
+    padding: 5px 10px 3px 10px;
+    border-radius: 15px;
+    margin: 10px;
+  }
+  .modalImg__desc2 {
+    font-size: 1.2rem;
+    background-color: #928787;
+    color: white;
+    display: grid;
+    padding: 5px 10px 3px 10px;
+    border-radius: 15px;
+    margin: 10px;
+  }
+</style>

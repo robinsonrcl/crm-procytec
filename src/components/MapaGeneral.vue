@@ -116,7 +116,10 @@ function createCircleHallazgo(position) {
             maxHeight: 320,
           }">
 
-          <BubbleInfo @show-modal-historia="createCircleHallazgo"  @show-modal-images-bubble="enviarShowBubble" v-bind:hallazgo="hallazgo" />
+          <BubbleInfo @show-modal-historia="createCircleHallazgo"  
+            @show-modal-images-bubble="enviarShowBubble" 
+            v-bind:hallazgo="hallazgo" 
+          />
 
         </GMapInfoWindow>
       </GMapMarker>

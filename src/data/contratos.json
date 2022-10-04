@@ -14350,7 +14350,9 @@
               "position": { "lat": 6.188718787, "lng": -75.58337435 },
               "fotos": [
                 {
-                  "id": "1", "src": "Fotos_RioMed/20211028_111139.jpg"
+                  "id": "1",
+                  "src": "Fotos_RioMed/20211028_111139.jpg",
+                  "etiqueta": "Foto Rio Medellín 28 Oct 2021"
                 }
               ],
               "referencia": "",
@@ -16811,7 +16813,9 @@
               "position": { "lat": 6.197237079, "lng": -75.58079396 },
               "fotos": [
                 {
-                  "id": "1", "src": "Fotos_RioMed/Monitoreo_25_03_22_20220325_082305962.jpg"
+                  "id": "1", 
+                  "src": "Fotos_RioMed/Monitoreo_25_03_22_20220325_082305962.jpg",
+                  "etiqueta":"Monitoreo Agosto 25 de 2022"
                 }
               ],
               "referencia": "",
@@ -17791,13 +17795,19 @@
               "position": { "lat": 6.200438399, "lng": -75.57984839 },
               "fotos": [
                 {
-                  "id": "1", "src": "Fotos_RioMed/Project_1_20220504_125334734.jpg"
+                  "id": "1", 
+                  "src": "Fotos_RioMed/Project_1_20220504_125334734.jpg",
+                  "etiqueta":"Proyecto Rio Medellín Mayo 4 2022"
                 },
                 {
-                  "id": "1", "src": "Fotos_RioMed/Project_1_20220504_125419754.jpg"
+                  "id": "1",
+                  "src": "Fotos_RioMed/Project_1_20220504_125419754.jpg",
+                  "etiqueta":"Proyecto Rio Medellín Mayo"
                 },
                 {
-                  "id": "1", "src": "Fotos_RioMed/Project_1_20220504_125419754.jpg"
+                  "id": "1",
+                  "src": "Fotos_RioMed/Project_1_20220504_125419754.jpg",
+                  "etiqueta":"Proyecto Rio Medellín 2022"
                 }
               ],
               "referencia": "",
