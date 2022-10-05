@@ -28,7 +28,6 @@ const props = defineProps<{
 
 async function showHistoria() {
   contratoStore.setShowHistorico("historico")
-  // contratoStore.setCircles([])
 
   if(contratoStore.getShowHistorico)
     contratoStore.setCircles([ { position: props.hallazgo.position } ])
@@ -38,17 +37,13 @@ async function showHistoria() {
   await contratoStore.loadPatologia(props.hallazgo.position)
   await contratoStore.getPatologia
 
-  // emit('showModalHistoria', props.hallazgo.position)
-
 }
 
 function enviarShow(fotos) {
   contratoStore.setShowModalImages("Images")
   contratoStore.setCurrentPhotos(fotos)
-  //this.$emit('showModalImagesBubble', true, fotos)
 }
 </script>
-
 <template>
   <div className="c-bubble">
     <div className="c-bubble-item bubble-title">

@@ -49,7 +49,7 @@ function createCircleHallazgo(position) {
             rotateControl: true,
             fullscreenControl: false,
             mapTypeControlOptions: {
-              position: 6
+              position: 7
             },
         }"
     map-type-id="roadmap"
