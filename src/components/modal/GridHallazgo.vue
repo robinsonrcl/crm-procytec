@@ -1,5 +1,5 @@
 <script setup>
-  import { getImage } from "../../utils/utilidades.js"
+  import { getImage, getAbscisa } from "../../utils/utilidades.ts"
 </script>
 <template>
   <div class="container-hallazgo">
@@ -36,12 +36,12 @@
     <div class="container-hallazgo-item" id="cont-tramo">
       <div>{{ hallazgo.tramo1 }}</div>
       <div id="abscisa">Abscisa:</div>
-      <div>{{ hallazgo.abscisakm }}</div>
+      <div>{{ getAbscisa(hallazgo.abscisakm) }}</div>
     </div>
     <div class="container-hallazgo-item" id="cont-hall-fotos">
 
       <div v-for="foto in hallazgo.fotos" :key="foto">
-        <div><img class="cont-hall-img" :src="getImage(`/images/photos/`, foto.src)" alt="" /></div>
+        <div><img class="cont-hall-img" :src="getImage(foto.src)" alt="" /></div>
       </div>
       
     </div>

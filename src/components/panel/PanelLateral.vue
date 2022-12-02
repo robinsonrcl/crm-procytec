@@ -2,12 +2,11 @@
 import { useContratoStore } from "../../stores/ContratoStore.js";
 import { ref } from "vue";
 import PanelFiltros from "./PanelFiltros.vue"
+import PanelAgreement from "./PanelAgreement.vue"
+import PanelUsuario from "./PanelUsuario.vue";
 
 const contratoStore = useContratoStore()
-const showFiltros = ref(contratoStore.getShowPanel)
-//ref(false)
-
-// showFiltros.value = contratoStore.getShowPanel
+const showFiltros = ref(contratoStore.getShowPanelCapas)
 
 </script>
 
@@ -33,37 +32,70 @@ const showFiltros = ref(contratoStore.getShowPanel)
       </RouterLink>
     </div>
     <div class="c-lateral__item">
-      <PanelFiltros v-if="contratoStore.getShowPanel" />
+      <PanelFiltros v-if="contratoStore.getShowPanelCapas" />
+      <PanelAgreement v-if="contratoStore.getShowPanelAgreement" />
+      <PanelUsuario v-if="contratoStore.getShowPanelUsuario" />
     </div>
     <div class="c-lateral__item c-lateral__item-opcion">
       <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-      <span className="toolTip"><img src="../../assets/images/iconos/icouser.png" className="imgIcon">
-      <span className="tooltiptext">Usuario</span></span>
+      <span className="toolTip">
+        <img src="../../assets/images/iconos/icouser.png" className="imgIcon"
+        @click.prevent="contratoStore.setShowPanel('Usuario')">
+        <span className="tooltiptext">Usuario</span>
+        <span class="iconUsuario" v-if="contratoStore.getShowPanelUsuario"><fa icon="fa-location-arrow fa-2x" /></span>
+      </span>
     </div>
     <div class="c-lateral__item c-lateral__item-opcion">
       <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
       <span className="toolTip">
         <img src="../../assets/images/iconos/icolayer.png" className="imgIcon"
-        @click.prevent="contratoStore.setShowPanel('panel')">
+        @click.prevent="contratoStore.setShowPanel('Capas')">
         <span className="tooltiptext">Mapa Fluvial</span>
+        <span class="iconCapas" v-if="contratoStore.getShowPanelCapas"><fa icon="fa-location-arrow fa-2x" /></span>  
       </span>
     </div>
     <div class="c-lateral__item c-lateral__item-opcion">
       <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-      <span className="toolTip"><img src="../../assets/images/iconos/iconAgreement.png" className="imgIcon">
-      <span className="tooltiptext">Gestión Contratos</span></span>
+      <span className="toolTip">
+        <img src="../../assets/images/iconos/iconAgreement.png" className="imgIcon"
+        @click.prevent="contratoStore.setShowPanel('Agreement')">
+        <span className="tooltiptext">Gestión Contratos</span>
+        <span class="iconAgreement" v-if="contratoStore.getShowPanelAgreement"><fa icon="fa-location-arrow fa-2x" /></span>  
+      </span>
     </div>
     <div class="c-lateral__item c-lateral__item-opcion">
       <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
       <span className="toolTip"><img src="../../assets/images/iconos/iconSetup.png" className="imgIcon">
-      <span className="tooltiptext">Configuración</span></span>
-      <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
+        <span className="tooltiptext">Configuración</span>
+        <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
+      </span>
     </div>
     <div class="c-lateral__item c-lateral__item-opcion"></div>
   </div>
 </template>
 
 <style lang="css" scoped>
+.iconUsuario {
+    color: yellow;
+    position: absolute;
+    padding: 11px 0 0 7px;
+    size: 20px;
+    z-index: 100;
+  }
+  .iconCapas {
+    color: yellow;
+    position: absolute;
+    padding: 0px 0 0 7px;
+    size: 20px;
+    z-index: 100;
+  }
+  .iconAgreement {
+    color: yellow;
+    position: absolute;
+    padding: 0px 0 0 7px;
+    size: 20px;
+    z-index: 100;
+  }
   .c-lateral {
     position: absolute;
     display: grid;

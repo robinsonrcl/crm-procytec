@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { MDBInput, MDBBtn } from "mdb-vue-ui-kit";
+  // import { MDBInput, MDBBtn } from "mdb-vue-ui-kit";
   import { ref } from "vue"
 
   const emit = defineEmits<{
@@ -23,15 +23,15 @@
 <template>
   <div className="panelLogin">
   <form>
-    <MDBRow class="mb-4">
-      <MDBCol>
+    <div class="mb-4">
+      <div>
         <img src="../../assets/images/iconoBitacora.svg" alt="">
         <div style="padding: 15px">
           <span className="tituloLogin">Credenciales de Acceso</span>
         </div>
-      </MDBCol>
-    </MDBRow>
-    <MDBInput
+      </div>
+    </div>
+    <input
       type="email"
       label="Email address"
       id="form1Email"
@@ -39,7 +39,7 @@
       wrapperClass="mb-4"
       autofocus
     />
-    <MDBInput
+    <input
       type="password"
       label="Password"
       id="form1Password"
@@ -47,13 +47,13 @@
       wrapperClass="mb-4"
     />
 
-    <MDBRow class="mb-4">
-      <MDBCol>
+    <div class="mb-4">
+      <div>
         <span>{{ mensaje }}</span>
-      </MDBCol>
-    </MDBRow>
+      </div>
+    </div>
 
-    <MDBBtn color="primary" block @click.prevent="ingresar"> Sign in </MDBBtn>
+    <button color="primary" block @click.prevent="ingresar"> Sign in </button>
   </form>
   </div>
 </template>

@@ -1,339 +1,618 @@
-import { defineStore } from "pinia"
-import { arePointsNear } from "../utils/utilidades"
+import { acceptHMRUpdate, defineStore } from "pinia";
+import { arePointsNear } from "../utils/utilidades";
+import axios from "axios";
+import { stringifyQuery } from "vue-router";
+import { faThList } from "@fortawesome/free-solid-svg-icons";
 
-class typeEstructura { 
-    id = 0 
-    name = ''
-    src = ''
-    completed = false
+class typeEstructura {
+  id = 0;
+  name = "";
+  src = "";
+  completed = false;
 }
 
-class typeEstados { 
-    id = 0 
-    name = ''
-    src = ''
-    completed = false
+class typeEstados {
+  id = 0;
+  name = "";
+  src = "";
+  completed = false;
 }
+class componenteClass {
+  id: string;
+  name: string;
+}
+class estadoClass {
+  id: string;
+  name: string;
+}
+
+class Hallazgos {
+  diagnostico: String;
+  observacion: String;
+  tramo1: String;
+  position: String;
+  shapeleng: Number;
+  nivelriesgo: String;
+  revisors: [
+    {
+      cedula: Number;
+      id: String;
+      nombres: String;
+      nickname: String;
+      apellidos: String;
+    }
+  ];
+  estadoanterior: Number;
+  zona: String;
+  linkdiseno: String;
+  hallazgo2: String;
+  nomenclatura: String;
+  margen: String;
+  corriente: { id: String };
+  cota: String;
+  propuesta: String;
+  coordenadas: String;
+  id: String;
+  componente: String;
+  fotos: [
+    {
+      id: String;
+      src: String;
+      etiqueta: String;
+    }
+  ];
+  costo: Number;
+  fecha: Date;
+  afectacion: String;
+  tipodiseno: String;
+  icono: String;
+  referencia: String;
+  abscisakm: Number;
+  colorestado: String;
+  hallazgo1: String;
+  hallazgo3: String;
+  estado: String;
+  criticidad: String;
+}
+
+let urlFluvialApi = import.meta.env.VITE_URL_FLUVIALAPI;
 
 export const useContratoStore = defineStore("ContratoStore", {
-    // state
-    state: () => {
-        return {
-            contratos: {
-                contrato: [{
-                    id: 0,
-                    nombre: ""
-                }]
+  // state
+  state: () => {
+    return {
+      contratos: [
+        {
+          nombre: String,
+          descripcion: String,
+          id: String,
+          year: Number,
+          fecha: Date,
+          mes: Number,
+          corriente: [
+            {
+              puntomedio: String,
+              nombre: String,
+              descripcion: String,
+              id: String,
+              contrato: String,
+              coordenadas: String,
+              fecha: Date,
             },
-            corrientes: [String],
-            corriente: [],
-            path: [[]],
-            puntomedio: { lat: 6.248353, lng: -75.580265 },
-            hallazgos: [],
-            componentes: [],
-            estados: [],
-            patologia: [],
-            login: false,
-            showPanel: Boolean(false),
-            showHistorico: Boolean(false),
-            showModalImages: Boolean(false),
-            optionContrato: [],
-            optionCorriente: [],
-            estructuras: [
-                { id: 1, name:"AZUD", src:"barrasAzud.png", completed: false },
-                { id: 2, name:"PLACA", src:"circuloPlaca.png", completed: false },
-                { id: 3, name:"MURO", src:"trianguloMuro.png", completed: false },
-                { id: 4, name:"BARRAS", src:"cuadradoBarras.png", completed: false },
-                { id: 5, name:"BANCA", src:"trianguloMuro.png", completed: false },
-                { id: 6, name:"BOCATOMA", src:"cuadradoBarras.png", completed: false },
-                { id: 7, name:"BOLSA DE GRAVILLA", src:"cuadradoBarras.png", completed: false },
-                { id: 8, name:"CONTRADIQUE", src:"cuadradoBarras.png", completed: false },
-                { id: 9, name:"CONTROL DE GRADIENTE", src:"cuadradoBarras.png", completed: false },
-                { id: 10, name:"DIQUE", src:"cuadradoBarras.png", completed: false },
-                { id: 11, name:"DIRECCIONADOR", src:"cuadradoBarras.png", completed: false },
-                { id: 12, name:"GAVIÓN", src:"cuadradoBarras.png", completed: false },
-                { id: 13, name:"LLAVE", src:"cuadradoBarras.png", completed: false },
-                { id: 14, name:"TABIQUE", src:"cuadradoBarras.png", completed: false },
-                { id: 15, name:"TRAVIEZA", src:"cuadradoBarras.png", completed: false },
-            ],
-            estadosfinales: [
-                { id: 1, name:"Bueno", src:"colorVerde.png", completed: false },
-                { id: 2, name:"Repotenciado", src:"colorAmarillo.png", completed: false },
-                { id: 3, name:"Critico", src:"colorRojo.png", completed: false },
-                { id: 4, name:"Otro", src:"colorVioleta.png", completed: false },
-            ],
-            circles: [],
-            currentPhotos: []
-        }
+          ],
+        },
+      ],
+      corrientes: [],
+      corriente: [],
+      path: [{ corriente: String, puntomedio: String }],
+      puntomedio: { lat: 6.248353, lng: -75.580265 },
+      hallazgos: [],
+      // {
+      //   diagnostico: String,
+      //   observacion: String,
+      //   tramo1: String,
+      //   position: String,
+      //   shapeleng: Number,
+      //   nivelriesgo: String,
+      //   revisors: [
+      //     {
+      //       cedula: Number,
+      //       id: String,
+      //       nombres: String,
+      //       nickname: String,
+      //       apellidos: String
+      //     }
+      //   ],
+      //   estadoanterior: Number,
+      //   zona: String,
+      //   linkdiseno: String,
+      //   hallazgo2: String,
+      //   nomenclatura: String,
+      //   margen: String,
+      //   corriente: { id: String },
+      //   cota: String,
+      //   propuesta: String,
+      //   coordenadas: String,
+      //   id: String,
+      //   componente: String,
+      //   fotos: [{
+      //     id: String,
+      //     src: String,
+      //     etiqueta: String
+      //   }],
+      //   costo: Number,
+      //   fecha: Date,
+      //   afectacion: String,
+      //   tipodiseno: String,
+      //   icono: String,
+      //   referencia: String,
+      //   abscisakm: Number,
+      //   colorestado: String,
+      //   hallazgo1: String,
+      //   hallazgo3: String,
+      //   estado: String,
+      //   criticidad: String
+      // }
+      // ],
+      componentes: [],
+      estados: [new estadoClass()],
+      patologia: [],
+      login: false,
+      showPanelCapas: Boolean(false),
+      showHistorico: Boolean(false),
+      showModalImages: Boolean(false),
+      optionContrato: [],
+      optionCorriente: [],
+      estructuras: [
+        {
+          id: String,
+          nombre: String,
+          icono: String,
+          estado: Boolean,
+        },
+      ],
+      estadosfinales: [
+        {
+          id: String,
+          estado: Boolean,
+          nombre: String,
+          icono: String,
+        },
+      ],
+      circles: [],
+      currentPhotos: [],
+      message: {
+        message: "Hola Mundo!",
+        color: "#FFFF00",
+        duration: 5,
+        hidden: false,
+      },
+      dataChartGeneral: [
+        ["Componentes", "#"],
+        ["Comp", 0],
+      ],
+      dataChartEstados: [
+        ["Estado", "#"],
+        ["N/A", 0],
+      ],
+      showDashboard: Boolean(false),
+      showPanelAgreement: Boolean(false),
+      showPanelUsuario: Boolean(false),
+      showRegister: Boolean(false),
+      user: {
+        name: String,
+        username: String,
+        password: String,
+        siwaIdentifier: String,
+        email: String,
+        profilePicture: String,
+        twitterURL: String,
+        rol: String
+      }
+    };
+  },
+
+  // getters
+  getters: {
+    getUser() {
+      return this.user;
+    },
+    getShowRegister() {
+      return this.showRegister;
+    },
+    getShowDashboard() {
+      return this.showDashboard;
+    },
+    getChartEstados() {
+      return this.dataChartEstados;
+    },
+    getChartGeneral() {
+      return this.dataChartGeneral;
+    },
+    getMessage() {
+      return this.message;
+    },
+    getCurrentPhotos() {
+      return this.currentPhotos;
+    },
+    getCircles() {
+      return this.circles;
+    },
+    getShowPanelCapas() {
+      return this.showPanelCapas;
+    },
+    getShowPanelAgreement() {
+      return this.showPanelAgreement;
+    },
+    getShowPanelUsuario() {
+      return this.showPanelUsuario;
+    },
+    getShowHistorico() {
+      return this.showHistorico;
+    },
+    getShowModalImages() {
+      return this.showModalImages;
+    },
+    getEstados() {
+      return this.estadosfinales;
+    },
+    getEstructuras() {
+      return this.estructuras;
+    },
+    getComponentes() {
+      return this.componentes;
+    },
+    getCorrientes() {
+      return this.corrientes;
+    },
+    getContratos() {
+      return this.contratos
+    },
+    getPath() {
+      return this.path;
+    },
+    getPuntomedio() {
+      return this.puntomedio;
+    },
+    getHallazgos() {
+      return this.hallazgos;
+    },
+    getCountHallazgos() {
+      return this.hallazgos.length;
+    },
+    getPatologia() {
+      return this.patologia;
+    },
+    getLogin() {
+      return this.login;
+    },
+    getOptionContrato() {
+      return this.optionContrato;
+    },
+    getOptionCorriente() {
+      return this.optionCorriente;
+    },
+  },
+
+  // actions
+  actions: {
+    setUser(newUser) {
+      this.user.email = newUser.email
+      this.user.name = newUser.name
+      this.user.password = newUser.password
+      this.user.profilePicture = newUser.profilePicture
+      this.user.siwaIdentifier = newUser.siwaIdentifier
+      this.user.twitterURL = newUser.twitterURL
+      this.user.username = newUser.username
+    },
+    setShowRegister(newValue) {
+      this.showRegister = newValue;
+    },
+    setHallazgos() {
+      this.hallazgos = []
+    },
+    setMessage(message, duration) {
+      this.message.hidden = !this.message.hidden;
+      this.message.message = message;
+      setTimeout(() => {
+        this.message.hidden = !this.message.hidden;
+      }, duration);
+    },
+    setCurrentPhotos(newValue) {
+      this.currentPhotos = newValue;
+    },
+    setCircles(newValue) {
+      this.circles = newValue;
+    },
+    setOptionCorriente(newValue) {
+      this.optionCorriente = newValue;
+    },
+    setOptionContrato(newValue) {
+      this.optionContrato = newValue;
+    },
+    setShowModalImages(newValue) {
+      this.showModalImages = !this.showModalImages;
+    },
+    setShowPanel(newValue) {
+      switch (newValue) {
+        case "Capas":
+          this.showPanelCapas = !this.showPanelCapas;
+          this.showPanelAgreement = false;
+          this.showPanelUsuario = false;
+          break;
+          case "Agreement":
+          this.showPanelAgreement = !this.showPanelAgreement;    
+          this.showPanelCapas = false;
+          this.showPanelUsuario = false;
+          break;
+          case "Usuario":
+          this.showPanelUsuario = !this.showPanelUsuario;
+          this.showPanelCapas = false;
+          this.showPanelAgreement = false;
+          break;
+      }
+      
+    },
+    setShowHistorico(newValue) {
+      this.showHistorico = !this.showHistorico;
+    },
+    setLogin(newValue) {
+      this.login = newValue;
+    },
+    setFalseEstructuras(newValue) {
+      this.estructuras.forEach((estructura) => {
+        estructura.estado = false;
+      });
+    },
+    setFalseEstados(newValue) {
+      this.estadosfinales.forEach((estado) => {
+        estado.estado = false;
+      });
+    },
+    async fill() {
+      await axios
+        .get(urlFluvialApi + "/api/componentes/")
+        .then((response) => {
+          this.estructuras = response.data;
+        })
+        .catch((_error) => {})
+        .then(() => {});
+
+      await axios
+        .get(urlFluvialApi + "/api/estados/")
+        .then((response) => {
+          this.estadosfinales = response.data;
+        })
+        .catch((_error) => {})
+        .then(() => {});
+        
+      await axios
+        .get(urlFluvialApi + "/api/contratos/")
+        .then((response) => {
+          this.contratos = response.data;
+        })
+        .catch((_error) => {})
+        .then(() => {});
+    },
+    fillCorrientes(contratosId) {
+      this.corrientes = [];
+
+      var contratos = this.contratos.filter(function (contrato) {
+        return contratosId.some((item) => item.id === contrato.id);
+      });
+
+      contratos.forEach((contrato) => {
+        contrato.corriente.forEach((corriente) => {
+          this.corrientes.push(corriente);
+        });
+      });
+    },
+    drawCorriente(contratosId, corrientesId) {
+      var contratos = this.contratos.filter(function (contrato) {
+        return contratosId.some((item) => item.id === contrato.id);
+      });
+
+      this.path = [];
+      var corrientesBk = [{ puntomedio: "" }];
+
+      contratos.forEach((contrato) => {
+        var corrientes = contrato.corriente.filter(function (corriente) {
+          return corrientesId.some((item) => item.id === corriente.id);
+        });
+        corrientes.forEach((corriente) => {
+          const newPath = {
+            corriente: JSON.parse(corriente.coordenadas.toString()),
+            puntomedio: JSON.parse(corriente.puntomedio.toString()),
+          };
+
+          this.path.push(newPath);
+          corrientesBk.push(corriente);
+        });
+      });
+
+      this.puntomedio = corrientesBk[corrientesBk.length - 1].puntomedio;
+      this.drawHallazgos(corrientesId);
+    },
+    async drawHallazgos(corrientesId) {
+      var componentesName = this.componentes;
+      var estadosName = this.estados;
+
+      // Fields for get data from API
+      class ArraySearch {
+        corrientes = [];
+        componentes = [];
+        estados = [];
+
+        init() {}
+      }
+
+      if (estadosName.length === 0) {
+        this.hallazgos = [];
+        return;
+      }
+      if (componentesName.length === 0) {
+        this.hallazgos = [];
+        return;
+      }
+
+      let filtersHallazgos = new ArraySearch();
+
+      if (this.componentes.length > 0) {
+        this.componentes.forEach((componente) => {
+          filtersHallazgos.componentes.push(componente.name);
+        });
+      }
+
+      if (this.estados.length > 0) {
+        this.estados.forEach((estado) => {
+          filtersHallazgos.estados.push(estado.name);
+        });
+      }
+
+      if (corrientesId.length > 0) {
+        corrientesId.forEach((corriente) => {
+          filtersHallazgos.corrientes.push(corriente.id);
+        });
+      }
+      // ------------
+
+      await axios
+        .post(urlFluvialApi + "/api/search", filtersHallazgos)
+        .then((response) => {
+          this.hallazgos = response.data;
+
+          var countPlaca = 0;
+          var countMuro = 0;
+          var countAzud = 0;
+          var countBarra = 0;
+          var countObstruccion = 0;
+
+          var countBueno = 0;
+          var countRegular = 0;
+          var countMalo = 0;
+          var countNA = 0;
+
+          this.hallazgos.forEach((hallazgo) => {
+            switch (hallazgo.estado) {
+              case "BUENO":
+                countBueno += 1;
+                break;
+              case "REGULAR":
+                countRegular += 1;
+                break;
+              case "MALO":
+                countMalo += 1;
+                break;
+              case "NA":
+                countNA += 1;
+                break;
+            }
+            switch (hallazgo.componente) {
+              case "PLACA":
+                countPlaca += 1;
+                break;
+              case "MURO":
+                countMuro += 1;
+                break;
+              case "ESTRUCTURA_DE_CAIDA":
+                countAzud += 1;
+                break;
+              case "BARRA":
+                countBarra += 1;
+                break;
+              case "OBSTRUCCION":
+                countObstruccion += 1;
+                break;
+            }
+          });
+          this.dataChartGeneral = [
+            ["Estructura", "#"],
+            ["Placa", countPlaca],
+            ["Muro", countMuro],
+            ["Azud", countAzud],
+            ["Barra", countBarra],
+            ["Obstruccion", countObstruccion],
+          ];
+          this.dataChartEstados = [
+            ["Estado", "#"],
+            ["Bueno", countBueno],
+            ["Regular", countRegular],
+            ["Malo", countMalo],
+            ["NA", countNA],
+          ];
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .then(() => {}
+        );
+
+      //axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+
+      let ultimoHallazgo = this.hallazgos[this.hallazgos.length - 1];
+
+      this.puntomedio = ultimoHallazgo.position;
     },
 
-    // getters
-    getters: {
-        getCurrentPhotos() {
-            return this.currentPhotos
-        },
-        getCircles() {
-            return this.circles
-        },
-        getShowPanel() {
-            return this.showPanel
-        },
-        getShowHistorico() {
-            return this.showHistorico
-        },
-        getShowModalImages() {
-            return this.showModalImages
-        },
-        getEstados() {
-            return this.estadosfinales
-        },
-        getEstructuras() {
-            return this.estructuras
-        },
-        getComponentes() {
-            return this.componentes
-        },
-        getCorrientes() {
-            return this.corrientes
-        },
-        getPath() {
-            return this.path
-        },
-        getPuntomedio() {
-            return this.puntomedio
-        },
-        getHallazgos() {
-            return this.hallazgos
-        },
-        getCountHallazgos() {
-            return this.hallazgos.length
-        },
-        getPatologia() {
-            return this.patologia
-        },
-        getLogin() {
-            return this.login
-        },
-        getOptionContrato() {
-            return this.optionContrato
-        },
-        getOptionCorriente() {
-            return this.optionCorriente
-        }
+    setComponentes(componentes) {
+      this.componentes = [];
+      let componenteLocal: componenteClass;
+
+      componentes.forEach((componente) => {
+        componenteLocal = new componenteClass();
+        componenteLocal.id = componente.id;
+        componenteLocal.name = componente.nombre;
+
+        this.componentes.push({ id: componente.id, name: componente.nombre });
+      });
     },
+    setEstados(estados) {
+      this.estados = [];
+      let estadoLocal: estadoClass;
 
-    // actions
-    actions: {
-        setCurrentPhotos(newValue) {
-            this.currentPhotos = newValue
-        },
-        setCircles(newValue) {
-            this.circles = newValue
-        },
-        setOptionCorriente(newValue) {
-            this.optionCorriente = newValue
-        },
-        setOptionContrato(newValue) {
-            this.optionContrato = newValue
-        },
-        setShowModalImages(newValue) {
-            this.showModalImages = !this.showModalImages
-        },
-        setShowPanel(newValue) {
-            this.showPanel = !this.showPanel
-        },
-        setShowHistorico(newValue) {
-            this.showHistorico = !this.showHistorico
-        },
-        setLogin(newValue) {
-            this.login = newValue
-        },
-        async fill() {
-            this.contratos = (await import("../data/contratos.json")).default
-            this.drawHallazgos()
-        },
-        fillCorrientes(contratosId) {
-            this.corrientes = []
+      estados.forEach((estado) => {
+        estadoLocal = new estadoClass();
+        estadoLocal.id = estado.id;
+        estadoLocal.name = estado.nombre;
 
-            var contratos = this.contratos.contrato.filter(function(contrato) {
-                return contratosId.some(item => item.id === contrato.id)
-            })
+        this.estados.push(estadoLocal);
+      });
+    },
+    async loadPatologia(centerPoint: String) {
+      class CheckPoint {
+        lat = 0.0;
+        lng = 0.0;
 
-            contratos.forEach(contrato => {
-                contrato.corrientes.forEach(corriente => {
-                    this.corrientes.push(corriente)
-                })
-            })
-        },
-        drawCorriente(contratosId, corrientesId) {
-            var contratos = this.contratos.contrato.filter(function(contrato) {
-                return contratosId.some(item => item.id === contrato.id)
-            })
+        init() {}
+      }
 
-            this.path = []
-            var corrientesBk = [{puntomedio: "" }]
-            contratos.forEach(contrato => {
-                var corrientes = contrato.corrientes.filter(function(corriente) {
-                    return corrientesId.some(item => item.id === corriente.id)
-                })
-                corrientes.forEach(corriente => {
-                    const newPath = {
-                        corriente: corriente.coordenadas,
-                        puntomedio: corriente.puntomedio
-                    }
+      this.patologia = [];
+      let checkPoint = new CheckPoint();
 
-                    this.path.push(newPath)
-                    corrientesBk.push(corriente)
-                })
-            })
+      let uno = centerPoint.split(",");
+      let unoa = uno[0];
+      let unob = unoa.split(":");
+      let unoc = unob[1].trim();
+      let lat = parseFloat(unoc);
+      // ----
+      let uno1 = uno[1];
+      let uno2 = uno1.split(":");
+      var uno3 = uno2[1].replaceAll("}", "");
+      uno3 = uno3.trim();
+      let lng = parseFloat(uno3);
 
+      checkPoint.lat = lat;
+      checkPoint.lng = lng;
 
-            this.puntomedio = corrientesBk[(corrientesBk.length - 1)].puntomedio
-            this.drawHallazgos(contratosId, corrientesId)
-        },
-        drawHallazgos(contratosId, corrientesId) {
-            var componentesName = this.componentes
-            var estadosName = this.estados
-
-            if(estadosName.length === 0){
-                this.hallazgos = []
-                return
-            }
-            if(componentesName.length === 0) {
-                this.hallazgos = []
-                return
-            }
-
-            const contratos = this.contratos.contrato.filter(function(contratolocal) {
-                return contratosId.some((itemuno: { id: any }) => itemuno.id === contratolocal.id)
-            })
-
-            this.hallazgos = []
-            contratos.forEach(contrato => {
-                var nombreContrato = contrato.nombre
-                var corrientes = contrato.corrientes.filter(function(corriente) {
-                    return corrientesId.some(item => item.id === corriente.id)
-                })
-
-                corrientes.forEach(corriente => {
-                    var hallazgos = corriente.hallazgos.filter(function(hallazgo) {
-                        return componentesName.some((item: typeEstructura) => item.name === hallazgo.componente)
-                    })
-
-                    var hallazgosSegunEstado = hallazgos.filter(function(evento) {
-                        return estadosName.some((item: typeEstados) => item.name === evento.estado)
-                    }) 
-
-                    hallazgosSegunEstado.forEach(hallazgo => {
-
-                        if(hallazgo.fotos === ""){
-                            hallazgo.fotos = [{ "id": "1000", "src": "sinfoto.svg" }]
-                        }
-
-                        const newhallazgo = {
-                            id: hallazgo.id,
-                            nombrecontrato: nombreContrato,
-                            icono: hallazgo.icono,
-                            fecha: hallazgo.fecha,
-                            componente: hallazgo.componente,
-                            nomenclatura: hallazgo.nomenclatura,
-                            margen: hallazgo.margen,
-                            hallazgo1: hallazgo.hallazgo1,
-                            hallazgo2: hallazgo.hallazgo2,
-                            hallazgo3: hallazgo.hallazgo3,
-                            estado: hallazgo.estado,
-                            
-                            
-                            observacion: hallazgo.observacion,
-                            estadoanterior: hallazgo.estadoanterior,
-                            afectacion: hallazgo.afectacion,
-                            nivelriesgo: hallazgo.nivelriesgo,
-                            coordenadas: hallazgo.coordenadas,
-                            position: hallazgo.position,
-                            fotos: hallazgo.fotos,
-                            referencia: hallazgo.referencia,
-                            zona: hallazgo.zona,
-                            tramo1: hallazgo.tramo1,
-                            abscisakm: hallazgo.abscisakm,
-                            revisor: hallazgo.revisor,
-                            shapeleng: hallazgo.shapeleng,
-                            diagnostico: hallazgo.diagnostico,
-                            criticidad: hallazgo.criticidad,
-                            tipodiseno: hallazgo.tipodiseno,
-                            propuesta: hallazgo.propuesta,
-                            costo: hallazgo.costo,
-                            cota: hallazgo.cota,
-                            linkdiseno: hallazgo.linkdiseno
-                        }
-
-                        this.hallazgos.push(newhallazgo)
-                        this.puntomedio = newhallazgo.position
-                    })
-                })
-            })
-        },
-        setComponentes(componentes) {
-            this.componentes = componentes
-        },
-        setEstados(estados) {
-            this.estados = estados
-        },
-        loadPatologia(centerPoint) {
-            this.patologia = []
-            this.contratos.contrato.forEach(contrato => {
-                const nombreContrato = contrato.nombre
-
-                contrato.corrientes.forEach(corriente => {
-                    corriente.hallazgos.forEach(hallazgo => {
-                        const checkPoint = hallazgo.position
-
-                        if(centerPoint.lat != checkPoint.lat && centerPoint.lng != checkPoint.lng){
-
-                            if(arePointsNear(checkPoint, centerPoint, 0.2)){
-
-                                if(hallazgo.fotos === ""){
-                                    hallazgo.fotos = [{ "id": "1000", "src": "sinfoto.svg" }]
-                                }
-
-                                const newHallazgo = {
-                                    id: hallazgo.id,
-                                    nombrecontrato: nombreContrato,
-                                    icono: hallazgo.icono,
-                                    fecha: hallazgo.fecha,
-                                    componente: hallazgo.componente,
-                                    nomenclatura: hallazgo.nomenclatura,
-                                    margen: hallazgo.margen,
-                                    hallazgo1: hallazgo.hallazgo1,
-                                    hallazgo2: hallazgo.hallazgo2,
-                                    hallazgo3: hallazgo.hallazgo3,
-                                    estado: hallazgo.estado,
-                                    observacion: hallazgo.observacion,
-                                    estadoanterior: hallazgo.estadoanterior,
-                                    afectacion: hallazgo.afectacion,
-                                    nivelriesgo: hallazgo.nivelriesgo,
-                                    coordenadas: hallazgo.coordenadas,
-                                    position: hallazgo.position,
-                                    fotos: hallazgo.fotos,
-                                    referencia: hallazgo.referencia,
-                                    zona: hallazgo.zona,
-                                    tramo1: hallazgo.tramo1,
-                                    abscisakm: hallazgo.abscisakm,
-                                    revisor: hallazgo.revisor,
-                                    shapeleng: hallazgo.shapeleng,
-                                    diagnostico: hallazgo.diagnostico,
-                                    criticidad: hallazgo.criticidad,
-                                    tipodiseno: hallazgo.tipodiseno,
-                                    propuesta: hallazgo.propuesta,
-                                    costo: hallazgo.costo,
-                                    cota: hallazgo.cota,
-                                    linkdiseno: hallazgo.linkdiseno
-                                }
-                                this.patologia.push(newHallazgo)
-                            }
-                        }
-                    })
-                })
-            })
-        }
-    }
-})
+      await axios
+        .post(urlFluvialApi + "/api/patologia", checkPoint)
+        .then((response) => {
+          this.patologia = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .then(() => {});
+    },
+  },
+});

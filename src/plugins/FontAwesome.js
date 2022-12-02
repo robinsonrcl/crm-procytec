@@ -11,7 +11,12 @@ import {
     faCamera,
     faHistory,
     faCaretRight,
-    faDisplay
+    faDisplay,
+    faGaugeHigh,
+    faLocationArrow,
+    faFileCsv,
+    faUserPlus,
+    faRectangleXmark
     } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -27,7 +32,12 @@ library.add(
     faCamera,
     faHistory,
     faCaretRight,
-    faDisplay
+    faDisplay,
+    faGaugeHigh,
+    faLocationArrow,
+    faFileCsv,
+    faUserPlus,
+    faRectangleXmark
     )
 
 export default (app) => {

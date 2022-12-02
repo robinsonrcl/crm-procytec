@@ -22,7 +22,7 @@ const props = defineProps<{
           <div className="modalImg__foto">
             <div className="modalImg__desc2">{{ foto.etiqueta }}</div>
             <div className="bgdivimg">
-              <img className="img__modal" :src="getImage(`/images/photos/`, foto.src)" alt="" />
+              <img className="img__modal" :src="getImage('', foto.src)" alt="" />
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@ const props = defineProps<{
           <div className="modalImg__foto">
             <div className="modalImg__desc">{{ foto.etiqueta }}</div>
             <div className="bgdivimg">
-              <img className="img__modal" :src="getImage(`/images/photos/`, foto.src)" alt="" />
+              <img className="img__modal" :src="getImage('', foto.src)" alt="" />
             </div>
           </div>
         </div>

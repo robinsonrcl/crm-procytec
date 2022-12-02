@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima:wght@100;400&family=Bebas+Neue&family=Edu+NSW+ACT+Foundation:wght@600&family=Edu+SA+Beginner&family=Roboto:wght@100&display=swap");
 
 :root {
-  --bcolor: rgba(38, 34, 98, 0.75);
+  --bcolor: rgba(38, 34, 98, 0.90);
   --bcolor-title: rgb(88, 132, 169);
   --bcolor-hallazgo: rgba(255, 255, 255, 0.3);
   --bcolor-hallazgo-title: #004173;
   --bcolor-hallazgo-footer: #004173;
   --fontSizeFilter: 12px;
   --bcolor-filtros-1: #2a2a2a;
-  --bcolor-filtros-2: #03021b; 
-  --bcolor-lateral: rgb(38,34,98);
+  --bcolor-filtros-2: #03021b;
+  --bcolor-lateral: rgb(38, 34, 98);
 }
 
 html,
@@ -1021,6 +1021,10 @@ body,
 #c-bubble-descripcion {
   resize: none;
   border: none;
+  /* width: 300px; */
+  height: 100px;
+  min-width: -webkit-fill-available;
+  font-size: initial;
 }
 .btn-bubble {
   color: #3b5998;

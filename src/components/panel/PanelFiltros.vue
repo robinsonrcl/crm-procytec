@@ -6,7 +6,7 @@
   const contratoStore = useContratoStore()
   
   var optionContrato = ref(contratoStore.getOptionContrato)
-  var optionCorriente = ref(contratoStore.getOptionCorriente)
+  const optionCorriente = ref(contratoStore.optionCorriente)
   var optionEstructura = ref([])
   var optionEstado = ref()
   var chkAzud = ref()
@@ -17,62 +17,73 @@
   var chkRepotenciado = ref()
   var chkCritico = ref()
   var chkOtro = ref()
-  
-  function updateOptionEstado() {
-    contratoStore.setOptionCorriente(optionCorriente.value)
+
+  async function callDrawHallazgos() {
+    await contratoStore.drawHallazgos(optionCorriente.value)
   }
 
-  function updateOptionCorriente() {
-    contratoStore.setOptionCorriente(optionCorriente.value)
-  }
-
-  function updateOptionContrato() {
-    contratoStore.setOptionContrato(optionContrato.value)
-  }
-
-  function corrientesLocal() {
+  function clickContrato() {
     contratoStore.fillCorrientes(optionContrato.value)
-
-    var element = document.getElementById("select-corrientes") as HTMLSelectElement | null
-
-    if(element != null && element.selectedOptions.length > 1){
-      // document.getElementById("select-corrientes").selectedOptions = null
-      console.log("Select -> " + element)
-    }
+    contratoStore.setFalseEstructuras('')
+    contratoStore.setFalseEstados('')
+    contratoStore.setHallazgos()
+    contratoStore.componentes = []
+    contratoStore.estados = []
+    optionCorriente.value = []
+    contratoStore.drawCorriente(optionContrato.value, optionCorriente.value)
+    callDrawHallazgos()
   }
   
-  function drawPath() {
+  function clickCorriente() {
     contratoStore.drawCorriente(optionContrato.value, optionCorriente.value)
+
+    callDrawHallazgos()
+  }
+  
+  function changeShowDashboard() {
+    contratoStore.showDashboard = !contratoStore.showDashboard;
   }
   
   async function selectComponente() {
-    let chkArray = contratoStore.getEstructuras.filter(function(estructura) {
-      return estructura.completed
-    })
-    let chkEstado = contratoStore.getEstados.filter(function(estado) {
-      return estado.completed
-    })
-
-    contratoStore.setComponentes(chkArray)
-
-    if(chkArray.length > 0 && chkEstado.length > 0) {
-      await contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
+    if(optionContrato.value.length == 0){
+      contratoStore.setMessage("Por favor seleccione un contrato.", 3500);
+      contratoStore.setFalseEstructuras('');
+      return
     }
+    if(optionCorriente.value.length == 0){
+      contratoStore.setMessage("Por favor seleccione una corriente.", 3500);
+      contratoStore.setFalseEstructuras('');
+      return
+    }
+
+    let chkEstucturas = contratoStore.getEstructuras.filter(function(estructura) {
+      return estructura.estado
+    })
+
+    contratoStore.setComponentes(chkEstucturas)
+
+    callDrawHallazgos()
   }
     
   async function selectEstado() {
-    let chkArray = contratoStore.getEstructuras.filter(function(estructura) {
-      return estructura.completed
-    })
+    if(optionContrato.value.length == 0){
+      contratoStore.setMessage("Por favor seleccione un contrato.", 5000);
+      contratoStore.setFalseEstados();
+      return
+    }
+    if(optionCorriente.value.length == 0){
+      contratoStore.setMessage("Por favor seleccione una corriente.", 5000);
+      contratoStore.setFalseEstados();
+      return
+    }
+
     let chkEstado = contratoStore.getEstados.filter(function(estado) {
-      return estado.completed
+      return estado.estado
     })
 
     contratoStore.setEstados(chkEstado)
     
-    if(chkArray.length > 0 && chkEstado.length > 0) {
-      await contratoStore.drawHallazgos(optionContrato.value, optionCorriente.value)
-    }
+    callDrawHallazgos()
   }
   
 </script>
@@ -83,40 +94,47 @@
       <div>PANEL DE FILTROS</div>
       <hr className="filtros-hr">
     </div>
+    <div className="c-filtros-item styleDashboard">
+      <div class="displayDashboard"><fa icon="fa-gauge-high" class="styleGauge" size="2x" /></div>
+      <div>Mostrar Dashboard</div>
+      <div><input type="checkbox" class="checkStyle" v-model="contratoStore.getShowDashboard"  @change="changeShowDashboard" ></div>
+    </div>
     <div className="c-filtros-item">
       Contratos
     </div>
     <div className="c-filtros-item">
-      Corrientes
-    </div>
-    <div className="c-filtros-item">
+       
       <select v-model="optionContrato"
         class="form-control" 
         id="select-contratos" 
         multiple size="3"
-        @change="updateOptionContrato"
+        @change="updateOptionContrato"  
         readonly>
         <option 
-          v-for="(contrato, index) in contratoStore.contratos.contrato"
+          v-for="(contrato, index) in contratoStore.getContratos"
           v-bind:value="{id: contrato.id,  text: contrato.nombre}"
           :key="index"
-          @click.prevent="corrientesLocal()">
+          @click.prevent="clickContrato()">
           {{ contrato.nombre }}
         </option>
       </select>
     </div>
     <div className="c-filtros-item">
+      Corrientes
+    </div>
+    <div className="c-filtros-item">
+      
       <select v-model="optionCorriente" 
         class="form-control"  
         id="select-corrientes" 
         multiple size="3" 
-        @change="updateOptionCorriente"
+        @change="updateOptionCorriente"  
         readonly>
         <option 
           v-for="(corriente, index) in contratoStore.getCorrientes"
           v-bind:value="{ id: corriente.id, text: corriente.nombre }"
           :key="index"
-          @click.prevent="drawPath()">
+          @click.prevent="clickCorriente()">
           {{ corriente.nombre }}
         </option>
       </select>
@@ -124,27 +142,27 @@
     <div className="c-filtros-item">
       Componentes
     </div>
-    <div className="c-filtros-item">
-      Estados
-    </div>
     <div className="c-filtros-item" id="filtros-componentes">
       <div className="c-filtros-item__estructuras">
         <div 
           v-for="(estructura) in contratoStore.getEstructuras" 
           :key="estructura.id"
         >
-          <img className="imgMuestraEstructura" :src="getImage(`/images/iconoEstructura/`, estructura.src)" alt="" />
-          <input type="checkbox" v-model="estructura.completed" @change="selectComponente"> {{ estructura.name }}
+          <img className="imgMuestraEstructura" :src="getImage(`/images/iconoEstructura/`, estructura.icono)" alt="" />
+          <input type="checkbox" v-model="estructura.estado" @change="selectComponente"> {{ estructura.nombre }}
         </div>
       </div>
+    </div>
+    <div className="c-filtros-item">
+      Estados
     </div>
     <div className="c-filtros-item" id="filtros-estados">
       <div 
         v-for="(estado) in contratoStore.getEstados" 
         :key="estado.id"
       >
-        <img className="imgMuestraColor" :src="getImage(`/images/muestrasColor/`, estado.src)" alt="" />
-        <input type="checkbox" v-model="estado.completed" @change="selectEstado"> {{ estado.name }}
+        <img className="imgMuestraColor" :src="getImage(`/images/muestrasColor/`, estado.icono)" alt="" />
+        <input type="checkbox" v-model="estado.estado" @change="selectEstado"> {{ estado.nombre }}
       </div>
     </div>
     <div  className="c-filtros-item">
@@ -187,33 +205,23 @@
     z-index: 10;
     background-color: var(--bcolor);
     opacity: 0.99;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     color: #fff;
-    padding: 10px;
+    padding: 20px;
     gap: 5px;
     height: 100%;
     grid-auto-rows: min-content;
-    font-size: medium;
-  }
-  .c-filtros-item:nth-child(1) {
-    grid-column: 1 / span 2;
-  }
-  .c-filtros-item:nth-last-child(2) {
-    grid-column: 1 / span 2;
-    font-weight: 400;
-    color: yellow;
-  }
-  .c-filtros-item:nth-last-child(1) {
-    grid-column: 1 / span 2;
-    background-color: var(--bcolor-title);
+    font-size: small;
+    border-radius: 0 10px 10px 0;
+    width: 22%;
   }
   .imgMuestraEstructura {
-    width: 32px;
+    width: 38px;
     padding: 0px 4px 4px 0px;
     margin-right: 4px;
   }
   .imgMuestraColor {
-    width: 32px;
+    width: 30px;
     padding: 0px 4px 4px 0px;
     margin-right: 4px;
   }
@@ -221,7 +229,7 @@
   place-items: flex-start;
   font-size: var(--fontSizeFilter);
   text-align: left;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 #filtros-estados {
   place-items: flex-start;
@@ -229,9 +237,9 @@
   padding-right: 7px;
   height: 125px;
   overflow-y: scroll;
-  width: 160px;
+  /* width: 160px; */
   background: var(--bcolor-filtros-2);
-  padding: 5px 0px 0px 7px;
+  padding: 10px 10px 10px 10px;
   border-radius: 10px;
 }
 .c-filtros-item {
@@ -246,9 +254,34 @@
 .c-filtros-item__estructuras {
   height: 125px;
   overflow-y: scroll;
-  width: 160px;
+  /* width: 200px; */
   background: var(--bcolor-filtros-2);
-  padding: 5px 0px 0px 7px;
+  padding: 10px 10px 10px 10px;
   border-radius: 10px;
+}
+.styleDashboard {
+  background-color: green;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.displayDashboard {
+  /* background-color: blue; */
+}
+.checkStyle {
+  /* Doble-tamaño Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari y Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+  margin: 12px;
+}
+.styleGauge {
+  margin: 10px;
+  vertical-align: bottom;
 }
 </style>

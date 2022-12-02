@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useContratoStore } from "../../stores/ContratoStore.js";
-import { getImage } from '../../utils/utilidades';
+import { getImage, getAbscisa } from '../../utils/utilidades.ts';
 
 const contratoStore = useContratoStore()
 
@@ -9,33 +9,34 @@ const emit = defineEmits<{
 }>()
 
 const props = defineProps<{
-  hallazgo: {
-    id: string
-    nombrecontrato: string
-    observacion: string
-    fotos: [{src: string}]
-    referencia: string
-    zona: string
-    abscisakm: string
-    hallazgo1: string
-    hallazgo2: string
-    hallazgo3: string
-    tramo1: string
-    position: string
-  }
-  contratonombre: string
+  // hallazgo: {
+  //   id: string
+  //   nombrecontrato: string
+  //   observacion: string
+  //   fotos: [{src: string}]
+  //   referencia: string
+  //   zona: string
+  //   abscisakm: string
+  //   hallazgo1: string
+  //   hallazgo2: string
+  //   hallazgo3: string
+  //   tramo1: string
+  //   position: string
+  // }
+  hallazgo
+  // contratonombre: string
 }>()
 
 async function showHistoria() {
-  contratoStore.setShowHistorico("historico")
-
-  if(contratoStore.getShowHistorico)
+  
+  // if(contratoStore.getShowHistorico)
     contratoStore.setCircles([ { position: props.hallazgo.position } ])
-  else
-    contratoStore.setCircles([ { position: { 'lat': 0.0, 'lng': 0.0 } } ])
+  // else
+    // contratoStore.setCircles([ { position: { 'lat': 0.0, 'lng': 0.0 } } ])
 
   await contratoStore.loadPatologia(props.hallazgo.position)
-  await contratoStore.getPatologia
+  //await contratoStore.getPatologia
+  contratoStore.setShowHistorico("historico")
 
 }
 
@@ -47,23 +48,28 @@ function enviarShow(fotos) {
 <template>
   <div className="c-bubble">
     <div className="c-bubble-item bubble-title">
-      {{ hallazgo.nombrecontrato }} - <span style="font-size: 0.8rem; font-weight: 400;">(Id:{{ hallazgo.id }})</span>
+      {{ hallazgo.consecutivo }} - {{ hallazgo.componente }}
+      <!-- <span style="font-size: 0.8rem; font-weight: 400;">(Id:{{ hallazgo.estadoanterior }})</span> -->
     </div>
     <!-- <div class="c-bubble-item bubble-title"></div> -->
     
     <div className="c-bubble-item" id="div-buble-descripcion">
       <div id="bubbleDescripcion">
-        <textarea :value="hallazgo.observacion" name="" id="c-bubble-descripcion"  disabled>
-        </textarea> 
+        <textarea :value="hallazgo.observacion" id="c-bubble-descripcion" disabled></textarea> 
       </div>
     </div>
     <div  className="c-bubble-item" id="DivBubbleImg">
-      <img  id="imgBubble" :src="getImage(`/images/photos/`, hallazgo.fotos[0].src)" alt="">
+    <div v-if="hallazgo.fotos.length > 0">
+      <img  id="imgBubble" :src="getImage('', hallazgo.fotos[0].src)" alt="">
+    </div>
+    <div v-else >
+      <img  id="imgBubble" :src="getImage(`/images/photos/`, 'sinfoto.svg')" alt="">
+    </div>
     </div>
     <div className="c-bubble-item bubble-subtitle"><span>Referencia:</span></div>
     <div className="c-bubble-item bubble-subtitle"><span>Zona:</span></div>
     <div className="c-bubble-item">
-      <a v-if="hallazgo.fotos[0].src != 'sinfoto.svg'" 
+      <a v-if="hallazgo.fotos.length > 0" 
         className="btn-bubble" href="#!" role="button" 
         @click.prevent="enviarShow(hallazgo.fotos)"
       >
@@ -82,7 +88,7 @@ function enviarShow(fotos) {
     </div>
     <div className="c-bubble-item bubble-subtitle"><span>Hallazgos:</span></div>
     <div className="c-bubble-item bubble-subtitle"><span>Abscisa:</span></div>
-    <div className="c-bubble-item">{{ hallazgo.abscisakm }}</div>
+    <div className="c-bubble-item">{{ getAbscisa(hallazgo.abscisakm) }}</div>
     <div className="c-bubble-item"><fa v-show="hallazgo.hallazgo1" icon="fa-caret-right"/> {{ hallazgo.hallazgo1 }}</div>
     <div className="c-bubble-item"><fa v-show="hallazgo.hallazgo2" icon="fa-caret-right"/> {{ hallazgo.hallazgo2 }}</div>
     <div className="c-bubble-item"><fa v-show="hallazgo.hallazgo3" icon="fa-caret-right"/> {{ hallazgo.hallazgo3 }}</div>
@@ -103,17 +109,6 @@ export default {
     };
   },
   
-  methods: {
-    // showHistoria() {
-      // this.contratoStore.setShowHistorico("historico")
-      // 1.
-      // this.contratoStore.loadPatologia(this.hallazgo.position)
-      // this.contratoStore.getPatologia
-
-      // this.$emit('showModalHistoria', this.showHistoriaToggle = !this.showHistoriaToggle, this.hallazgo.position)
-      // this.$emit('showModalHistoria', this.hallazgo.position)
-    // },
-  },
 };
 </script>
 

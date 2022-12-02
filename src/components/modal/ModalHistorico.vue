@@ -55,7 +55,7 @@ document.addEventListener('mousemove', function(event) {
 
 </script>
 <template>
-    <div id="patologia" className="container-historico">
+    <div id="patologia" className="container-historico slideDiv" >
         <div className="hist-item hist-item-title"><p>PATOLOGIA</p>
             <!-- <div className="modalIconCerrarHistorico" @click.prevent="cerrarModal"><fa icon="close" size="2x"/></div> -->
         </div>
@@ -66,6 +66,27 @@ document.addEventListener('mousemove', function(event) {
 </template>
 
 <style lang="css" scoped>
+.slideDiv {
+  /* transition: all 3.5s; */
+  animation-duration: 5.5s;
+  animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    /* background-color: rgb(203, 199, 239);
+    font-size: 1rem; */
+    margin-left: 0%;
+    width: 300%
+  }
+
+  to {
+    /* background-color : #262262;
+      font-size: 1.5rem;
+      color: white; */
+    margin-left: 100%;
+    width: 100%;
+  }
+}
 .container-historico {
   position: absolute;
   z-index: 160;

@@ -9,7 +9,7 @@
     <Slide v-for="slide in images" :key="slide._id">
       <span class="etiqueta__foto">{{ slide.etiqueta }}</span>
       <div class="carousel__item">
-        <img class="img__modal-carousel" :src="getImage(`/images/photos/`, slide.src)" alt="" />
+        <img class="img__modal-carousel" :src="getImage(slide.src)" alt="" />
       </div>
     </Slide>
 

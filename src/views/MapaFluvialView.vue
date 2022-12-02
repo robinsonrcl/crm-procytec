@@ -1,6 +1,10 @@
 <script  setup lang="ts">
 import { useContratoStore } from "../stores/ContratoStore.js";
-import PanelLogin from "../components/login/PanelLogin.vue"
+import PanelLogin from "../components/login/PanelLogin.vue";
+import RegisterLogin from "../components/register/RegisterLogin.vue";
+// import PanelImportCSV from "../components/panel/PanelImportCSV.vue";
+// import ChartComponents from "../components/charts/ChartComponents.vue";
+// import PanelDashboard from "../components/panel/PanelDashboard.vue";
 
 const contratoStore = useContratoStore()
 
@@ -14,14 +18,24 @@ function makeClick() {
   if(contratoStore.getShowModalImages){
     contratoStore.setShowModalImages("Images")
   } else {
-    if(contratoStore.getShowPanel)
-      contratoStore.setShowPanel("mapa")
+    if(contratoStore.getShowPanelCapas) {
+      contratoStore.setShowPanel("Capas")
+    } else {
+      if(contratoStore.getShowPanelAgreement) {
+        contratoStore.setShowPanel("Agreement")
+      } else {
+        if(contratoStore.getShowPanelUsuario) {
+          contratoStore.setShowPanel("Usuario")
+        }
+      }
+    }
   }
 }
 </script>
 <template>
   <div className="map__container">
     <div className="map__body">
+      <ModalMessages />
       <MapaGeneral 
         @show-modal-mapa-fluvial="showModalImg" 
         @show-modal-historia="showModalHistoricoView" 
@@ -52,6 +66,12 @@ function makeClick() {
       <PanelLogin 
         @ingresoseguro="showPaneles" />
     </div>
+    <div >
+      <PanelDashboard v-if="contratoStore.getShowDashboard" />
+    </div>
+    <div>
+      <RegisterLogin  v-show="contratoStore.getShowRegister" />
+    </div>
   </div>
 </template>
 
@@ -60,13 +80,16 @@ import MapaGeneral from "@/components/MapaGeneral.vue";
 import ModalImagenes from "../components/modal/ModalImagenes.vue";
 import ModalHistorico from "../components/modal/ModalHistorico.vue";
 import PanelLateral from "../components/panel/PanelLateral.vue";
+import ModalMessages from "../components/modal/ModalMessages.vue";
+import PanelDashboard from "../components/panel/PanelDashboard.vue";
 
 export default {
   name: "MapaFluvial",
   components: { 
     MapaGeneral, 
     ModalImagenes, 
-    ModalHistorico
+    ModalHistorico,
+    ModalMessages
   },
 
   data() {
@@ -96,3 +119,4 @@ export default {
   }
 };
 </script>
+

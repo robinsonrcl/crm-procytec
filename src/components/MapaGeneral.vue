@@ -31,7 +31,7 @@ function createCircleHallazgo(position) {
   position === undefined ? position = { 'lat': 0.0, 'lng': 0.0 } :
 
   circles.value = [ { position: position } ]
-  // contratoStore.setCircles([ { position: position } ])
+  contratoStore.setCircles([ { position: position } ])
 }
 </script>
 
@@ -59,7 +59,7 @@ function createCircleHallazgo(position) {
     <div v-for="item in contratoStore.getPath" :key="item.id">
       <GMapPolyline 
       :path=item.corriente
-      :editable="true"
+      :editable="false"
       :options="optionspoly"
       ref="polyline" />
 
@@ -68,7 +68,7 @@ function createCircleHallazgo(position) {
         :icon="{ 
             url: imgUrl,
             labelOrigin: {x: 16, y: -10},
-            scaledSize: { width: 42, height: 42 }
+            scaledSize: { width: 32, height: 32 }
         }"
         :clickable="true"
         :draggable="false">
@@ -85,23 +85,28 @@ function createCircleHallazgo(position) {
           height: 60,
           width: 60
         }]"
-    >
+      >
       <GMapMarker
         :key="index"
         v-for="(hallazgo, index) in contratoStore.getHallazgos"
-        :position="hallazgo.position"
+        :position=JSON.parse(hallazgo.position)
         :icon="{ 
             url: getImage(`/images/marcadores/`, hallazgo.icono),
-            scaledSize: { width: 32, height: 32 } }"
+            scaledSize: { width: 57, height: 57 } }"
         :clickable="true"
         :draggable="false"
         @click="openMarker(hallazgo.id)"
         >
         
         <GMapPolyline 
-          :path=hallazgo.coordenadas
-          :editable="true"
-          :options="optionspoly"
+          :path=JSON.parse(hallazgo.coordenadas)
+          :editable="false"
+          :options=
+          "{
+            strokeColor: hallazgo.colorestado,
+            strokeWeight: 7
+          }"
+          
         />
 
         <GMapInfoWindow
@@ -114,7 +119,8 @@ function createCircleHallazgo(position) {
             },
             maxWidth: 400,
             maxHeight: 320,
-          }">
+          }"
+          >
 
           <BubbleInfo @show-modal-historia="createCircleHallazgo"  
             @show-modal-images-bubble="enviarShowBubble" 
@@ -127,13 +133,11 @@ function createCircleHallazgo(position) {
       <div v-for="circle in contratoStore.getCircles" :key="circle">
         <GMapCircle
           :radius="200"
-          :center="circle.position"
+          :center="JSON.parse(circle.position)"
           :options="circleOptions"
         />
       </div>
     </GMapCluster>
-    
-  <!-- <ImportarJson /> -->
   </GMapMap>
 </template>
 
@@ -178,7 +182,27 @@ export default {
         },
         optionspoly: {
           strokeColor: "#0000FF",
-          strokeWeight: 1
+          strokeWeight: 3
+        },
+        optionspolyHallazgo: {
+          strokeColor: "#008000",
+          strokeWeight: 3
+        },
+        NA: {
+          strokeColor: "#FF0080",
+          strokeWeight: 3
+        },
+        BUENO: {
+          strokeColor: "#008000",
+          strokeWeight: 3
+        },
+        REGULAR: {
+          strokeColor: "#FFCE30",
+          strokeWeight: 3
+        },
+        MALO: {
+          strokeColor: "#E83845",
+          strokeWeight: 3
         }
     };
   },
