@@ -23,4 +23,17 @@ function getAbscisa(abscisa) {
   return label;
 }
 
-export { arePointsNear, getImage, getAbscisa };
+let UUID = 0
+
+function UniqueID () {
+  const getID = () => {
+    UUID++
+    return UUID
+  }
+
+  return {
+    getID
+  }
+}
+
+export { arePointsNear, getImage, getAbscisa, UniqueID };

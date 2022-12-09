@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BaseCheckbox: typeof import('./src/components/ReusableComponents/BaseCheckbox.vue')['default']
     BaseInput: typeof import('./src/components/ReusableComponents/BaseInput.vue')['default']
+    BaseInputTel: typeof import('./src/components/ReusableComponents/BaseInputTel.vue')['default']
     BaseRadio: typeof import('./src/components/ReusableComponents/BaseRadio.vue')['default']
     BaseRadioGroup: typeof import('./src/components/ReusableComponents/BaseRadioGroup.vue')['default']
     BaseSelect: typeof import('./src/components/ReusableComponents/BaseSelect.vue')['default']

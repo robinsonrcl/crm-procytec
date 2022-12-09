@@ -6,12 +6,20 @@ import FontAwesome from "./plugins/FontAwesome.js";
 import { createPinia } from "pinia"
 import VueGoogleCharts from "vue3-googl-chart";
 import Spinner from "vue-simple-spinner"
-import upperFirst from "lodash/upperFirst"
-import camelCase from "lodash/camelCase"
+// import upperFirst from "lodash/upperFirst"
+// import camelCase from "lodash/camelCase"
+import VueTelInput from 'vue3-tel-input'
+import 'vue3-tel-input/dist/vue3-tel-input.css'
+
+const VueTelInputOptions = {
+  mode: "international",
+  onlyCountries: ['CO', "US", "CA"]
+}
 
 const store = createPinia()
 
 const app = createApp(App)
+.use(VueTelInput, VueTelInputOptions)
 .use(Spinner)
 .use(VueGoogleCharts)
 .use(FontAwesome)

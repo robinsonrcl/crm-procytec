@@ -29,6 +29,7 @@ const uuid = UniqueID().getID().toString
       :id="uuid"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      type="tel"
     >
   </div>
 </template>

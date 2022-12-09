@@ -199,24 +199,11 @@ export const useContratoStore = defineStore("ContratoStore", {
       showPanelAgreement: Boolean(false),
       showPanelUsuario: Boolean(false),
       showRegister: Boolean(false),
-      user: {
-        name: String,
-        username: String,
-        password: String,
-        siwaIdentifier: String,
-        email: String,
-        profilePicture: String,
-        twitterURL: String,
-        rol: String
-      }
     };
   },
 
   // getters
   getters: {
-    getUser() {
-      return this.user;
-    },
     getShowRegister() {
       return this.showRegister;
     },

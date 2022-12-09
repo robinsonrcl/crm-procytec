@@ -31,7 +31,8 @@
     "vue-router": "^4.0.3",
     "vue-simple-spinner": "^1.2.10",
     "vue3-carousel": "^0.1.40",
-    "vue3-googl-chart": "^0.0.1"
+    "vue3-googl-chart": "^0.0.1",
+    "vue3-tel-input": "^1.0.4"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.14",
