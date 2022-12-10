@@ -27,6 +27,16 @@ function validatePhone(event) {
   
 }
 
+function showPassword(event) {
+  var inputPassword = document.getElementById("password");
+
+  if(inputPassword.children[1].type === "password"){
+    inputPassword.children[1].type = "text"
+  }else{
+    inputPassword.children[1].type = "password";
+  }
+}
+
 </script>
 <template>
   <div class="container-ppal-register">
@@ -55,11 +65,14 @@ function validatePhone(event) {
           label="Celular"
           type="tel"
         />
+        <vue-tel-input v-model="phone"></vue-tel-input>
         <BaseInput 
           :v-model="user.password"
           label="Password"
           type="password"
+          id="password"
         />
+        <fa icon="fa-eye" class="iconEye" @click="showPassword" onmouseover="cursor: pointer" />
       </fieldset>
       <!-- <fieldset>
         <legend>Datos opcionales</legend>
@@ -94,6 +107,13 @@ function validatePhone(event) {
 </template>
 
 <style lang="css" scoped>
+.iconEye {
+  display: flex;
+    position: relative;
+    top: -35px;
+    left: 145px;
+    color: black;
+}
 .phone {
   color: black;
 }

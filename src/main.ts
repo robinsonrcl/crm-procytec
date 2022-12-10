@@ -10,6 +10,7 @@ import Spinner from "vue-simple-spinner"
 // import camelCase from "lodash/camelCase"
 import VueTelInput from 'vue3-tel-input'
 import 'vue3-tel-input/dist/vue3-tel-input.css'
+import FlagIcon from "vue-flag-icon"
 
 const VueTelInputOptions = {
   mode: "international",
@@ -19,8 +20,7 @@ const VueTelInputOptions = {
 const store = createPinia()
 
 const app = createApp(App)
-.use(VueTelInput, VueTelInputOptions)
-.use(Spinner)
+.use(FlagIcon)
 .use(VueGoogleCharts)
 .use(FontAwesome)
 .use(router)

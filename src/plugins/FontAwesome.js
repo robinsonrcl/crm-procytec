@@ -16,7 +16,8 @@ import {
     faLocationArrow,
     faFileCsv,
     faUserPlus,
-    faRectangleXmark
+    faRectangleXmark,
+    faEye
     } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -37,7 +38,8 @@ library.add(
     faLocationArrow,
     faFileCsv,
     faUserPlus,
-    faRectangleXmark
+    faRectangleXmark,
+    faEye
     )
 
 export default (app) => {

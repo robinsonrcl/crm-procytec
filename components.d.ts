@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     BaseRadio: typeof import('./src/components/ReusableComponents/BaseRadio.vue')['default']
     BaseRadioGroup: typeof import('./src/components/ReusableComponents/BaseRadioGroup.vue')['default']
     BaseSelect: typeof import('./src/components/ReusableComponents/BaseSelect.vue')['default']
+    BaseSelectFlags: typeof import('./src/components/ReusableComponents/BaseSelectFlags.vue')['default']
     BubbleInfo: typeof import('./src/components/modal/BubbleInfo.vue')['default']
     Carousel: typeof import('./src/components/modal/Carousel.vue')['default']
     ChartComponents: typeof import('./src/components/charts/ChartComponents.vue')['default']
