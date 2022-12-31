@@ -31,4 +31,8 @@ const app = createApp(App)
 }, )
 .use(store)
 
+app.directive('focus', {
+  mounted: (el) => el.focus()
+})
+
 app.mount("#app");

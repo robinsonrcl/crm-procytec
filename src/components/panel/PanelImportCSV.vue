@@ -44,7 +44,6 @@ async function uploadFile(event) {
         showSpinner.value = false;
       }, 4000)
 
-      
       inputFile.value = "";
     });
 }

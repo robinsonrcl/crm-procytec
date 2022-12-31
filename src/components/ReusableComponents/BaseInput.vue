@@ -9,10 +9,14 @@ defineProps({
   modelValue: {
     type: [String, Number],
     default: ''
+  },
+  error: {
+    type: String,
+    default: ''
   }
 })
 
-const uuid = UniqueID().getID().toString
+const uuid = UniqueID().getID()
 
 </script>
 
@@ -29,7 +33,17 @@ const uuid = UniqueID().getID().toString
       :id="uuid"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      :aria-describedby="error ? `${uuid}-error` : null"
+      :aria-invalid="error ? true : null"
     >
+    <p
+      v-if="error"
+      class="errorMessage"
+      :id="`${uuid}-error`"
+      aria-live="assertive"
+    >
+      {{ error }}
+    </p>
   </div>
 </template>
 
@@ -39,5 +53,6 @@ const uuid = UniqueID().getID().toString
 }
 .inputNew {
   border-radius: 5px !important;
+  line-height: normal;
 }
 </style>

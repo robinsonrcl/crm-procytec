@@ -26,8 +26,8 @@ const showFiltros = ref(contratoStore.getShowPanelCapas)
     <div class="c-lateral__item"></div>
     <div class="c-lateral__item c-lateral__item-opcion">
       <img src="../../assets/images/iconos/separador.png" className="imgSeparador">
-      <RouterLink to="/">
-        <span className="toolTip"><img src="../../assets/images/iconos/icohome.png" className="imgIcon">
+      <RouterLink to="/" title="Home">
+        <span className="toolTip"><img src="../../assets/images/iconos/icohome.png" title="Home" className="imgIcon">
         <span className="tooltiptext">Bienvenido a Bitacora Fluvial</span></span>
       </RouterLink>
     </div>

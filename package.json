@@ -24,6 +24,7 @@
     "pinia": "^2.0.17",
     "react": "^18.2.0",
     "react-scripts": "^5.0.1",
+    "vee-validate": "^4.5.8",
     "vue": "^3.2.13",
     "vue-chart-3": "^3.1.8",
     "vue-flag-icon": "^2.1.0",
@@ -33,7 +34,8 @@
     "vue-simple-spinner": "^1.2.10",
     "vue3-carousel": "^0.1.40",
     "vue3-googl-chart": "^0.0.1",
-    "vue3-tel-input": "^1.0.4"
+    "vue3-tel-input": "^1.0.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.14",

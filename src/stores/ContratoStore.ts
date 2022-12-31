@@ -81,6 +81,8 @@ export const useContratoStore = defineStore("ContratoStore", {
   // state
   state: () => {
     return {
+      showSpinner: Boolean(false),
+      msgSpinner: 'Esperando...',
       contratos: [
         {
           nombre: String,
@@ -107,57 +109,10 @@ export const useContratoStore = defineStore("ContratoStore", {
       path: [{ corriente: String, puntomedio: String }],
       puntomedio: { lat: 6.248353, lng: -75.580265 },
       hallazgos: [],
-      // {
-      //   diagnostico: String,
-      //   observacion: String,
-      //   tramo1: String,
-      //   position: String,
-      //   shapeleng: Number,
-      //   nivelriesgo: String,
-      //   revisors: [
-      //     {
-      //       cedula: Number,
-      //       id: String,
-      //       nombres: String,
-      //       nickname: String,
-      //       apellidos: String
-      //     }
-      //   ],
-      //   estadoanterior: Number,
-      //   zona: String,
-      //   linkdiseno: String,
-      //   hallazgo2: String,
-      //   nomenclatura: String,
-      //   margen: String,
-      //   corriente: { id: String },
-      //   cota: String,
-      //   propuesta: String,
-      //   coordenadas: String,
-      //   id: String,
-      //   componente: String,
-      //   fotos: [{
-      //     id: String,
-      //     src: String,
-      //     etiqueta: String
-      //   }],
-      //   costo: Number,
-      //   fecha: Date,
-      //   afectacion: String,
-      //   tipodiseno: String,
-      //   icono: String,
-      //   referencia: String,
-      //   abscisakm: Number,
-      //   colorestado: String,
-      //   hallazgo1: String,
-      //   hallazgo3: String,
-      //   estado: String,
-      //   criticidad: String
-      // }
-      // ],
       componentes: [],
       estados: [new estadoClass()],
       patologia: [],
-      login: false,
+      login: true,
       showPanelCapas: Boolean(false),
       showHistorico: Boolean(false),
       showModalImages: Boolean(false),
@@ -204,6 +159,12 @@ export const useContratoStore = defineStore("ContratoStore", {
 
   // getters
   getters: {
+    getShowSpinner() {
+      return this.showSpinner;
+    },
+    getMsgSpinner() {
+      return this.msgSpinner;
+    },
     getShowRegister() {
       return this.showRegister;
     },

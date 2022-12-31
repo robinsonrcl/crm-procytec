@@ -1,13 +1,54 @@
 <script setup lang="ts">
 import { useContratoStore } from "../../stores/ContratoStore";
 import { useUserStore } from "../../stores/UserStore"
-import { getImage } from "../../utils/utilidades";
-import { ref } from 'vue'
+import { ref, onMounted, onUpdated, onActivated, onDeactivated, getCurrentInstance } from 'vue'
 import BaseInput from '../ReusableComponents/BaseInput.vue';
 import BaseCheckbox from "../ReusableComponents/BaseCheckbox.vue";
+import { useField, useForm } from 'vee-validate'
+import { object, string, bool } from 'yup'
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
+
+var msgEmailDuplicado = ref(userStore.getMsgEmailDuplicado)
+
+const internalInstance = getCurrentInstance();
+
+onActivated(() => {
+    console.log("Register Login: FALSE " + internalInstance?.isDeactivated) // false
+})
+
+onDeactivated(() => {
+  console.log("Register Login: TRUE " + internalInstance?.isDeactivated) // true
+})
+
+const validationSchema = object({
+  name: string().required('Nombres y apellidos son requeridos'),
+  email: string().email('Por favor ingrese un email valido').required('El email es requerido'),
+  phone: string()
+    .required('Un número celular es requerido')
+    .matches(/^[(][+][0-9]{2}[)][ ][0-9]{3}-[0-9]{3}-[0-9]{4}$/, "Número incompleto"),
+  password: string()
+    .required('El password es requerido')
+    .min(8, 'Password muy corto, se adminten almenos 8 caracteres.')
+    .matches(/^[\w\x2A\x2E\x2D]{1,}\w+[\x2A\x2E\x2D]+$/, "Se adminten numeros/letras y almenos un: * . -"),
+  terminosdelservicio: bool().oneOf([true], 'Debe aceptar los términos del servicio')
+    .required('Debe aceptar los terminos del servicio')
+})
+
+const { handleSubmit, errors } = useForm({
+  validationSchema
+})
+
+const { value: name } = useField('name')
+const { value: email, errorMessage: emailError, handleChange } = useField('email')
+const { value: phone } = useField('phone')
+const { value: password } = useField('password')
+const { value: terminosdelservicio } = useField('terminosdelservicio')
+
+const onSubmit = handleSubmit(values => {
+  userStore.save(values)
+})
 
 var user = ref(userStore.getUser)
 
@@ -19,15 +60,7 @@ function cancelRegister() {
   contratoStore.setShowRegister(false)
 }
 
-function validatePhone(event) {
-  if(event.target.value.length != 15){
-    contratoStore.setMessage("Por favor revise el número de teléfono", 3000);
-    return
-  }
-  
-}
-
-function showPassword(event) {
+function showPassword(event: any) {
   var inputPassword = document.getElementById("password");
 
   if(inputPassword.children[1].type === "password"){
@@ -37,82 +70,114 @@ function showPassword(event) {
   }
 }
 
+  async function handleEmail(event) {
+    const validarEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+
+    const result = validarEmail.test(event.target.value)
+
+    if(result){
+     // const resultCheck = await userStore.validarEmail(event.target.value)
+
+      if(await userStore.validarEmail(event.target.value)){
+        msgEmailDuplicado.value = 'Email ya registrado!'
+        userStore.msgEmailDuplicado = "Duplicado"
+      }else{
+        msgEmailDuplicado.value = ''
+        userStore.msgEmailDuplicado = ""
+      }
+    }
+  }
+
+onUpdated(() => {
+
+})
+
+onMounted(() => {
+
+})
+
 </script>
 <template>
-  <div class="container-ppal-register">
-    <img class="imgRegister" :src="getImage('/images/','rio.png')" />
+  <!-- <div class="container-ppal-register">
+    <img class="imgRegister" :src="getImage('/images/','rio.png')" /> -->
   
-    <div class="container-register">
+    <div class="container-register" id="container1">
       <div class="container-title">
         <label class="title">Registro</label>
         <label class="title login">Login</label>
       </div>
-      <form class="form" @submit.prevent="registerUser">
-      <fieldset>
-        <!-- <legend>Datos basicos</legend> -->
-        <BaseInput 
-          :v-model="user.name"
-          label="Nombres y apellidos"
-          type="text"
-        />
-        <BaseInput 
-          :v-model="user.email"
-          label="Email"
-          type="email"
-        />
-        <BaseInputTel
-          :v-model="user.phone" 
-          label="Celular"
-          type="tel"
-        />
-        <vue-tel-input v-model="phone"></vue-tel-input>
-        <BaseInput 
-          :v-model="user.password"
-          label="Password"
-          type="password"
-          id="password"
-        />
-        <fa icon="fa-eye" class="iconEye" @click="showPassword" onmouseover="cursor: pointer" />
-      </fieldset>
-      <!-- <fieldset>
-        <legend>Datos opcionales</legend>
-        <BaseSelect
-          :options="roles"
-          v-model="user.rol"
-          label="Seleccione un rol"
-        />
-        <BaseRadioGroup
-          v-model="emailing"
-          name="acuerdo"
-          :options="emailingGroup"
-        />
-      </fieldset> -->
+      
+      <form class="form" @submit="onSubmit" >
+        <fieldset>
+           <!-- <legend>Datos basicos</legend> -->
+           <BaseInput 
+             label="Nombres y apellidos"
+             type="text"
+             v-model="name"
+             :error="errors.name"
+             onkeyup="this.value = this.value.toUpperCase()"
+             size="30"
+           />
+          <BaseInput 
+            id="email"
+            label="Email"
+            type="email"
+            :error="emailError"
+            :modelValue="email"
+            @change="handleChange"
+            @blur="handleEmail"
+          />
+          <span>{{ msgEmailDuplicado }}</span>
+          <BaseInputTel
+            label="Celular"
+            type="text"
+            v-model="phone"
+            :error="errors.phone"
+          />
+          <fa icon="fa-eye" class="iconEye" @click="showPassword" onmouseover="cursor: pointer" />
+          <BaseInput 
+            id="password"
+            label="Password"
+            type="password"
+            v-model="password"
+            :error="errors.password"
+          />
+        </fieldset>
         <div class="terminos">
           <BaseCheckbox
             v-model="terminosdelservicio"
+            :error="errors.terminosdelservicio"
             label="Acepto los terminos del servicio"
           />
         </div>
+        <MySpinner v-show="contratoStore.getShowSpinner" :message-spinner="contratoStore.getMsgSpinner" />
         <div class="buttons-register">
-          <button type="submit" class="buttonRegister">
+          <BaseButton
+            type="submit"
+            class="buttonRegister"
+            something="else"
+            @click="onSubmit"
+            >
             <fa icon="fa-user-plus" /> Registrarme
-          </button>
+          </BaseButton>
           <button type="button" class="buttonCancel" @click.prevent="cancelRegister">
             <fa icon="fa-rectangle-xmark" /> Cancelar
           </button>
         </div>
       </form>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <style lang="css" scoped>
 .iconEye {
-  display: flex;
-    position: relative;
-    top: -35px;
-    left: 145px;
-    color: black;
+  display: inline-flex;
+  position: absolute;
+  left: 107px;
+  color: black;
+  top: auto;
+  padding: 6px 0 0 0;
+  z-index: 10;
 }
 .phone {
   color: black;
@@ -167,7 +232,7 @@ function showPassword(event) {
 }
 .container-ppal-register {
   z-index: 160;
-  background-color: white;
+  /* background-color: white; */
   display: grid;
   position: absolute;
   top: 0;
@@ -176,30 +241,37 @@ function showPassword(event) {
   bottom: 0;
   margin: auto;
   width: fit-content;
-  height: fit-content;
+  height: min-content;
   border-radius: 26px;
 }
 .container-register {
   background-color: rgb(38 34 98 / 61%);
     display: grid;
     z-index: 160;
-    width: 60%;
+    width: -webkit-fit-content;
     height: 80%;
     border-radius: 15px;
     box-shadow: green;
     position: absolute;
-    top: 0;
-    left: -30px;
-    /* right: 0; */
-    bottom: 0;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     margin: auto;
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     color: white;
-    height: fit-content;
+    /* height: min-content; */
     padding: 15px;
 }
+
+@media screen and (max-width: 1300px) {
+  .container-register {
+    height: 90%;
+  }
+}
+
 fieldset {
   background-color: #b9b6d6;
     border-radius: 10px;
@@ -242,3 +314,4 @@ input:valid + span::after {
   color: #009000;
 }
 </style>
+

@@ -3,11 +3,7 @@ import { ref } from 'vue';
 import { UniqueID } from '../../utils/utilidades'
 import paises from '../Utilities/paises'
 
-// const emit = defineEmits(
-//   ['update:modelValueSelect']
-// )
-
-defineProps({
+const props = defineProps({
   label:{
     type: String,
     default: ''
@@ -15,23 +11,32 @@ defineProps({
   modelValue: {
     type: [String, Number],
     default: ''
+  },
+  error: {
+    type: String,
+    default: ''
   }
 })
 
-var newValue = ref('(+57) ')
-var newFlag = ref('🇨🇴')
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: String): void
+}>()
+
+var newValue = ref('')
+var newFlag = ref('País')
 var valueCode = ref("")
 var largoDialCode = ref(0)
 var msg = ref("")
 var mostrarPaises = ref(Boolean(false))
 
-const uuid = UniqueID().getID().toString
+const uuid = UniqueID().getID()
 
 function showPaises() {
   mostrarPaises.value = !mostrarPaises.value;
 }
 
 let prevVal = "";
+
 function validate(event, tecla) {
   const len = event.target.value.length;
   prevVal = event.target.value;
@@ -48,8 +53,6 @@ function validate(event, tecla) {
     return;
   }
 
-  // /[(][+][0-9]{2}[)][ ][0-9]{3}-[0-9]{3}-[0-9]{4}/gi
-
   const regexp = new RegExp('[A-Z]','gi');
   const result = prevVal.match(regexp);
   
@@ -58,7 +61,6 @@ function validate(event, tecla) {
     setTimeout(function() {
       msg.value = ""
     }, 1500)
-
     return;
   }
 
@@ -86,7 +88,10 @@ function validate(event, tecla) {
     }
   }
   
+  newValue.value = prevVal;
   event.target.value = prevVal;
+
+  emit('update:modelValue', event.target.value)
 }
 
 function selectPais(flag, code) {
@@ -117,7 +122,8 @@ function selectPais(flag, code) {
         type="text" 
         :value="(pais.flag + ' ' + pais.name  + ' (+' + pais.dialCode + ')')" 
         @click="selectPais(pais.flag, pais.dialCode)" 
-        size="25"
+        size="26"
+        class="inputTel"
       />
     </li>
   </ul>
@@ -127,15 +133,32 @@ function selectPais(flag, code) {
     class="field"
     :id="uuid"
     :value="newValue"
-    type="tel"
     @input="validate($event, 'normal')"
+    :aria-describedby="error ? `${uuid}-error` : null"
+    :aria-invalid="error ? true : null"
   >
-  <br/>
-  <span>{{ msg }}</span>
+  <p
+    v-if="error"
+    class="errorMessage"
+    :id="`${uuid}-error`"
+    aria-live="assertive"
+  >
+    {{ error }}
+  </p>
+  <span v-if="error">{{ msg }}</span>
+  <span v-else="error"><br>{{ msg }}</span>
   </div>
 </template>
 
 <style lang="css" scoped>
+.errorMessage {
+  padding: 0px;
+  margin: 0px;
+}
+.inputTel {
+  border: 0;
+  padding: 3px 0 0 10px;
+}
 .field {
   border-radius: 5px !important;
 }
@@ -151,7 +174,7 @@ function selectPais(flag, code) {
   border-radius: 5px;
   overflow: auto;
   position: fixed;
-  z-index: 10;
+  z-index: 15;
   padding: 3px;
 }
 .inputFlag {

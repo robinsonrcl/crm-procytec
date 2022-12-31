@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 defineProps({
   options: {
     type: Array,
@@ -17,6 +18,7 @@ defineProps({
     default: false
   }
 })
+
 </script>
 <template>
   <!-- eslint-disable vue/no-multiple-template-root -->

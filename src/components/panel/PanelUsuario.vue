@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import { useContratoStore } from "../../stores/ContratoStore.js";
+import { useUserStore } from "../../stores/UserStore";
 import { getImage } from '../../utils/utilidades';
 
 const contratoStore = useContratoStore();
+const userStore = useUserStore()
 
 function register() {
   contratoStore.setShowPanel('Usuario')
   contratoStore.setShowRegister(true);
+}
+function profile() {
+  contratoStore.setShowPanel("Usuario")
+  userStore.showPanelUser = true
+}
+function inicioSesion() {
+  userStore.showLogin = true
 }
 </script>
 
@@ -17,40 +26,50 @@ function register() {
       <hr className="filtros-hr">
     </div>
     <div class="opcionesUsuario">
-      <div style="text-align:center">
-      Registrarse<br>
-      <div class="botonRegistro">
-        <div><img class="img__register" :src="getImage(`/images/`, `register.png`)" alt="Registrarse con Email" @click.prevent="register()" /></div>
+      <div>
+        <a href="" @click.prevent="profile()">Mi perfil</a>
       </div>
-    </div>
-    <hr className="filtros-hr">
-    <div style="text-align:center">
-      Inicio de sesión<br>
-      <div class="botonRegistro">
-        <div><img class="img__google" :src="getImage(`/images/`, `google.png`)" alt="Registrarse con Google" /></div>
-        <div><img class="img__email" :src="getImage(`/images/`, `email.png`)" alt="Registrarse con Email" /></div>
+      <hr className="filtros-hr">
+      <div>
+        <a href="" @click.prevent="register()">Registrarse</a>
       </div>
-    </div>
-    <hr className="filtros-hr">
-    <div style="text-align:center">
-      Recordar contraseña<br>
-      <div class="botonRegistro">
-        <div><img class="img__forgot-password" :src="getImage(`/images/`, `forgot-password.png`)" alt="Registrarse con Email" /></div>
+      <hr className="filtros-hr">
+      <div>
+        <a href="" @click.prevent="inicioSesion()">Inicio de sesion</a>
       </div>
-    </div>
-    <hr className="filtros-hr">
-    <div class="logout">
-      Logout<br>
-      <div class="botonRegistro">
-        <div><img class="img__shutdown" :src="getImage(`/images/`, `shutdown.png`)" alt="Registrarse con Email" /></div>
+      <hr className="filtros-hr">
+      <div>
+        Recordar contraseña<br>
       </div>
+      <hr className="filtros-hr">
+      <div class="logout">
+        Logout<br>
+      </div>
+      <hr className="filtros-hr">
     </div>
-    <hr className="filtros-hr">
-  </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+a:link {
+  color: rgb(229, 215, 215);
+}
+
+/* visited link */
+a:visited {
+  color: rgb(226, 233, 9);
+}
+
+/* mouse over link */
+a:hover {
+  color: rgb(229, 215, 215);
+}
+
+/* selected link */
+a:active {
+  color: rgb(229, 215, 215);
+}
+
 .logout {
   background-color: green;
   border-radius: 10px;

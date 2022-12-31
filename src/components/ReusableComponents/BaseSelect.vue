@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UniqueID } from '../../utils/utilidades'
+
 defineProps({
   label: {
     type: String,
@@ -14,13 +16,16 @@ defineProps({
   }
 })
 
+const uuid = UniqueID().getID().toString
+
 </script>
 <template>
   <!-- eslint-disable vue/no-multiple-template-root -->
   <div>
-    <label v-if="label">{{ label }}</label>
+    <label :for="uuid" v-if="label">{{ label }}</label>
   </div>
   <select 
+    :id="uuid"
     :value="modelValue"
     class="field"
     v-bind="{

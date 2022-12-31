@@ -1,12 +1,11 @@
 <script  setup lang="ts">
 import { useContratoStore } from "../stores/ContratoStore.js";
+import { useUserStore } from "../stores/UserStore"
 import PanelLogin from "../components/login/PanelLogin.vue";
 import RegisterLogin from "../components/register/RegisterLogin.vue";
-// import PanelImportCSV from "../components/panel/PanelImportCSV.vue";
-// import ChartComponents from "../components/charts/ChartComponents.vue";
-// import PanelDashboard from "../components/panel/PanelDashboard.vue";
 
 const contratoStore = useContratoStore()
+const userStore = useUserStore()
 
 contratoStore.fill()
 
@@ -57,20 +56,19 @@ function makeClick() {
         v-bind:hallazgos="hallazgos"
       />
     </div>
-    <div v-if=contratoStore.getLogin>
-      <div>
-        <PanelLateral />
-      </div>
+    <div>
+      <PanelLateral />
     </div>
-    <div v-else className="class__panellogin">
-      <PanelLogin 
-        @ingresoseguro="showPaneles" />
+    <div className="class__panellogin">
+      <PanelLoginUser v-show="userStore.getShowLogin" />
     </div>
     <div >
       <PanelDashboard v-if="contratoStore.getShowDashboard" />
     </div>
     <div>
       <RegisterLogin  v-show="contratoStore.getShowRegister" />
+      <ModalConfirmRegister v-show="userStore.getShowValidarRegistro" />
+      <PanelUserProfile v-show="userStore.getShowPanelUser" />
     </div>
   </div>
 </template>

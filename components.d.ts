@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BaseButton: typeof import('./src/components/ReusableComponents/BaseButton.vue')['default']
     BaseCheckbox: typeof import('./src/components/ReusableComponents/BaseCheckbox.vue')['default']
     BaseInput: typeof import('./src/components/ReusableComponents/BaseInput.vue')['default']
     BaseInputTel: typeof import('./src/components/ReusableComponents/BaseInputTel.vue')['default']
@@ -19,6 +20,7 @@ declare module '@vue/runtime-core' {
     ChartComponents: typeof import('./src/components/charts/ChartComponents.vue')['default']
     GridHallazgo: typeof import('./src/components/modal/GridHallazgo.vue')['default']
     MapaGeneral: typeof import('./src/components/MapaGeneral.vue')['default']
+    ModalConfirmRegister: typeof import('./src/components/modal/ModalConfirmRegister.vue')['default']
     ModalHistorico: typeof import('./src/components/modal/ModalHistorico.vue')['default']
     ModalImagenes: typeof import('./src/components/modal/ModalImagenes.vue')['default']
     ModalMessages: typeof import('./src/components/modal/ModalMessages.vue')['default']
@@ -31,6 +33,8 @@ declare module '@vue/runtime-core' {
     PanelImportCSV: typeof import('./src/components/panel/PanelImportCSV.vue')['default']
     PanelLateral: typeof import('./src/components/panel/PanelLateral.vue')['default']
     PanelLogin: typeof import('./src/components/login/PanelLogin.vue')['default']
+    PanelLoginUser: typeof import('./src/components/panel/PanelLoginUser.vue')['default']
+    PanelUserProfile: typeof import('./src/components/panel/PanelUserProfile.vue')['default']
     PanelUsuario: typeof import('./src/components/panel/PanelUsuario.vue')['default']
     RegisterLogin: typeof import('./src/components/register/RegisterLogin.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
