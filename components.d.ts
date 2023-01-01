@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     PanelDashboard: typeof import('./src/components/panel/PanelDashboard.vue')['default']
     PanelFilters: typeof import('./src/components/panel/PanelFilters.vue')['default']
     PanelFiltros: typeof import('./src/components/panel/PanelFiltros.vue')['default']
+    PanelHeader: typeof import('./src/components/panel/PanelHeader.vue')['default']
     PanelImportCSV: typeof import('./src/components/panel/PanelImportCSV.vue')['default']
     PanelLateral: typeof import('./src/components/panel/PanelLateral.vue')['default']
     PanelLogin: typeof import('./src/components/login/PanelLogin.vue')['default']

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { useContratoStore } from "./stores/ContratoStore.js";
-import { onMounted  } from "vue";
-
-const contratoStore = useContratoStore()
 
 </script>
 <template>

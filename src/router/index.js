@@ -4,7 +4,8 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/MapaFluvialView.vue"),
+    // component: () => import("../views/MapaFluvialView.vue"),
+    component: () => import("../views/CrmLogin.vue")
   }
 ];
 
