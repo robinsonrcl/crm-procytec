@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { getImage } from '../utils/utilidades';
+import { useUserStore } from "../stores/UserStore"
+
+const userStore = useUserStore()
 
 </script>
 
@@ -7,6 +10,7 @@ import { getImage } from '../utils/utilidades';
   <div>
     <img :src="getImage('/images/','logoConecta.svg')" class="logo" />
     <RegisterLogin />
+    <ModalConfirmRegister v-show="userStore.getShowValidarRegistro" />
   </div>
 </template>
 

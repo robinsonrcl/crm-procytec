@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from "vue"
 import { useUserStore } from "../../stores/UserStore"
 import { useContratoStore } from "../../stores/ContratoStore";
+import { RouterLink } from "vue-router";
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
@@ -76,9 +77,12 @@ function confirmar() {
   }
 
   if(result){
-    userStore.login()
+    userStore.login("", "")
     userStore.showPanelUser = true
     userStore.showValidarRegistro = false
+    contratoStore.showRegister = false;
+
+    RouterLink
   }
 
 }
@@ -184,7 +188,7 @@ function confirmar() {
   padding: 10px;
   bottom: 0px;
   box-shadow: rgb(202 190 190 / 16%) 0px 1px 4px, rgb(222 216 216) 0px 0px 0px 3px;
-  z-index: 20;
+  z-index: 200;
   color: white;
   /* top: 0px; */
   left: 0px;

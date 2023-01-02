@@ -6,6 +6,7 @@ import BaseInput from '../ReusableComponents/BaseInput.vue';
 import BaseCheckbox from "../ReusableComponents/BaseCheckbox.vue";
 import { useField, useForm } from 'vee-validate'
 import { object, string, bool } from 'yup'
+import { getImage } from '../../utils/utilidades';
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
@@ -105,6 +106,9 @@ onMounted(() => {
       <div class="container-title">
         <label class="title">Registro</label>
         <label class="title login">Login</label>
+      </div>
+      <div class="container-logo">
+        <img :src="getImage('/images/','logoProcyteccrm.svg')" class="logo" />
       </div>
       
       <form class="form" @submit="onSubmit" >
@@ -207,9 +211,13 @@ onMounted(() => {
 }
 .form {
   text-align: left;
-  padding:10px;
+  /* padding:10px; */
 }
 .container-title {
+  display: inline-flex;
+  height: fit-content;
+}
+.container-logo {
   display: inline-flex;
   height: fit-content;
 }
@@ -245,11 +253,11 @@ onMounted(() => {
   border-radius: 26px;
 }
 .container-register {
-  background-color: rgb(38 34 98 / 61%);
+  background-color: rgb(204 200 255 / 61%);
     display: grid;
     z-index: 160;
     width: -webkit-fit-content;
-    height: 80%;
+    /* height: 80%; */
     border-radius: 15px;
     box-shadow: green;
     position: absolute;
@@ -262,7 +270,7 @@ onMounted(() => {
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     color: white;
-    /* height: min-content; */
+    height: min-content;
     padding: 15px;
 }
 
@@ -312,6 +320,12 @@ input:valid + span::after {
   content: "✓";
   padding-left: 5px;
   color: #009000;
+}
+
+.logo {
+  width: 300px;
+  display: flex;
+  height: fit-content;
 }
 </style>
 

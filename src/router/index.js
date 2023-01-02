@@ -4,8 +4,12 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    // component: () => import("../views/MapaFluvialView.vue"),
     component: () => import("../views/CrmLogin.vue")
+  },
+  {
+    path: "/crm",
+    name: "crmprincipal",
+    component: () => import("../views/CrmPrincipal.vue")
   }
 ];
 

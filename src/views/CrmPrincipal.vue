@@ -3,17 +3,22 @@
 
 <template>
   <div class="wrapper">
-  <div class="header">
-    <PanelHeader />
+    <div class="header">
+      <PanelHeader />
+    </div>
+    <div class="sidebar-left">Sidebar</div>
+    <div class="content">Content</div>
+    <div class="sidebar-rigth">Sidebar</div>
   </div>
-  <div class="sidebar-left">Sidebar</div>
-  <div class="content">Content</div>
-  <div class="sidebar-rigth">Sidebar</div>
-</div>
 </template>
 
 <style lang="css" scoped>
 .wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-auto-rows: minmax(100px, auto);

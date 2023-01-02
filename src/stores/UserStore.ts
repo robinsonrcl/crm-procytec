@@ -41,6 +41,10 @@ export const useUserStore = defineStore("UserStore", {
   actions: {
     async login(username, password){
 
+      if(isEmpty(username)){
+        username = this.user.username
+        password = this.user.password
+      }
       contratoStore.msgSpinner = "Autenticando..."
       contratoStore.showSpinner = true;
 
@@ -243,17 +247,18 @@ export const useUserStore = defineStore("UserStore", {
       
       const phone = String(values.phone)
       
-      var phoneNumber: String = phone.substring(phone.indexOf(")")+1)
+      var phoneNumber: String = phone.substring(phone.indexOf(")") + 1)
       // phoneNumber = phoneNumber.replaceAll("-","")
       phoneNumber = phoneNumber.trim()
 
-      var phoneCountry: String = phone.substring(0,phone.indexOf(")"))
+      var phoneCountry: String = phone.substring(0,phone.indexOf(")") + 1)
       phoneCountry  = phoneCountry.trim()
 
       // var expression = /[()+]/gm
       // phoneCountry = phoneCountry.replaceAll(expression,"")
       
       const newUser = {
+        id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
         name: values.name,
         username: values.email,
         password: values.password,
@@ -265,7 +270,11 @@ export const useUserStore = defineStore("UserStore", {
         phone: phoneNumber,
         phonecountry: phoneCountry,
         terminosdelservicio: true,
-        codigoconfirmacion: ""
+        codigoconfirmacion: "",
+        birthday: "1900-01-01",
+        address: "",
+        gustos: "",
+        landline: ""
       }
 
       this.user = newUser
@@ -280,7 +289,7 @@ export const useUserStore = defineStore("UserStore", {
 
         window.setTimeout(() => {
           contratoStore.showSpinner = false;
-          contratoStore.showRegister = false;
+          // contratoStore.showRegister = false;
           this.showValidarRegistro = true;
         }, 2000)
       })
