@@ -6,7 +6,7 @@ import router from "../../router";
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
-const timeToWait = 1
+const timeToWait = 5
 
 var remainingTime = ref(timeToWait)
 var showResend = ref(true)

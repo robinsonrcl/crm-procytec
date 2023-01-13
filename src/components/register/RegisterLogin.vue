@@ -115,7 +115,7 @@ async function handleEmail(event) {
       <div class="container-logo">
         <img :src="getImage('/images/','logoProcyteccrm.svg')" class="logo" />
       </div>
-      
+      <div>No he confirmado mi cuenta!</div>
       <div v-if="login" class="divLogin">
         <PanelLoginUser />
       </div>
