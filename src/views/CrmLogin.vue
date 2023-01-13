@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { getImage } from '../utils/utilidades';
-import { useUserStore } from "../stores/UserStore"
+  import { getImage } from '../utils/utilidades';
+  import { useUserStore } from "../stores/UserStore"
 
-const userStore = useUserStore()
+  const userStore = useUserStore()
 
+  userStore.fillRoles()
+  
 </script>
 
 <template>

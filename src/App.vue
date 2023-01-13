@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useContratoStore } from "./stores/ContratoStore.js";
 
 </script>
 <template>

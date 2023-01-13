@@ -5,12 +5,22 @@ import { useContratoStore } from "../../stores/ContratoStore";
 import { useField, useForm } from 'vee-validate'
 import { object, string,  bool } from 'yup'
 import { storeToRefs } from "pinia";
+import { getImage } from '../../utils/utilidades';
 
 const file = ref<File | null>()
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
 
+const rolesOptions = []
+
+const rolesOpt = userStore.getRoles
+
+rolesOpt.forEach(element => {
+  rolesOptions.push({ id: element.id, name: element.name })
+});
+
 var { user } = storeToRefs(userStore)
+// var user = userStore.getUser
 
 const validationSchema = object({
   name: string().required('Nombres y apellidos son requeridos'),
@@ -25,9 +35,9 @@ const validationSchema = object({
         .required('Date of Birth is required')
         .matches(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/, 'Selecciona una fecha'),
   telefonofijo: string(),
-
   gustos: string(),
-  direccioncasa: string()
+  direccioncasa: string(),
+  roles: string()
 })
 
 const { handleSubmit, errors } = useForm({
@@ -43,9 +53,15 @@ const { value: birthday } = useField('birthday')
 const { value: gustos } = useField('gustos')
 const { value: direccioncasa } = useField('direccioncasa')
 const { value: telefonofijo } = useField('telefonofijo')
+const { value: roles } = useField('roles')
 
 const phone2 = user.value.phonecountry + ' ' +  user.value.phone
+var rolid = ''
+if(user.value != ""){
+  rolid = user.value.roles.id
+}
 
+roles.value = rolid
 name.value = user.value.name
 twitterURL.value = user.value.twitterURL
 rol.value = user.value.rol
@@ -58,6 +74,11 @@ telefonofijo.value = user.value.landline
 
 watchEffect(() => {
   const phone2 = user.value.phonecountry + ' ' +  user.value.phone
+  var rolid = ''
+  if(user.value != ""){
+    rolid = user.value.roles.id
+  }
+  
   name.value = user.value.name
   phone.value = phone2 //userStore.user.phone
   twitterURL.value = user.value.twitterURL
@@ -67,6 +88,7 @@ watchEffect(() => {
   direccioncasa.value = user.value.address
   telefonofijo.value = user.value.landline
   terminosdelservicio.value = user.value.terminosdelservicio
+  roles.value = rolid
 })
     
 function descartar() {
@@ -141,152 +163,112 @@ async function saveImage() {
     }
   }
 }
+function checkRol(event) {
+  const rpta = userStore.checkRol("update-rol")
+
+  if(!rpta){
+    event.target.disabled = true
+    userStore.messageUser = "Permisos insuficientes para esta accción"
+    userStore.showMessageGeneral = true
+    setTimeout(() => {
+      userStore.messageUser = ""
+      userStore.showMessageGeneral = false
+    }, 2500);
+  }
+}
 </script>
 
 <template>
   <form class="form" @submit="onSubmit" >
-  <div class="container">
-  <div class="subcontainer">
-    <div class="container-item photo">
-      <div>
-        <img src="images/Robinson.jpeg" class="profilePicture" />
+    <div class="container">
+      <div class="container-item">
+        <div>
+          <img :src="getImage('/images/','user.png')" class="profilePicture" />
+        </div>
+        <!-- <div class="fileUpload">
+          <input type="file" accept="image/*" capture style="width:250px;" @change="onFileChanged($event)" />
+          <div style="font-size:x-large;"  @click.prevent="saveImage()" ><fa icon="fa-file-arrow-up" /></div>
+        </div> -->
       </div>
-      <div class="fileUpload">
-        <input
-          type="file"
-          accept="image/*"
-          capture
-          style="width:250px;"
-          @change="onFileChanged($event)"
-        />
-        <div
-          style="font-size:x-large;" 
-          @click.prevent="saveImage()" 
-        ><fa icon="fa-file-arrow-up" /></div>
-      </div>
-    </div>
-    <div class="container-item">
-      <div class="subtitulos">Datos adicionales</div>
-      <div>
-        <label style="font-size: smaller;">Fecha nacimiento</label><br>
-        <input 
-          type="date"
-          v-model="birthday"
-          pattern="\d{4}-\d{2}-\d{2}"
-        />
-        <p>{{  errors.birthday }}</p>
-      </div>
-      <div>
-      <label style="font-size: smaller;">Gustos (separar con coma)</label><br>
-        <textarea
-          type="textarea"
-          placeholder="Gustos"
-          v-model="gustos"
-          onkeyup="this.value = this.value.toUpperCase()"
-          size="30"
-        />
-      </div>
-      <div>
-        <BaseInput
-          label="Dirección residencia"
-          type="text"
-          v-model="direccioncasa"
-          :error="errors.direccioncasa"
-          onkeyup="this.value = this.value.toUpperCase()"
-          size="30"
-        />
-      </div>
-      
-      <div>
-        <BaseInput
-          label="Teléfono fijo"
-          type="text"
-          v-model="telefonofijo"
-          :error="errors.telefonofijo"
-          @input="validate($event, 'normal')"
-          size="30"
-        />
-      </div>
-      <hr>
-    </div>
-    <div class="container-item">
-      <div class="name">
-        <BaseInput
-          label="Nombres y apellidos"
-          type="text"
-          v-model="name"
-          :error="errors.name"
-          onkeyup="this.value = this.value.toUpperCase()"
-          size="30"
-        />
-      </div>
-      <br>
-      <div class="datosbasicos">
-        <div class="subtitulos">Datos básicos</div>
+      <!-- <div class="container-item"> -->
+        <div class="name">
+          <BaseInput label="Nombres y apellidos" type="text" v-model="name" :error="errors.name" onkeyup="this.value = this.value.toUpperCase()" size="30" />
+        </div>
+      <!-- </div> -->
+      <!-- <div class="container-item"> -->
         <div class="div-username">
           Username:<br><span class="username">{{ user?.username }}</span>
         </div>
+      <!-- </div> -->
+      <div class="container-item">
         <div>
-          <BaseInput
-            label="Celular (+##) ###-###-####"
-            v-model="phone"
-            :error="errors.phone"
-          />
+          <BaseInput label="Celular (+##) ###-###-####" v-model="phone" :error="errors.phone" />
         </div>
+      </div>
+      <div class="container-item">
         <div>
-          <BaseInput
-             label="Twitter"
-             type="text"
-             v-model="twitterURL"
-             :error="errors.twitterURL"
-             size="30"
-           />
+          <BaseInput label="Twitter" type="text" v-model="twitterURL" :error="errors.twitterURL" size="30" />
         </div>
+      </div>
+      <div class="container-item">
         <div>
-          <BaseInput
-             label="Rol"
-             type="text"
-             v-model="rol"
-             :error="errors.rol"
-             size="30"
-           />
-        </div>
-        <div>
-          <BaseCheckbox  
-            v-model="terminosdelservicio"
-            label="Terminos del servicio"
-            :error="errors.terminosdelservicio"
-            :disabled="true"
+          <BaseSelect 
+            :options="rolesOptions"
+            v-model="roles"
+            label="Rol en CRM Conecta"
+            :error="errors.roles"
+            @click.prevent="checkRol"
           />
         </div>
       </div>
-    </div>
-    <div class="container-item">
-      <div class="datosEmpresa">
-        <div class="subtitulos">Datos de empresa</div>
-        <div>Empresa:</div>
-        <div>Dirección:</div>
-        <div>Contacto:</div>
-        <div>Teléfono:</div>
-        <img src="images/company.png" class="imageCompany" />
+      <div class="container-item">
+        <div>
+          <label style="font-size: smaller;">Fecha nacimiento</label><br>
+          <input  type="date" v-model="birthday" pattern="\d{4}-\d{2}-\d{2}" />
+          <p>{{  errors.birthday }}</p>
+        </div>
       </div>
+      <div class="container-item">
+        <div>
+          <label style="font-size: smaller;">Gustos (separar con coma)</label><br>
+          <textarea type="textarea" placeholder="Gustos" v-model="gustos" onkeyup="this.value = this.value.toUpperCase()" size="30" />
+        </div>
+      </div>
+      <div class="container-item">
+        <div>
+          <BaseInput label="Dirección residencia" type="text" v-model="direccioncasa" :error="errors.direccioncasa" onkeyup="this.value = this.value.toUpperCase()" size="30" />
+        </div>
+      </div>
+      <div class="container-item">
+        <div>
+          <BaseInput label="Teléfono fijo" type="text" v-model="telefonofijo" :error="errors.telefonofijo" @input="validate($event, 'normal')" size="30" />
+        </div>
+      </div>
+      <div class="container-item">
+        <div>
+          <BaseCheckbox v-model="terminosdelservicio" label="Terminos del servicio" :error="errors.terminosdelservicio" :disabled="true" />
+        </div>
+      </div>
+      <br><br><br>
     </div>
-    <div class="container-item" style="padding-top: 10px;">.</div>
-    
-  </div>
-  <div class="positionButtons">
-    <MySpinner v-show="contratoStore.getShowSpinner" :message-spinner="contratoStore.getMsgSpinner" />
+    <div class="positionButtons">
+      <MySpinner v-show="contratoStore.getShowSpinner" :message-spinner="contratoStore.getMsgSpinner" />
       <div class="subtitulos botones">
         <button class="updatePerfil" @click="onSubmit">Actualizar</button>
-        <button class="updatePerfil" @click="descartar">Descartar</button>
+        <!-- <button class="updatePerfil" @click="descartar">Descartar</button> -->
       </div>
     </div>
-  </div>
-  
   </form>
 </template>
 
 <style lang="css" scoped>
+.form {
+  /* margin-top: 60px; */
+  margin: 60px 0 0 0;
+}
+.container-item {
+  display: grid;
+}
 .fileUpload {
   display: -webkit-inline-box;
     padding: 0 15px 0 15px;
@@ -342,63 +324,31 @@ async function saveImage() {
   color: blue;
   font-weight: 600;
 }
-.container-item:nth-child(2) {
-  align-self: start;
-  text-align: left;
-  width: -webkit-fill-available;
-}
-.container-item:nth-child(3) {
-  width: -webkit-fill-available;
-}
-.container-item:nth-child(4) {
-  width: -webkit-fill-available;
-  align-self: baseline;
-}
-.container-item:nth-child(5) {
-  width: -webkit-fill-available;
-  grid-column: span 2;
-}
 .profilePicture {
-  width: 100%;
+  width: 25%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  -webkit-mask-image: url("images/circulo.svg");
-  mask-image: url("images/circulo.svg");
+  -webkit-mask-image: url("http://18.213.74.173/images/circulo.svg");
+  mask-image: url("http://18.213.74.173/images/circulo.svg");
   
 }
 .positionButtons {
-  background-color: #ccccdb;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: -webkit-fill-available;
+  background-color: #a0d8a9;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    border-radius: 0 10px;
+    /* border-style: groove; */
+    z-index: 200;
+    /* margin: 00 10px 10px; */
 }
-.subcontainer {
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 20px;
-  overflow: auto;
-  width: min-content;
-  height: 100%;
-}
+
 .container {
   position: absolute;
-  display: grid;
-  z-index: 300;
-  height: 80%;
-  width: min-content;
-  left: 0;
-  right: 0;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  background-color: rgb(250, 250, 250);
-  border-style: double;
-  border-radius: 5px;
-  align-content: baseline;
-  padding: 20px;
-  /* overflow: auto; */
+  display: flow-root;
+  background-color: white;
+  text-align: left;
+  margin-top: 6px;
 }
-.container-item {
-  display: grid;
-}
+
 </style>

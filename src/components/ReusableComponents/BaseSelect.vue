@@ -35,10 +35,10 @@ const uuid = UniqueID().getID().toString
   >
     <option
       v-for="option in options"
-      :value="option"
+      :value="option.id"
       :key="option"
-      :selected="option === modelValue"
-    >{{ option }}</option>
+      :selected="option.id === modelValue"
+    >{{ option.name }}</option>
   </select>
   
 </template>

@@ -10,6 +10,9 @@ import { getImage } from '../../utils/utilidades';
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
+const login = ref(true)
+const register = ref(false)
+const selectedTab = ref("login")
 
 var msgEmailDuplicado = ref(userStore.getMsgEmailDuplicado)
 
@@ -48,6 +51,7 @@ const { value: password } = useField('password')
 const { value: terminosdelservicio } = useField('terminosdelservicio')
 
 const onSubmit = handleSubmit(values => {
+  document.getElementById('registrarme').disabled = true
   userStore.save(values)
 })
 
@@ -58,7 +62,7 @@ function registerUser() {
 }
 
 function cancelRegister() {
-  contratoStore.setShowRegister(false)
+  // contratoStore.setShowRegister(false)
 }
 
 function showPassword(event: any) {
@@ -71,47 +75,52 @@ function showPassword(event: any) {
   }
 }
 
-  async function handleEmail(event) {
-    const validarEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+async function handleEmail(event) {
+  const validarEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
 
-    const result = validarEmail.test(event.target.value)
+  const result = validarEmail.test(event.target.value)
 
-    if(result){
-     // const resultCheck = await userStore.validarEmail(event.target.value)
-
-      if(await userStore.validarEmail(event.target.value)){
-        msgEmailDuplicado.value = 'Email ya registrado!'
-        userStore.msgEmailDuplicado = "Duplicado"
-      }else{
+  if(result){
+    let respuesta = await userStore.validarEmail(event.target.value)
+    if(respuesta === "CONFIRMADO"){
+      msgEmailDuplicado.value = 'Email ya registrado!'
+      userStore.msgEmailDuplicado = "Duplicado"
+    }else{
+      userStore.msgEmailDuplicado = ""
+      if(respuesta === "NOCONFIRMADO"){
         msgEmailDuplicado.value = ''
         userStore.msgEmailDuplicado = ""
+        userStore.enviarCode(event.target.value)
+        userStore.showValidarRegistro = true
       }
     }
   }
-
-onUpdated(() => {
-
-})
-
-onMounted(() => {
-
-})
+}
 
 </script>
 <template>
-  <!-- <div class="container-ppal-register">
-    <img class="imgRegister" :src="getImage('/images/','rio.png')" /> -->
-  
     <div class="container-register" id="container1">
       <div class="container-title">
-        <label class="title">Registro</label>
-        <label class="title login">Login</label>
+        <label class="title" 
+          :class="{ activeTab: selectedTab === 'registro' } "
+          @click="register = true; login = false; selectedTab = 'registro' ">
+          Registro
+        </label>
+        <label class="title" 
+          :class="{ activeTab: selectedTab === 'login' } "
+          @click="login = true; register = false; selectedTab = 'login' ">
+          Login
+        </label>
       </div>
       <div class="container-logo">
         <img :src="getImage('/images/','logoProcyteccrm.svg')" class="logo" />
       </div>
       
-      <form class="form" @submit="onSubmit" >
+      <div v-if="login" class="divLogin">
+        <PanelLoginUser />
+      </div>
+      <div v-if="register">
+        <form class="form" @submit="onSubmit" >
         <fieldset>
            <!-- <legend>Datos basicos</legend> -->
            <BaseInput 
@@ -157,6 +166,7 @@ onMounted(() => {
         <MySpinner v-show="contratoStore.getShowSpinner" :message-spinner="contratoStore.getMsgSpinner" />
         <div class="buttons-register">
           <BaseButton
+            id="registrarme"
             type="submit"
             class="buttonRegister"
             something="else"
@@ -169,16 +179,20 @@ onMounted(() => {
           </button>
         </div>
       </form>
+      </div>
     </div>
-  <!-- </div> -->
 </template>
 
 <style lang="css" scoped>
+.divLogin {
+  display: flex;
+  height: fit-content;
+}
 .iconEye {
   display: inline-flex;
   position: absolute;
   left: 107px;
-  color: black;
+  color: rgb(255, 255, 255);
   top: auto;
   padding: 6px 0 0 0;
   z-index: 10;
@@ -223,15 +237,15 @@ onMounted(() => {
 }
 .title {
   padding: 6px;
-  background-color: #474779;
+  background-color: #6e6e83;
   margin: 7px;
   border-radius: 5px;
   width: -webkit-fill-available;
   border-bottom-style: ridge;
-  
+  cursor: pointer;
 }
-.login {
-  opacity: 0.6;
+.activeTab {
+  background: var(--bcolor);
 }
 .imgRegister {
   align-self: center;
@@ -261,16 +275,16 @@ onMounted(() => {
     border-radius: 15px;
     box-shadow: green;
     position: absolute;
-    top: 0px;
+    top: 10%;
     left: 0px;
     right: 0px;
-    bottom: 0px;
+    /* bottom: 0px; */
     margin: auto;
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     color: white;
-    height: min-content;
+    /* height: max-content; */
     padding: 15px;
 }
 
@@ -281,7 +295,7 @@ onMounted(() => {
 }
 
 fieldset {
-  background-color: #b9b6d6;
+  background: var(--bcolor);
     border-radius: 10px;
     padding: 15px;
     margin: 10px 0 0 0;
@@ -323,7 +337,7 @@ input:valid + span::after {
 }
 
 .logo {
-  width: 300px;
+  width: 200px;
   display: flex;
   height: fit-content;
 }

@@ -20,8 +20,6 @@ defineProps({
 .spinner, img {
   width: fit-content;
   display: inline-flex;
-  padding: 5px;
   align-items: center;
-  font-size: larger;
 }
 </style>

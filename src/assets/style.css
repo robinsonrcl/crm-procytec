@@ -85,39 +85,6 @@ body,
   height: 17px;
 }
 
-.titleBitacorah2 {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  box-sizing: border-box;
-  font-weight: 300;
-  font-size: 25px;
-  letter-spacing: -0.20825px;
-  color: rgb(0, 0, 0);
-  margin: 0px;
-  display: inline;
-}
-
-.titleBitacorah1 {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  box-sizing: border-box;
-  font-size: 25px;
-  letter-spacing: -0.3905px;
-  font-weight: 300;
-  color: rgb(3, 11, 185);
-  margin: 0px;
-  display: inline;
-}
-
-.iconoBitacora {
-  /* -webkit-tap-highlight-color : rgba(0, 0, 0, 0); 
-    box-sizing : border-box; 
-    border-style : none; */
-  width: 116px;
-  height: 39px;
-  padding: 0px;
-  box-sizing: border-box;
-  filter: drop-shadow(3px 3px 3px rgb(0, 0, 0)) brightness(1.2);
-}
-
 .typefontNSW {
   font-family: "Edu NSW ACT Foundation", cursive;
   font-family: "Arima", cursive;
@@ -663,10 +630,6 @@ body,
   }
   .grid-containerH {
     grid-template-columns: 250px 1fr;
-  }
-  .iconoBitacora {
-    width: 200px;
-    height: auto;
   }
   .iconMenu {
     height: 21px;

@@ -2,12 +2,13 @@
 import { ref, onMounted, onUnmounted } from "vue"
 import { useUserStore } from "../../stores/UserStore"
 import { useContratoStore } from "../../stores/ContratoStore";
-import { RouterLink } from "vue-router";
+import router from "../../router";
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
+const timeToWait = 1
 
-var remainingTime = ref(4)
+var remainingTime = ref(timeToWait)
 var showResend = ref(true)
 var showMessage = ref("")
 
@@ -24,7 +25,7 @@ function showRemaining() {
 function resendCode() {
   showResend.value = true
   userStore.resendCode()
-  remainingTime.value = 4
+  remainingTime.value = timeToWait
   showRemaining()
 }
 
@@ -33,7 +34,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  remainingTime.value = 5
+  remainingTime.value = timeToWait
 }),
 
 function clickInput(event) {
@@ -58,7 +59,14 @@ function cancelarConfirmarRegistro(){
     userStore.showValidarRegistro = false
   }, 3000);
 }
-function confirmar() {
+async function confirmar() {
+  if(remainingTime.value == 0){
+    showMessage.value="Debes generar un nuevo código"  
+    setTimeout(() => {
+      showMessage.value=""
+    }, 2000);
+    return
+  }
   let a = document.getElementById("codigoa").value
   let b = document.getElementById("codigob").value
   let c = document.getElementById("codigoc").value
@@ -68,7 +76,7 @@ function confirmar() {
 
   let codigo = a + b + c + d + e + f
 
-  let result = userStore.confirmRegister(codigo)
+  let result = await userStore.confirmRegister(codigo)
 
   const inputs = document.getElementsByClassName("casilla") as HTMLCollection
 
@@ -76,13 +84,13 @@ function confirmar() {
     item.value = ""
   }
 
-  if(result){
-    userStore.login("", "")
-    userStore.showPanelUser = true
+  if(result === "CONFIRMADO"){
+    await userStore.login("", "")
+    // userStore.showPanelUser = true
     userStore.showValidarRegistro = false
-    contratoStore.showRegister = false;
+    // contratoStore.showRegister = false;
 
-    RouterLink
+    router.push('/crm')
   }
 
 }
@@ -92,7 +100,7 @@ function confirmar() {
   <div class="container">
     <h3 class="inputs">Confirma tu registro</h3>
     <span class="leyendas">Ingresa el código que hemos enviado
-    a tu correo y celular (SMS)</span>
+    a tu correo</span>
     <div class="inputs">
       <input class="casilla" type="text" size="1" maxlength="1" id="codigoa" 
         @click="clickInput" 

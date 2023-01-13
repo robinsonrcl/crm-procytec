@@ -1,0 +1,70 @@
+"<style>" + 
+".titleCodigo {" + 
+"  font-weight: 600;" + 
+"  text-align: center;" + 
+"}" + 
+".codigo {" + 
+"  font-weight: 900;" + 
+"  font-size: 2.5rem;" + 
+"  text-align: center;" + 
+"  border-radius: 5px;" + 
+"  margin: 0px 50px 0px 50px;" + 
+"}" + 
+".sub {" + 
+"  padding: 20px;" + 
+"  border: 1px;" + 
+"  border-block-color: white;" + 
+"  border-style: double;" + 
+"}" + 
+".logo {" + 
+"  width: 200px;" + 
+"}" + 
+".footer1 {" + 
+"  background: rgb(172, 192, 225);" + 
+"  text-align: left;" + 
+"  padding: 5px 0 5px 30px;" + 
+"}" + 
+".footer2 {" + 
+"  text-align: left;" + 
+"  padding: 5px 0 5px 30px;" + 
+"  display: inline-flex;" + 
+"  font-size: small;" + 
+"}" + 
+".texto {" + 
+"  font-size: medium;" + 
+"  text-align: justify;" + 
+"  display: block;" + 
+"  padding: 30px 0 30px 0;" + 
+"}" + 
+".cuerpo {" + 
+"  text-align: left;" + 
+"  padding: 30px;" + 
+"}" + 
+".name {" + 
+"  font-weight: 700;" + 
+"}" + 
+".tittle {" + 
+"  font-size: 30px;" + 
+"  background: rgb(172, 192, 225);" + 
+"  width: -webkit-fill-available;" + 
+"  border-radius: 20px 20px 0 0;" + 
+"  padding: 40px 0 0 0;" + 
+"  text-align: center;" + 
+"}" + 
+".subtittle {" + 
+"  font-size: 12px;" + 
+"  background: rgb(172, 192, 225);" + 
+"  padding: 0 0 40px 0;" + 
+"}" + 
+".container {" + 
+"  background-color: white;" + 
+"  display: flow-root;" + 
+"  position: absolute;" + 
+"  top: 0px;" + 
+"  width: auto;" + 
+"  border-radius: 20px;" + 
+"  height: auto;" + 
+"  margin: 20px;" + 
+"  padding: 0px;" + 
+"}" + 
+"</style>" + 

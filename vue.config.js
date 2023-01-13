@@ -1,6 +1,6 @@
 module.exports = {
     devServer: {
-      proxy: 'https://bitacorafluvial.com:82'
+      proxy: 'https://crm.procytec.com.co:82'
     },
     publicPath: "/"
   };
