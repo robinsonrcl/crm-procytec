@@ -31,7 +31,7 @@
     <div class="item"><img :src="getImage('/images/','logoConecta.svg')" class="logo" /></div>
     <div class="item">
       <div class="contactos">
-        <div>Contactos</div>
+        <div>Contactos ⬇︎</div>
         <ul class="contactos-list">
           <li>Contactos</li>
           <li>Empresas</li>
@@ -40,7 +40,7 @@
     </div>
     <div class="item">
       <div class="contactos">
-        <div>Bandeja de entrada</div>
+        <div>Negocios ⬇︎</div>
         <ul class="contactos-list">
           <li>Contactos</li>
           <li>Empresas</li>
@@ -49,7 +49,7 @@
     </div>
     <div class="item">
       <div class="contactos">
-        <div>Ventas</div>
+        <div>Product/Servicios ⬇︎</div>
         <ul class="contactos-list">
           <li>Contactos</li>
           <li>Empresas</li>
@@ -114,12 +114,18 @@
   display: none;
 }
 .contactos {
-  background-color: white;
-  border-radius: 0px 0px 5px 5px;
-  margin: 5px;
   padding: 5px;
-  font-size: smaller;
-  height: fit-content;
+    font-size: smaller;
+    height: 61px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: -webkit-fill-available;
+    /* text-decoration: underline; */
+}
+.contactos:hover {
+  background-color: #324665;
 }
 .logo {
   width: 200px;

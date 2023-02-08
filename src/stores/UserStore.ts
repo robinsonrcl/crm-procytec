@@ -1,9 +1,6 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import axios from "axios";
-import { ref } from "vue";
 import { useContratoStore } from "../stores/ContratoStore.js";
-import { useField, useForm } from "vee-validate";
-import { object, string, bool } from "yup";
 import { isEmpty } from "lodash";
 
 const contratoStore = useContratoStore();
@@ -13,13 +10,14 @@ let urlGateway = import.meta.env.VITE_URL_GATEWAY;
 export const useUserStore = defineStore("UserStore", {
   state: () => {
     return {
+      emailWithoutRegister: "",
+      roles: "",
       showLogin: Boolean(false),
       showPanelUser: Boolean(false),
       msgEmailDuplicado: String(""),
       showValidarRegistro: Boolean(false),
       user: "",
       showRestorePassword: Boolean(false),
-      roles: "",
       showMessageGeneral: Boolean(false),
       messageUser: "",
     };
@@ -279,15 +277,16 @@ export const useUserStore = defineStore("UserStore", {
       contratoStore.showSpinner = true;
       let respuesta = "";
       let id = "";
+      var usuarioCorreo: string;
 
-      if (this.user.id != "") {
-        id = this.user.id;
+      if (isEmpty(this.user.username)) {
+        usuarioCorreo = this.emailWithoutRegister
       } else {
-        id = this.user;
-      }
+        usuarioCorreo = this.user.username.toString()
+      }      
 
       await axios
-        .get(urlGateway + "/api/users/confirmregister/" + id + "/" + codigo)
+        .get(urlGateway + "/api/users/confirmregister/" + usuarioCorreo + "/" + codigo)
         .then((response) => {
           let msg: string;
           respuesta = response.data.respuesta;
@@ -362,19 +361,15 @@ export const useUserStore = defineStore("UserStore", {
             Date.parse(response.data.birthday)
           ).toISOString();
           this.user.birthday = fecha.substring(0, 10);
-
-          window.setTimeout(() => {
-            contratoStore.showSpinner = false;
-          }, 700);
         })
         .catch((error) => {
-          contratoStore.msgSpinner =
-            "Error: " + error.response.data.reason.substring(0, 30) + "...";
+          contratoStore.msgSpinner = "Error: " + error.response.data.reason.substring(0, 30) + "...";
+        })
+        .then(() => {
           window.setTimeout(function () {
             contratoStore.showSpinner = false;
           }, 2000);
-        })
-        .then(() => {});
+        });
     },
     async save(values) {
       if (this.msgEmailDuplicado != "") {
@@ -407,8 +402,6 @@ export const useUserStore = defineStore("UserStore", {
         gustos: "",
         landline: "",
       };
-
-      // this.user = newUser;
 
       contratoStore.msgSpinner = "Creando usuario...";
       contratoStore.showSpinner = true;

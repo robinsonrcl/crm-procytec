@@ -60,6 +60,7 @@ async function restorePassword() {
     <hr style="margin:3px 3px 10px">
     <div style="text-align: left">
       <BaseInput 
+        size="30"
         id="username"
         label="Username"
         type="email"

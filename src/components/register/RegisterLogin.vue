@@ -7,6 +7,7 @@ import BaseCheckbox from "../ReusableComponents/BaseCheckbox.vue";
 import { useField, useForm } from 'vee-validate'
 import { object, string, bool } from 'yup'
 import { getImage } from '../../utils/utilidades';
+import { storeToRefs } from "pinia"
 
 const userStore = useUserStore()
 const contratoStore = useContratoStore()
@@ -14,7 +15,8 @@ const login = ref(true)
 const register = ref(false)
 const selectedTab = ref("login")
 
-var msgEmailDuplicado = ref(userStore.getMsgEmailDuplicado)
+//var msgEmailDuplicado = ref(userStore.getMsgEmailDuplicado)
+var { msgEmailDuplicado } =  storeToRefs(userStore)
 
 const internalInstance = getCurrentInstance();
 
@@ -83,13 +85,12 @@ async function handleEmail(event) {
   if(result){
     let respuesta = await userStore.validarEmail(event.target.value)
     if(respuesta === "CONFIRMADO"){
-      msgEmailDuplicado.value = 'Email ya registrado!'
-      userStore.msgEmailDuplicado = "Duplicado"
+      userStore.msgEmailDuplicado = 'Email ya registrado!'
     }else{
       userStore.msgEmailDuplicado = ""
       if(respuesta === "NOCONFIRMADO"){
-        msgEmailDuplicado.value = ''
-        userStore.msgEmailDuplicado = ""
+        userStore.msgEmailDuplicado = "Pendiente Confirmar..."
+        userStore.emailWithoutRegister = String(email.value)
         userStore.enviarCode(event.target.value)
         userStore.showValidarRegistro = true
       }
@@ -115,7 +116,7 @@ async function handleEmail(event) {
       <div class="container-logo">
         <img :src="getImage('/images/','logoProcyteccrm.svg')" class="logo" />
       </div>
-      <div>No he confirmado mi cuenta!</div>
+      <!-- <div>No he confirmado mi cuenta!</div> -->
       <div v-if="login" class="divLogin">
         <PanelLoginUser />
       </div>
@@ -132,6 +133,7 @@ async function handleEmail(event) {
              size="30"
            />
           <BaseInput 
+            size="30"
             id="email"
             label="Email"
             type="email"

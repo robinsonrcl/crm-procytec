@@ -16,6 +16,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: "/lista",
+    name: "crmlista",
+    component: () => import("../views/CrmLista.vue"),
+    meta: { requiresAuth: true }
+  },
+  {
     path: "/email",
     name: "Email",
     component: () => import("../views/TemplateEmail.vue")

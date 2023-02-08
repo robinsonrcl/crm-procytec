@@ -327,8 +327,8 @@ function checkRol(event) {
 .profilePicture {
   width: 25%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  -webkit-mask-image: url("http://18.213.74.173/images/circulo.svg");
-  mask-image: url("http://18.213.74.173/images/circulo.svg");
+  -webkit-mask-image: url("/images/circulo.svg");
+  mask-image: url("/images/circulo.svg");
   
 }
 .positionButtons {

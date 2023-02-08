@@ -86,10 +86,7 @@ async function confirmar() {
 
   if(result === "CONFIRMADO"){
     await userStore.login("", "")
-    // userStore.showPanelUser = true
     userStore.showValidarRegistro = false
-    // contratoStore.showRegister = false;
-
     router.push('/crm')
   }
 
